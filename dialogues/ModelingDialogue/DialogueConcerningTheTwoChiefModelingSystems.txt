@@ -1,0 +1,28 @@
+TITLE: Dialogue Concerning the Two Chief Modeling Systems
+
+DESCRIPTION:
+
+Sit in like a fly on the wall with a development team as they wrestle with the issues of data modeling versus object modeling. This is not your standard slideshow and talk, but a dialogue presented in three acts in which we explore the themes of simplicity and modularity as an application is developed. Watch the sparks fly as old-school objects modelers meet the Rails generation.
+
+ABSTRACT:
+
+A Galilean dialog about objects, modeling and data.
+
+Persona dramatica:
+
+Modello: Long time OO developer who is new to Rails.  He tends to view
+         the world in terms of objects and their interactions.
+
+Restolio: Experienced rails developer and REST advocate.  He is very
+          concerned about properly representing the problem domain in the
+          data base schema.
+
+Webucci: A recent convert to Rails from PHP.  He is loving working
+          with Ruby and Rails is is excited about learning more about
+          both.
+
+Act I: In which the develoment team reviews the requirements and develops an initial solution using a "by the book" Rails data modeling approach. The team begins by developing a detailed database schema and using script/generate resource to produce the application. An object modeling approach is considered but discarded in the interest of expediency.
+                                                                         
+Act II: In which turmoil ensues as changing requirements invalidate much of the sacred database schema. The team is faced with a massive rewrite and approaching deadlines. The team begins to question their approach to the problem and wonders if there is a better way. Several members begin to update their resumes.
+
+Act III: In which the team reconsiders the object modeling approach.  They realize that by modeling behavior, rather than data, their solution is more robust and more resilient to requirement changes.  The project is completed, the customers are happy, and the boy gets the girl.

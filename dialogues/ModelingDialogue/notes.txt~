@@ -1,0 +1,17 @@
+* start with basic data modelling
+* bring up question of start/stop vs start/duration
+  - MOD: doesn't matter
+  - start/stop gives you the nice rails date chooser.
+* Room
+  - name, capacity
+* Group
+  - name, contact-email
+* Event
+  - start/stop time
+
+|Room|<1---*|Event|*----->|Group|
+
+* We just need to crank out a little generate resource and a bit of ajax support.  We are almost done here.
+
+* Don't we need a calendar object ... no, isn't the database the
+  calendar, we don't need and explicit object.

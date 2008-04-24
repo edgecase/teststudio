@@ -12,7 +12,7 @@ task :test_success do
 end
 
 task :prompt do
-  ruby "prompt.rb MockDialogue_Act1.txt MockDialogue_Act2.txt MockDialogue_Act3.txt"
+  ruby "prompt.rb Act*.txt"
 end
 
 task :pack do

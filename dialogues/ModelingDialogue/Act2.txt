@@ -5,4 +5,216 @@ Act II
 _
 [The act opens with something funny]
 
-Modello: Abc
+Restolio: Ready to begin pairing?
+
+Webucci: Sure!  Just wait a sec ... I'm rebuilding the kernel ... I'm
+         almost done.
+
+Restolio: Huh? What are you using, Wonderful Weasel?
+
+Webucci: No, no.  It's Yielding Yak.  I don't understand why you can
+         keep that straight.  I like it. It does everything a Mac does
+         ... all you need to do is tweek a few window manager settings
+         and download the latest patches from linux.source.org and
+         recompile most of the low level graphics code ... and with a
+         few scripts, you've got an almost functional equivalent.
+
+Restolio: Umm, ok.  How about we use my laptop.
+
+Webucci: That's a good idea.
+
+Restolio: Well, so far we have the basics of scheduling rooms working.
+          We can create individual events and have them show up on the
+          calendar.  The customer is quite happy with our progress so
+          far.
+
+Webucci: Yeah, and it was so easy to do in Rails too.  The tables,
+         oops, I mean *models* were so easy to write and tie to the
+         database.
+
+Restolio: Well, it is a simple rails app after all.
+
+Webucci: Ok, so what's the next story.
+
+Restolio: [pull card from story deck and reads] "As a user of ECal, I
+          want to schedule a recurring event.  For example: A status
+          meeting that occurs every day at 1:00"
+
+Webucci: So, what's the difference between a regular event and a
+         recurring event?
+
+Restolio: A recurring event is something that happens repeatedly
+          ... once a week, once a month, and so on.
+
+Webucci: So how will this work?  On event form, will they have a
+         checkbox for repeating the event.  And if so, how will we
+         know how often and when to repeat it.
+         
+Restolio: Well, most forms I've seen let you specify that with a drop
+          down list.  For example, "Repeat the event every day, once a
+          week, etc.
+
+Webucci: Well that seems pretty easy.  For each occurrence We will
+         just insert a row into the event table ...
+
+Restolio: Ahem
+
+Webucci: [mutters] This new terminology [to Restolio] Oh, I mean
+         create an event *object* for each time it reoccurs.
+
+Restolio: Thanks, much better.
+
+Webucci: So, how many do to insert?
+
+Restolio: As many as we need.
+
+Webucci: But what if it goes on forever?  What if they don't want it
+         to have an end date?  That's a lot of rows to insert, umm,
+         objects to create.
+
+Restolio: We could pick an arbitrary end date, like 2038.
+
+Webucci: Yeah, there's no reason why anyone would need a date past
+         2038.  
+
+[Restolio scribbles on a piece of paper]
+
+Restolio: Lets see, there's 365 days in a year,
+
+Webucci: Technically, 365.25 ..
+
+Restolio: Right ... leap years, and we are 30 years away, so every
+          recurring event will have ... approximately 10,957 rows in
+          the event table.
+
+Webucci: You mean objects.
+
+Restolio: [Rolls eyes] Right.  Still that seems excessive.
+
+Webucci: But that's what databases are for, right ... to hold data?
+         Maybe we can just add an index.
+
+Restolio: Maybe we don't need to go out 30 years, maybe just a year is
+          enough.
+
+Webucci: Sure they can just reschedule it again next year, that's not
+         too much to ask.  Who stays at a job more than a year
+         anyways.  Let's not be ridiculous.
+
+Restolio: So, at most that's 365...
+
+Webucci: and a quarter
+
+Restolio: ... rows for an event.  I think we can live with that.
+
+Webucci:  Ok, let's start netbeans and get crakin'
+
+[ ... time passes as Restolio and Webucci do some coding, coding
+images come and go on the screen ... ]
+
+Webucci:  Ok, that was painful, but we got through it.  What's next.
+
+Restolio: Well, we have a story about changing a recuring event.  "As
+          an ECal user, I want to reschedule a recurring event."
+
+Webucci: What's that mean?
+
+Restolio: Oh, say for example, I have a status meeting every day at
+          1:00.  Now I want to change the status meeting to be at
+          2:00. Oh, crap.
+
+Webucci: I don't like the sound of that.  What are you thinking?
+
+Restolio: We have our recurring event replicated for everytime it
+          occurs.  That means if we want to change it, we have to
+          change each and every entry.
+
+Webucci: Is that a big deal?  We can just walk through the data and
+         change it.  Something like this [starts to write code]
+
+   event = Event.find(id) ....
+
+Webucci: Oops, I see the problem.  We don't have a single event, we
+         have a bunch of related events that somehow need to tie back
+         into the original recurring event.  How do we know which
+         events to change.
+
+Restolio: I think we can figure it out.  Any event scheduled for 1:00
+          in the same room by the same group will just be changed to
+          2:00.
+
+Webucci: Sure, that works for me.
+
+Restolio: But it would be nice if we could change it in one spot.  The
+          problem seems to be that we have a lot of duplicate data.
+          What if we normalized our schema so that the duplication is
+          removed.
+
+Webucci: Normalizing the schema, I didn't know you did that in object
+         oriented design.
+
+Restolio: Yeah, we call it refactoring.  Currently, we have each event
+          storing its own time.  What if we refactored the time out
+          into an EventDefinition object.  All our recurring events
+          can reference the same definition.  And then to change from
+          1:00 to 2:00, all we have to do is change the defintion.
+
+Webucci: I love Rails, it makes it so easy to do this stuff.  We just
+         write a migration and away we go.
+
+[ ... time passes, screen show migrations being created and run  ... ]
+
+Restolio: That looks great, lets give it a try.
+
+[... web form appears on screen.  Restolio changes the time, everything works great. ...]
+
+Webucci: Oooo, I want to try.
+
+[... web form appear again.  Webucci changes from every day to every
+week ... Nothing changes ...]
+
+Webucci: Nothing changed!  I don't get it.
+
+Restolio: Rats.  We removed the time duplication, but there's other
+          duplication that we haven't addressed.
+
+Webucci: ???
+
+Restolio: Ok, Look at your new event.  It's scheduled once a week.
+          Since that applies to all the events covered by a
+          definition, that information should be in the defintion.
+          However, the events themselves contain the date.  But date
+          is implied by the definition.  We have two bit of
+          information that are clearly related, but stored in
+          different places.
+
+[cue light bulb]
+
+Webucci: Oh, so when I changed the event from every day to every week,
+         the events ... arg, its hard to talk about this.  I thought
+         this was a simple rails app.
+
+Restolio: Try to use the modelling terminology: events and event
+          defintiions.
+
+Webucci: Ok, so when an event *definition* changes, then individual
+         events may be created or destroyed, as appropriate.
+         [thinking it over] Wow. That doesn't help.
+
+Restolio: We take the event, find its definition, then turn around
+          find all the events that belong to that definition.  We will
+          need a has_many declaration in the EventDefition, of course.
+
+Webucci: And do what?
+
+Restolio: Destroy them and recreate them to match the new defintion.
+
+Webucci: Yikes.  Kinda ugly, but I guess it will work.
+
+[... music kicks in ... screen fades to black... end of act II ...]
+
+NOTES: 
+* Temporal Expressions ... repeating events.
+* Dealing with unbounded 
+
+* Modello comes back and asks about the 365.25 assert_equals in the test.

@@ -1,21 +1,21 @@
 A Dialogue Concerning the Two Chief Modelling Systems
 (A Galilien Dialogue)
-
+_
 Persona dramatica:
-
+_
 Modello -- Long time OO developer who is new to Rails.  He tends to
            view the world in terms of objects and their interactions.
-
+_
 Restolio -- Experienced rails developer and REST advocate.  He is very
             concerned about properly representing the problem domain
             in the data base schema.
-
+_
 Webucci -- A recent convert to Rails from PHP.  He is loving working
            with Ruby and Rails is is excited about learning more about
            both.
-
+_
 Act I
-
+_
 [The act opens as our developement team is discussing a new project]
 
 Restolio: We got the customer requirements for our new project
@@ -90,8 +90,8 @@ Restolio: Right, probably an email address.  Some way to get a hold of
 
 Webucci: And you said something about an Meeting.  What's that?
 
-Restolio: An meeting is our central object.  It has a start time end
-          time and ties the room to the group requesting the room.
+Restolio: A meeting is our central object.  It has a start time, an
+          end time and ties the room to the group requesting the room.
 
 Modello: Is meeting the right name for this class?  Is every use of a
          room a meeting?  Maybe less specific name would be better,
@@ -116,7 +116,7 @@ Webucci: Wait, I thought there were only four verbs in Rest. Am I
          missing something?
 
 Restolio: There are only 4 HTTP verbs that are used in REST.  But a
-          restfully Rails controller needs to implement these seven
+          restfull Rails controller needs to implement these seven
           actions.
 
 Modello: Wow, how did we get from talking about object methods and

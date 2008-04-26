@@ -53,8 +53,9 @@ Webucci: Oh, kinda like a calendar, only electronic.
 
 Modello: Hey, why don't we call it ECal.  It has a nice ring to it.
 
-Restolio: [annoyed at the diversion] Ok, fine.  So, we need a Room
-          model, a Group model and an Meeting model.
+Restolio: [annoyed at the diversion] Ok, fine.  So, here's what I'm
+          thinking.  We need a Room model, a Group model and an
+          Meeting model.
 
 Webucci: Group model?
 
@@ -90,8 +91,9 @@ Restolio: Right, probably an email address.  Some way to get a hold of
 
 Webucci: And you said something about an Meeting.  What's that?
 
-Restolio: A meeting is our central object.  It has a start time, an
-          end time and ties the room to the group requesting the room.
+Restolio: A meeting is our central object.  It has a date, a start
+          time, an end time and ties the room to the group requesting
+          the room.
 
 Modello: Is meeting the right name for this class?  Is every use of a
          room a meeting?  Maybe less specific name would be better,

@@ -12,7 +12,7 @@ task :test_success do
 end
 
 task :prompt do
-  ruby "prompt.rb Act*.txt"
+  ruby "-Ilib lib/prompt.rb Act*.txt"
 end
 
 task :pack do

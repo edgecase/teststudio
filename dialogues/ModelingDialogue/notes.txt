@@ -21,3 +21,10 @@
   we will just use the restful verbs.
 
 * Discussion on need for contact.
+
+* Twits:
+
+** Webucci: Looking forward to doing some rails programming ... hope
+   they don't make me write tests all the time ... instead of coding.
+
+** 

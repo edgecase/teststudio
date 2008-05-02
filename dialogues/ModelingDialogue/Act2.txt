@@ -143,7 +143,7 @@ Restolio: I think we can figure it out.  Any event scheduled for 1:00
           in the same room by the same group will just be changed to
           2:00.
 
-Webucci: Sure, that works for me.
+Webucci: Ummm, I guess we could try that, but seems kinda squirrelly.
 
 Restolio: But it would be nice if we could change it in one spot.  The
           problem seems to be that we have a lot of duplicate data.
@@ -159,8 +159,8 @@ Restolio: Yeah, we call it refactoring.  Currently, we have each event
           can reference the same definition.  And then to change from
           1:00 to 2:00, all we have to do is change the defintion.
 
-Webucci: I love Rails, it makes it so easy to do this stuff.  We just
-         write a migration and away we go.
+Webucci: Well, its a good thing we have migrations to do this kind of
+         change easily.
 
 [ ... time passes, screen show migrations being created and run  ... ]
 
@@ -178,14 +178,12 @@ Webucci: Nothing changed!  I don't get it.
 Restolio: Rats.  We removed the time duplication, but there's other
           duplication that we haven't addressed.
 
-Webucci: ???
+Webucci: Oh kaaay ...
 
-Restolio: Ok, Look at your new event.  It's scheduled once a week.
-          Since that applies to all the events covered by a
-          definition, that information should be in the defintion.
-          However, the events themselves contain the date.  But date
-          is implied by the definition.  We have two bit of
-          information that are clearly related, but stored in
+Restolio: Ok, here's what happened.  We moved the time of the event
+          into the shared event definition, but we didn't move the
+          date.  We still store the date in the event.  We have two
+          bits of information that are clearly related, but stored in
           different places.
 
 [cue light bulb]
@@ -195,25 +193,337 @@ Webucci: Oh, so when I changed the event from every day to every week,
          this was a simple rails app.
 
 Restolio: Try to use the modelling terminology: events and event
-          defintiions.
+          definitions.
 
-Webucci: Ok, so when an event *definition* changes, then individual
-         events may be created or destroyed, as appropriate.
-         [thinking it over] Wow. That doesn't help.
+Webucci: Ok, so when the date changes, we change the event definition?
+         What happens to the individual events.
 
-Restolio: We take the event, find its definition, then turn around
-          find all the events that belong to that definition.  We will
-          need a has_many declaration in the EventDefition, of course.
+Restolio: Well first, We will need a has_many declaration in the
+          EventDefition.  Then we take the event, find its definition,
+          and find all the events that belong to that definition.
 
-Webucci: And do what?
+Webucci: And what do we do with them.
 
 Restolio: Destroy them and recreate them to match the new defintion.
 
-Webucci: Yikes.  Kinda ugly, but I guess it will work.
+Webucci: Blech.  Kinda ugly.  Are you sure this is a good idea?
 
-[... music kicks in ... screen fades to black... end of act II ...]
+Restolio: If you have a better idea, feel free to contribute.
 
-NOTES: 
+Webucci: Actually, maybe I'll go see what Modello is up to.
+
+[... music kicks in ... screen fades to black... end of act II, Scene I ...]
+
+Act II, Scene II
+
+[Modello doing something]
+
+Webucci: Hey Modello, whatcha doing'?
+
+Modello: Oh, not much.  How's your simple Rails app going?
+
+Webucci: Not so simple after all.  In fact, we hit a rough spot in the
+         road and are looking for ideas.  You got a second?
+
+Modello: Shoot!
+
+Webucci: We are trying to figure out how to represent the schedule in
+         the database. We started with a simple approatch of having an
+         event for each time a room was scheduled.  Seemed simple
+         enough, right?
+
+Modello: Sure.
+
+Webucci: And it worked great.  But then we started talking about
+         recurring events and things started to get out of control
+         pretty quickly.  Now, say someone schedules a room every day
+         for a year, and they want to change it from 1:00 to 2:00.
+         Now we have to go through and change 365 rows, I mean,
+         objects.  So Restolio is all "We just have to normalize our
+         schema", or as he called it: refactoring.
+
+Modello: [shakes head] Oy-vey.
+
+Webucci: So he created this "event definition" object to keep the time
+         in. But just made things more confusing.  Pretty soon we
+         ended up with any changes to an event definition requiring us
+         to destroy all the event and recreate them.  It just seems
+         like a mess.  
+
+Modello: Sounds like you've had quite a day.  Still excited about
+         Rails.
+
+Webucci: [grunt] Things were so much simpler in PHP.
+
+Modello: Let's not get ahead of ourselves.  I don't think the project
+         is hopeless yet.  Let's think this through.
+
+Webucci: Ok, so what's your idea?
+
+Modello: What you've failed to do is proper domain analysis and object
+         modelling.  A simple application of some domain driven design
+         will solve all your problems.
+
+Webucci: Oh, we're doing that ... we call all our tables models now.
+
+Modello: Oh my.  We need to talk.  The first thing we need to do is
+         identify the behaviors of the system.
+
+Webucci: Behaviors?  You mentioned that before.  What are you talking
+         about?
+
+Modello: An object oriented design is more concerned about the
+         behaviours of the sytem rather than the exact way the data is
+         stored, that just an implementation detail.
+
+Webucci: hmm.  So we don't care how we store it in the database?
+
+Modello: It doesn't even matter that you are using a database. If you
+         capture the behaviors properly, the system just designs
+         itself. You can use a database, flat files, or even store
+         them in a paper file. We don't care.
+
+Webucci: Paper file?
+
+Modello: Ok, maybe I exaggerated a little. 
+
+Webucci: So where do we start?
+
+Modello: Ok, you have to ask yourself the question: What does the
+         system do?
+
+Webucci: Well that's easy, it reserves conference rooms.
+
+Modello: Give me some more details. You want to display a schedule,
+         check for conflicts ...
+
+Webucci: Well the main things we need to be able to do is to make sure
+         two groups do not try and use the same rooms at the same
+         time.  We also need to let groups schedule individual as well
+         as recurring meetings.
+
+Modello: So let's look at that in terms of objects and
+         interactions. Imagine you had a Calendar object.
+
+Webucci: Restollio said that we don't need one.  That's what the whole
+         database is, one big calendar.  That's why we call it eCal.
+
+Modello: Just work with me here.  If you had a Calendar object, what
+         would it have to do for you in order for you to get your job
+         done?  Your job being the things you just mentioned.
+
+Webucci: Well I think you would need to be able to ask it if a room
+         was reserved at a given time.
+
+Modello: Ok, behavior number one, asking if a room is reserved.  Go
+         on.
+
+[list pops up with behavior number one on it]
+
+Webucci: and I guess the obvious one is that it has to be able to
+         reserve a room in the first place. 
+
+Modello: Behavior number two: reserve a room (at a date and time). And
+         what else?
+
+Webucci: It needs to be able to deal with recurring events.
+
+Modello: Do you care how it deals with those recurring events?
+
+Webucci: Huh?  
+
+Modello: When you reserve a room, you specify the pattern for a
+         recurring event.  Do you care internally how it stores it. 
+
+Webucci: No I don't care.
+
+Modello: Great so we need be able to specify a how an event would
+         recur, but the actual recording of that recurring event is
+         not important to us.  As long as, the Calendar correctly
+         reports events on any days we ask for it.
+
+Webucci: Yeah that was the first behavior we came up with.  
+
+Modello: Exactly.  Anything else it needs to do for you?
+
+Webucci: Well let's see we also need to be able to print what's going
+         on in a particular room that day.
+
+Modello: I'm thinking that if we can ask the Calendar for a list of
+         events for a given room, during a given time spane, on a
+         particular date, then that's adequate for detecting conflicts
+         and listing out events.
+
+Webucci: huh. I think that might work. 
+
+Modello: Ok, anything else?
+
+Webucci: I think if we got that far, we'd be doing peachy. 
+
+Modello: Ok, now we have identified our essential behaviors.  The
+         essential behaviors are the thigns that tend not to change as
+         the project changes or grows.  I'm not saying they won't ever
+         change, but they are more stable than say the implentation
+         details.
+
+Webucci: Great, but I still don't see any code.  
+
+Modello: Now that we've identified our essential behaviors we can
+         write the rest of the application based on them.  For example
+         to ask if there are any conflicts for a room, you could write
+         this code:
+
+Calendar.find_events(room, date, start_time, end_time).empty?
+
+Webucci: Oh, okay. So find_events makes a query against the database
+         ...
+
+Modello: Maybe, maybe not.  We don't know, that's an implementation
+         detail. 
+
+Webucci: But don't we have to figure that out for the system
+         to actually work?
+
+Modello: Sure. Eventually. Let's not bury ourselves in details yet. 
+
+Webucci: Alright smart guy, how about recurring events.  Those were a
+         real pain in Restollio's design.
+
+Modello: Have I ever told you about temporal expressions?
+
+Webucci: Temporal ma-whuzzit?
+
+Modello: Temporal Expressions.  They are a way of codifying recurring
+         events in a very object oriented manner.  Martin Fowler wrote
+         about them on his bliki, but the basic idea is this: consider
+         the following class
+
+
+[code comes up on the screen to represent a very simple temporal
+expression]
+
+class MonthTE 
+  def initialize(month)
+    @month = month
+  end
+  def include?(date)
+    @month == date.month
+  end
+end
+
+te = MonthTE.new(1)
+te.include?(Date.today)
+
+Modello: TE is our Temporal Expression. You give it any date and it
+         will return true if that date is in January of any year.
+
+Webucci: Ok, so you can schedule events in January ...
+
+Modello: Or any other month for that matter, depending on how you
+         initialize it. Now imagine another class similar to MonthTE,
+         but instead of checking for the month, it checks for the day
+         of the month.  
+
+[possible slide put here]
+
+Webucci: Great, so now we can schedule things in January or schedule
+         things on the fifth of the month, but I'm still not quite
+         sure where you are going with this.
+
+Modello: Ok, one more class.  
+
+[another slide here]
+
+class And
+  def initialize(exp_one, exp_two)
+    ...
+  end
+end
+
+Modello: Now we can take a temporal expression for January, and one
+         for the fifth of the month, and get a composite expression
+         for scheduling things that only happen on January 5th of the
+         year.  With a handful of really simple temporal expressions
+         you can hanlde any kind of recurring event you might run
+         into.
+
+Webucci: So you are saying, if we have enough of these litte temporal
+         expression guys and ways to combine them together, we can
+         schedule anything?
+
+Modello: Yes.
+
+Webucci: Alright, I think this is starting to make sense. But how are
+         we gonna keep track of these things. You said you don't care
+         if they are in a database, but we have to put them somehwere.
+
+Modello: I haven't really thought about that. That's an implementation
+         detail.  We'll get to it eventually. 
+
+Webucci: Seems kind of important to me, but we'll move on. Show me how
+         you would create a meeting for the second Tuesday of every
+         month.
+
+Modello: Well we need a temporal expression that matches a particular
+         week of the month and a temporal expression that matches any
+         tuesday. You might create them like this:
+
+[code here]
+
+Modello: Then you take these two expressions, combine them with the
+         And operation and you will get a temporal expression that
+         will only match days that are both Tuesday's and the second
+         week of the month. Here is the code:
+
+[code completing it here]
+
+Webucci: I think that makes sense. Can we code up some more of these
+         now?
+
+Modello: Sure, let's pair on them. What's our first test?
+
+[time passes as they implement more]
+
+Webucci: Alright, that works, our tests are passing, but I think we
+         really need to figure out how we are going to store these
+         things. 
+
+Modello: I think we could just make them all ActiveRecord objects.
+
+Webucci: Cool, now we can finally get back to some Rails code. 
+
+Modello: All the temporal expressions derive from a common base
+         class. Rails supports Single Table Inheritance and I think
+         that would work for this case.
+
+Webucci: Let's see, script generate migration ...
+
+[time passes]
+
+Webucci: After our last migration our temporal expressions table has
+         65 columns.  This seems a little out of control to me.
+
+Modello: If we were using GemStone we wouldn't have this problem. This
+         is a problem with the impedence mismatch between objects and
+         relational databases. 
+
+Webucci: Impotence what now? I think I got an email about that recently.
+
+Modello: No, no, impeeedence. Object orientation and relational
+         databases are like oil and water, they don't mix well. So are
+         our tests still passing?
+
+Webucci: Hang on it's still running. Ok, yeah they are still green,
+but WOW is it slow. 
+
+
+
+
+Webucci: *Pleads* There has to be a way to bring the two modeling
+         systems together! I think I'm gonna go work on my resume. 
+
+
+notes: 
 * Temporal Expressions ... repeating events.
 * Dealing with unbounded 
 

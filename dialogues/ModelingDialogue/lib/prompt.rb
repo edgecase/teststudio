@@ -8,11 +8,11 @@ REV = AnsiColors.new(:reverse)
 NO_REV = AnsiColors.new(:reset)
 
 ACTOR_COLORS = [
-  :green, :yellow, :cyan, :magenta, :white, :red
+  :green, :yellow, :cyan, :white, :red, :blue
 ].map { |c|
   AnsiColors.new(c, :black, :bright)
 }
-INSTRUCTION_COLORS = AnsiColors.new(:reset) + AnsiColors.new(:blue, :black)
+INSTRUCTION_COLORS = AnsiColors.new(:reset) + AnsiColors.new(:magenta, :black)
 
 ACTORS = {}
 

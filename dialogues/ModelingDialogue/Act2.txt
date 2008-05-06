@@ -511,20 +511,25 @@ Webucci: Impotence what now? I think I got an email about that recently.
 
 Modello: No, no, impeeedence. Object orientation and relational
          databases are like oil and water, they don't mix well. So are
-         our tests still passing?
+         the tests still passing?
 
-Webucci: Hang on it's still running. Ok, yeah they are still green,
-but WOW is it slow. 
+Webucci: Hang on their still running. Ok, yeah everything's green,
+         but WOW is it slow. 
 
+Modello: Don't worry, that's just a implementation detail.  We'll get
+         the performance up to speed later.
 
+Webucci: Speaking of performance, you do realize that we have to go
+         thru every single event object in the system to find out if a
+         room is schedule in a given day.  I'm not a performance
+         tuning guru, but that doesn't seem like a good idea.
 
+Modello: Hmmm.  Good point.  Stupid relational database!
 
-Webucci: *Pleads* There has to be a way to bring the two modeling
-         systems together! I think I'm gonna go work on my resume. 
+Webucci: So, is this what it means when they say Rails can't scale.
 
+Medello: Well, end of the day.  I'll see you tommorrow.
 
-notes: 
-* Temporal Expressions ... repeating events.
-* Dealing with unbounded 
-
-* Modello comes back and asks about the 365.25 assert_equals in the test.
+Webucci: [Pleads] Man, somethings not right here.  Maybe this Rails
+         thing isn't all its cracked up to be.  I think I'm gonna go
+         work on my resume.

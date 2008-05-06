@@ -6,7 +6,8 @@ _
 [The act opens with Webucci working at the laptop, obviously thinking
 very hard.  Restolio and Modello enter.]
 
-Restolio: ... and so I say to the guy, "blah blah blah".
+Restolio: ... and so I say to the guy, "If it walks like a duck, and
+          talks like a duck, it must *be* a duck".
 
 Modello: Ha! That's a great story.  I wish I was there to see it.
 
@@ -15,7 +16,7 @@ Restolio: No kidding.  It was great fun.  [to Webucci] Hey there.
 
 Webucci: I've been trying to sort out the issues we are having with
          the ECal system.  Both of you seem to have good ideas, but
-         they seem to be polar opposites and I'm not sure how to bring
+         they seem to be total opposites and I'm not sure how to bring
          them together.
 
 Modello: Well, obviously, you need to start with the behaviour of the
@@ -67,8 +68,8 @@ Webucci: Its obvious that you two have different ways to design the
          system.  How do I know which one is right?
 
 Modello: Well, obviously I am.  But seriously.  I've been taught that
-         in modelling, one is neither right nor wrong, but useful or
-         not useful.
+         a model, one is neither right nor wrong, but useful or not
+         useful.
 
 Webucci: Really.  How do you mean?
 
@@ -151,7 +152,7 @@ Restolio: There is a solid mathematical foundation for data
           modeling. Tuple relational calculus, domain relational
           calculus.  It's all there, solid mathamatics.   
 
-Modeling: All bow down to the alter of C.J. Date. 
+Modello: All bow down to the alter of C.J. Date.
 
 Restolio: Date was a genius. Read "The Third Manifesto" for a view of
           how data modeling should be.  
@@ -223,4 +224,6 @@ Modello: Absolutely.  We keep the essential behaviour of the system
          like a good fit for the very data oriented portion of the
          application.  After all, it is a simple Rails app.
 
-Webucci: So, 
+Webucci: So, both modeling techniques are useful.  It all depends on
+         what you are working on.  Cool!  Well, I'm ready to start
+         writing some tests.  Who's with me?

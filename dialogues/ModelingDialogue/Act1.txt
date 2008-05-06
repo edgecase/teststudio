@@ -111,8 +111,8 @@ Modello: Yes and no.  It doesn't effect the basic functionality, but
 Restolio: Behavior?  We won't have to worry about that!  This is a
           simple Rails app, so we are going to follow conventions do
           it restfully.  That means we will have the seven actions:
-          index, show, new create, edit, update and, ... oh, there one
-          more ... um ... oh yeah, destroy.
+          index, show, new, create, edit, update and, ... oh, there
+          one more ... um ... oh yeah, destroy.
 
 Webucci: Wait, I thought there were only four verbs in Rest. Am I
          missing something?
@@ -135,6 +135,12 @@ Webucci: Oh, and a Group has many Events.  And a Room has many Events.
          I love the way Rails allows you to express this so naturally.
 
 Restolio: That's the beauty of following Rails conventions.           
+
+Modello: Since we *are* building an electronic calendar, I'm thinking
+         a colendar object might be useful.
+
+Restolio: Nah, the entire database is our calendar.  We won't need an
+          explicit table, I mean, model to represent a calendar.
 
 Webucci: So, are we ready to code?
 

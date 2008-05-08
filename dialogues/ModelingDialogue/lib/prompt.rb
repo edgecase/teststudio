@@ -16,6 +16,12 @@ INSTRUCTION_COLORS = AnsiColors.new(:reset) + AnsiColors.new(:magenta, :black)
 
 ACTORS = {}
 
+def calibrate
+  100.downto(1) do |i| puts i end
+  print "Enter the top number on the screen: "
+  $lines = gets.to_i
+end
+
 def clear
   print "\e[2J"
 end
@@ -56,12 +62,16 @@ end
 
 files = ARGV.to_a.dup
 ARGV.clear
+
+calibrate
+puts "#$lines lines"
 paragraphs = []
 files.each do |fn|
   open(fn) do |ins|
     begin
       p = ""
       while line = ins.gets
+        next if line =~ /^#/
         break if line.blank?
         p << line
       end

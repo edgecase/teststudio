@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 
+require 'rake/clean'
+
 task :default => :test_success
 
 task :test do
@@ -12,17 +14,5 @@ task :test_success do
 end
 
 task :prompt do
-  ruby "-Ilib lib/prompt.rb Act*.txt"
-end
-
-task :pack do
-  sh 'tar zcvf MockDialogue_key.tgz MockDialogue.key'
-end
-
-directory 'new_keynote'
-
-task :unpack => 'new_keynote' do
-  Dir.chdir("new_keynote") do
-    sh 'tar zxvf ../MockDialogue_key.tgz'
-  end
+  ruby "-Ilib lib/prompt.rb Act1.txt Act2.txt Act3.txt"
 end

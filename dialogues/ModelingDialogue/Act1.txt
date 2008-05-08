@@ -1,146 +1,173 @@
+# -*- mode: text; fill-column: 55 -*-
+
 A Dialogue Concerning the Two Chief Modelling Systems
 (A Galilien Dialogue)
-_
+
 Persona dramatica:
-_
-Modello -- Long time OO developer who is new to Rails.  He tends to
-           view the world in terms of objects and their interactions.
-_
-Restolio -- Experienced rails developer and REST advocate.  He is very
-            concerned about properly representing the problem domain
-            in the data base schema.
-_
-Webucci -- A recent convert to Rails from PHP.  He is loving working
-           with Ruby and Rails is is excited about learning more about
-           both.
-_
+
+Modello -- Long time OO developer who is new to Rails.
+           He tends to view the world in terms of
+           objects and their interactions.
+
+Restolio -- Experienced rails developer and REST
+            advocate.  He is very concerned about
+            properly representing the problem domain in
+            the data base schema.
+
+Webucci -- A recent convert to Rails from PHP.  He is
+           loving working with Ruby and Rails is is
+           excited about learning more about both.
+
 Act I
-_
-[The act opens as our developement team is discussing a new project]
 
-Restolio: We got the customer requirements for our new project
-          yesterday and I wanted to get everyone together for a
-          project kick-off meeting.
+[The act opens as our developement team is discussing a
+new project]
 
-Webucci: Great.  I hope its not another social web app.  Not like the
-         world doesn't need another FaceBook.
+Restolio: We got the customer requirements for our new
+          project yesterday and I wanted to get
+          everyone together for a project kick-off
+          meeting.
 
-Restolio: No, no.  Its for a client that has real money.  Its a
-          scheduling application.  Here's what we need: We need a Room
-          model, a Group model ...
+Webucci: Great.  I hope its not another social web app.
+         Not like the world doesn't need another
+         FaceBook.
 
-Modello: Whoa.  Design before requirements?  Surely the customer
-         didn't tell us what models we need?
+Restolio: No, no.  Its for a client that has real
+          money.  Its a scheduling application.  Here's
+          what we need: We need a Room model, a Group
+          model ...
 
-Restolio: Oh no.  This is a really simple rails app.  I was just
-          outlining what we will be needing.
+Modello: Whoa.  Design before requirements?  Surely the
+         customer didn't tell us what models we need?
 
-Modello: Ok, but why don't you just start with what the customer is
-         *asking* for.
+Restolio: Oh no.  This is a really simple rails app.  I
+          was just outlining what we will be needing.
 
-Restolio: We would worry about if it was a big app, but this is such a
-          staightforward application that I don't want to spend a of
-          overhead in too much design.
+Modello: Ok, but why don't you just start with what the
+         customer is *asking* for.
+
+Restolio: We would worry about if it was a big app, but
+          this is such a staightforward application
+          that I don't want to spend a of overhead in
+          too much design.
 
 Modello: Humor me.
 
-Restolio: Here's the general idea.  The client has a bunch of rooms
-          that are used for meetings.  They are having trouble
-          coordinating who is using the room when and want a *simple*
-          web application to schedule those rooms.
+Restolio: Here's the general idea.  The client has a
+          bunch of rooms that are used for meetings.
+          They are having trouble coordinating who is
+          using the room when and want a *simple* web
+          application to schedule those rooms.
 
 Webucci: Oh, kinda like a calendar, only electronic.
 
-Modello: Hey, why don't we call it ECal.  It has a nice ring to it.
+Modello: Hey, why don't we call it ECal.  It has a nice
+         ring to it.
 
-Restolio: [annoyed at the diversion] Ok, fine.  So, here's what I'm
-          thinking.  We need a Room model, a Group model and an
-          Meeting model.
+Restolio: [annoyed at the diversion] Ok, fine.  So,
+          here's what I'm thinking.  We need a Room
+          model, a Group model and an Meeting model.
 
 Webucci: Group model?
 
-Restolio: Yah, the group that is reserving the room.  We need to
-          record that.
+Restolio: Yah, the group that is reserving the room.
+          We need to record that.
 
-Modello: [snidely] Looks like you've thought through this pretty deeply.
+Modello: [snidely] Looks like you've thought through
+         this pretty deeply.
 
-Restolio: Sure.  Like I said.  A simple rails app.   Where was I?  
+Restolio: Sure.  Like I said.  A simple rails app.
+          Where was I?
 
-Webucci: So when you say model, you are really talking about database
-         tables, right?  I really love that MVC thing that rails gives
-         you.  So what columns does the Room table need.
+Webucci: So when you say model, you are really talking
+         about database tables, right?  I really love
+         that MVC thing that rails gives you.  So what
+         columns does the Room table need.
 
-Restolio: Well, in Rails (unlike PHP), we don't talk about columns.
-          We are doing object oriented design, so we want to talk
-          about model attributes rather than columns.
+Restolio: Well, in Rails (unlike PHP), we don't talk
+          about columns.  We are doing object oriented
+          design, so we want to talk about model
+          attributes rather than columns.
 
-Modello: Well, OO design is more than just talking about attributes...
+Modello: Well, OO design is more than just talking
+         about attributes...
 
 Restolio: Yeah, right, ok.
 
-Webucci: Ok, so what *attribute* does a room table have.
+Webucci: Ok, so what *attribute* does a room table
+         have.
 
-Restolio: [pedantically] A room *model* has a name, its a string and a
-          capacity, probably an integer.
+Restolio: [pedantically] A room *model* has a name, its
+          a string and a capacity, probably an integer.
 
-Webucci: So a group might have a, oh I don't know, a name.  And maybe
-         some contact information.
+Webucci: So a group might have a, oh I don't know, a
+         name.  And maybe some contact information.
 
-Restolio: Right, probably an email address.  Some way to get a hold of
-          the group who wants to use the room.
-
-Webucci: And you said something about an Meeting.  What's that?
-
-Restolio: A meeting is our central object.  It has a date, a start
-          time, an end time and ties the room to the group requesting
+Restolio: Right, probably an email address.  Some way
+          to get a hold of the group who wants to use
           the room.
 
-Modello: Is meeting the right name for this class?  Is every use of a
-         room a meeting?  Maybe less specific name would be better,
-         like Event?
+Webucci: And you said something about an Meeting.
+         What's that?
+
+Restolio: A meeting is our central object.  It has a
+          date, a start time, an end time and ties the
+          room to the group requesting the room.
+
+Modello: Is meeting the right name for this class?  Is
+         every use of a room a meeting?  Maybe less
+         specific name would be better, like Event?
 
 Restolio: Sure, fine.
 
 Webucci: Does it really matter what we call it?
 
-Modello: Yes and no.  It doesn't effect the basic functionality, but
-         choosing the right names will help guide developers in
-         thinking about the model properly and choosing the right
+Modello: Yes and no.  It doesn't effect the basic
+         functionality, but choosing the right names
+         will help guide developers in thinking about
+         the model properly and choosing the right
          behavior for the objects.
 
-Restolio: Behavior?  We won't have to worry about that!  This is a
-          simple Rails app, so we are going to follow conventions do
-          it restfully.  That means we will have the seven actions:
-          index, show, new, create, edit, update and, ... oh, there
-          one more ... um ... oh yeah, destroy.
+Restolio: Behavior?  We won't have to worry about that!
+          This is a simple Rails app, so we are going
+          to follow conventions do it restfully.  That
+          means we will have the seven actions: index,
+          show, new, create, edit, update and, ... oh,
+          there one more ... um ... oh yeah, destroy.
 
-Webucci: Wait, I thought there were only four verbs in Rest. Am I
-         missing something?
+Webucci: Wait, I thought there were only four verbs in
+         Rest. Am I missing something?
 
-Restolio: There are only 4 HTTP verbs that are used in REST.  But a
-          restfull Rails controller needs to implement these seven
-          actions.
+Restolio: There are only 4 HTTP verbs that are used in
+          REST.  But a restfull Rails controller needs
+          to implement these seven actions.
 
-Modello: Wow, how did we get from talking about object methods and
-         business logic to controller actions and HTTP verbs.  Sounds
-         like we are mixing layers here.
+Modello: Wow, how did we get from talking about object
+         methods and business logic to controller
+         actions and HTTP verbs.  Sounds like we are
+         mixing layers here.
 
-Restolio: Because we are using REST, we don't have to think about
-          stuff like that.  Remember, its a simple Rails application.
+Restolio: Because we are using REST, we don't have to
+          think about stuff like that.  Remember, its a
+          simple Rails application.
 
-Restolio: Ok, so our Meeting, *ahem*, Event belongs to a Room and
-          belongs to a Group.
+Restolio: Ok, so our Meeting, *ahem*, Event belongs to
+          a Room and belongs to a Group.
 
-Webucci: Oh, and a Group has many Events.  And a Room has many Events.
-         I love the way Rails allows you to express this so naturally.
+Webucci: Oh, and a Group has many Events.  And a Room
+         has many Events.  I love the way Rails allows
+         you to express this so naturally.
 
-Restolio: That's the beauty of following Rails conventions.           
+Restolio: That's the beauty of following Rails
+          conventions.
 
-Modello: Since we *are* building an electronic calendar, I'm thinking
-         a colendar object might be useful.
+Modello: Since we *are* building an electronic
+         calendar, I'm thinking a colendar object might
+         be useful.
 
-Restolio: Nah, the entire database is our calendar.  We won't need an
-          explicit table, I mean, model to represent a calendar.
+Restolio: Nah, the entire database is our calendar.  We
+          won't need an explicit table, I mean, model
+          to represent a calendar.
 
 Webucci: So, are we ready to code?
 

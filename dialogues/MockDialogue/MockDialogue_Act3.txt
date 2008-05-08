@@ -1,0 +1,329 @@
+Mock Dialogue
+By Jim Weirich and Joe O'brien
+
+Act III
+
+[The scene opens Jim and Joe working at their workstations.  Joe
+becomes more frustrate the longer he works.]
+
+Joe: You got a second?  I'm having trouble with setting up some mocks.
+
+Jim: Oh?
+
+Joe: You've convinced me that mocks are really cool, and I'm
+     trying. But I keep running into problems when actually trying to
+     use them.
+
+Jim: Well, they are not the answer to everything.  What seems to be
+     your problem now?
+
+Joe: I'm working on some code to calculate the shipping cost to ship a
+     package between two stations.
+
+Jim: OK
+
+Joe: It seems like a lot of trouble to setup the mocks.
+
+Jim: Show me the code.
+
+  ## Snippet III-1
+  def test_cost_of_sending_a_package
+    sending_station = flexmock("sending station")
+
+    receiving_station = flexmock("receiving station")
+
+    zip_code = flexmock("zip code")
+    zip_code.should_receive(:get_closest_station).once.and_return(station)
+
+    address = flexmock("address")
+    address.should_receive(:zip_code).once.and_return(zip_code)
+
+    customer = flexmock("customer")
+    customer.should_receive(:address).once.and_return(address)
+
+    package = flexmock("package")
+    package.should_receive(:customer).once.and_return(customer)
+    
+    assert_equal 10.00, sending_station.cost_to_send(package)
+  end
+
+Jim: This is interesting code.
+
+Joe: It sure is, what are you thinking?
+
+Jim: I'm thinking there is something missing here.
+
+Joe: Like...?
+
+Jim: ... any real code.  What is it that you are trying to test?
+
+Joe: I want to make sure that the station objects can calculate the
+     cost to ship a pakcage.
+
+Jim: So the business logic of calculating shipping costs belong to the
+     station objects?
+
+Joe: Sure!  Station "1" might be a warehouse holding a "package" for a
+     customer.  Our client will ship the package from Station 1 (the
+     warehouse) to a station close to the customer.  The receiving
+     station is choosen according to the zipcode of the customer.
+
+Jim: Ok, I guess that make sense.  We can work with that.  So, the
+     objective of this test is to see if the cost calculations in
+     Station are correct.
+
+Joe: Exactly!
+
+Jim: So, where are the station objects?
+
+Joe: They are right here ... Oh, oops.
+
+Jim: Right.  You've gone just a little wild with the mocks.  You don't
+     have any real domain objects in the test.
+
+[Joe starts to fix the code]
+
+Jim: [continuing] Sometimes one gets so caught up in the process of
+     creating mocks that you lose sight of what your testing.  I've
+     seen a lot of tests that verify nothing more than that you have
+     setup the mocks correctly (for some defintion of correct).
+
+Joe: Here!  Does this look better?
+
+  ## Snippet III-2
+  def test_cost_of_sending_a_package
+    sending_station = Station.new("Columbus")
+    receiving_station = Station.new("Edinburgh")
+
+    zip_code = flexmock("zip code")
+    zip_code.should_receive(:get_closest_station).once.and_return(station)
+
+    address = flexmock("address")
+    address.should_receive(:zip_code).once.and_return(zip_code)
+
+    customer = flexmock("customer")
+    customer.should_receive(:address).once.and_return(address)
+
+    package = flexmock("package")
+    package.should_receive(:customer).once.and_return(customer)
+    
+    assert_equal 10.00, sending_station.cost_to_send(package)
+  end
+
+Jim: That's better.  Now we have something real to test.  Let's look
+     at the rest of the test code.  Wow, there are a lot of mocks
+     there.  [pause ... thinking] Do you really _care_ if the zip_code
+     method is called?
+
+Joe: Certainly!  I mean, we _need_ to call zip_code to find to ... umm
+     ... get the zip code, right?
+
+Jim: All I'm saying is that the "once" specification on the mock call
+     means that it *must* be called to pass the test.  It seems to me
+     that whether "zip_code" is called or not is incidental to a
+     problem being addressed.
+
+Joe: Ok ... I think.
+
+Jim: Let me put it another way.  If zipcode is called twice, would you
+     care?
+
+Joe: No.
+
+Jim: Or three times, or ten times?  Or actually zero times ... as long
+     as you got the right answer?
+
+Joe: Sure:
+
+Jim: Then that call is over specified.  We can leave off the "once"
+     specification and the mock will still work, it just won't insist
+     that the method _must_ be called to pass the test.  BTW, that's
+     the essential difference between a mock and stub.
+
+Joe: So we just leave off the "once" on the zip code call.
+
+Jim: And most of the other mock calls as well. 
+
+  ## Snippet III-3
+  def test_cost_of_sending_a_package
+    sending_station = Station.new("Columbus")
+    receiving_station = Station.new("Edinburgh")
+
+    zip_code = flexmock("zip code")
+    zip_code.should_receive(:get_closest_station).and_return(station)
+
+    address = flexmock("address")
+    address.should_receive(:zip_code).and_return(zip_code)
+
+    customer = flexmock("customer")
+    customer.should_receive(:address).and_return(address)
+
+    package = flexmock("package")
+    package.should_receive(:customer).and_return(customer)
+    
+    assert_equal 10.00, sending_station.cost_to_send(package)
+  end
+
+Jim: BTW, there's a short-cut you can use when you are mocking a
+     method of no arugments that just returns a value.  It will
+     shorten up the code quite a bit:
+
+  ## Snippet III-4
+  def test_cost_of_sending_a_package
+    sending_station = Station.new("Columbus")
+    receiving_station = Station.new("Edinburgh")
+
+    zip_code = flexmock("zip code", :get_closest_station => station)
+    address = flexmock("address", :zip_code => zip_code)
+    customer = flexmock("customer", :address => address)
+    package = flexmock("package", :customer => customer)
+
+    assert_equal 10.00, sending_station.cost_to_send(package)
+  end
+     
+Jim: Ok, the code is getting a bit clearer.  But now I'm bothered by
+     something else.  It seems that we are using a lot of mock
+     objects.  What are they being used for?
+
+Joe: Well, we need them to calculate the shipping cost?
+
+Jim: Really?  What's the shipping cost based on?
+
+Joe: The distance between two stations.
+
+Jim: Just that?
+
+Joe: Yes.
+
+Jim: Then why do we need to know about the customer in this test?
+
+Joe: It's the customer object that has the address.
+
+Jim: The address of the receiving station?
+
+Joe: No ... the address of the customer.
+
+Jim: So you are shipping direct to the customer?
+
+Joe: No, to the station closest to the customer.  The customer will
+     will pick it up from the local distributers.
+
+Jim: Hmmm ... Bring up the "cost_to_send" function.  I want to see
+     something.
+
+  ## Snippet III-4a
+  def cost_to_send(package)
+    receiving_station = package.customer.address.zip_code.get_closest_station
+    cost_to_send_to(receiving_station)
+  end
+
+Jim: Ha!  Just as I suspected.  You have a train wreck!
+
+Joe: That's unlikely.  We usually ship by truck.
+
+Jim: No, I mean the code is a train wreck.
+
+Joe: Excuse me!
+
+Jim: See how all the methods are joined up to each other by dots.
+     It's like a line of train cars ready to be derailed.  Hence the
+     term "Train Wreck".  Take a look at the first line of code in
+     that method.  What do you see?
+
+Joe: I see it getting the receiving station.
+
+Jim: By .... ?
+
+Joe: Asking the package for the customer.
+
+Jim: And ... ?
+
+Joe: And then asking the customer for the address.
+
+Jim: And ... ?
+
+Joe: Ok, ok.  And then getting the zipcode from teh address, and then
+     finding the assigned receiving station for that zip code area.
+
+Jim: And that's the train wreck.  We are exposing a whole lot of data
+     structure to this simple "calculate cost" function.  If we ever
+     refactored the schema, say like allowing a customer to have
+     multiple addresses, then this code would be unnecessarily
+     effected.
+
+Joe: Ok, that makes sense.  But how do we fix this.  I mean, we have
+     to get the zip code somehow.
+
+Jim: Yes, but it shouldn't be the responsibility of *this* code to do
+     that.  There are a number of ways to fix this.  We could drop
+     this method and make everyone call "cost_to_send_to(station)"
+     directly ...
+
+Joe: But that would make *all* the callers have to navigate the
+     datastructure.  Sounds like you just made the problem worse.
+
+Jim: Right, or we could give the package the responsibility of knowing
+     its receiving station.
+
+Joe: Interesting, then our code would look like this:
+
+  ## Snippet III-4b
+  def cost_to_send(package)
+    cost_to_send_to(package.receiving_station)
+  end
+
+Jim: Right.  And look at what it does to our tests.
+
+  ## Snippet III-4c
+  def test_cost_of_sending_a_package
+    sending_station = Station.new("Columbus")
+    receiving_station = Station.new("Edinburgh")
+    package = flexmock("package", :receiving_station => receiving_station)
+
+    assert_equal 10.00, sending_station.cost_to_send(package)
+  end
+
+Jim: [continuing] Most of the mocks are gone.  We only need to mock
+     the "receiving_station" method on a package.  The details of
+     exactly how to get the receiving station is no longer exposed, in
+     the test or in the code.
+
+Joe: But that "navigation code" still needs to be somewhere.
+
+Jim: Sure, but its no longer part of the cost calculation code.  By
+     putting it in the Package object, it is in one location and
+     changing it in the future will be easier.
+
+Joe: But the train wreck code still exists in the Package object, just
+     one train car shorter.
+
+Jim: Yes, and we should revisit that code and consider if we need to
+     refactor that any further.  Its a matter of balancing the number
+     of public methods on an object with its responsibilities and the
+     need to keep the code DRY.
+
+Joe: And ease of testing.  You noticed this problem because of the
+     number of mock objects we needed in our test.
+
+Jim: Right.  When tests become ugly, its a good clue that the code
+     that is being tested is ugly.  We need to become sensitive to
+     ugliness in our code and tests and be ruthless in removing it.
+
+Joe: Ban the Ugly!  Now there's a slogan.  So, are we done here.
+
+Jim: Not yet.  We still need to write the "recieving_station" method
+     in the Package class.
+
+Joe: Yikes!  We call that method here, but since it is mocked, it
+     might never exist.
+
+Jim: True.  And truthfully, if it is easy to create a Package object
+     without hitting the database and without creating a whole network
+     support objects behind it, then I would suggest using a real
+     Package object.  No need for mock in that case.
+
+Joe: Make sense to me.  Time to call it a day?
+
+Jim: Sounds good to me.  I want to get home and catch the showing of
+     "The Trial of the Century"
+

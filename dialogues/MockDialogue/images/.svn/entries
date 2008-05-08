@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="47"
+   name=""
+   committed-date="2008-04-04T08:17:50.210254Z"
+   url="http://edgerepo.com/svn/training/dialogues/trunk/MockDialogue/images"
+   last-author="jimweirich"
+   kind="dir"
+   repos="http://edgerepo.com/svn/training"
+   revision="47"/>
+<entry
+   committed-rev="47"
+   name="mock_turtle.jpg"
+   text-time="2008-02-29T17:31:59.000000Z"
+   committed-date="2008-04-04T08:17:50.210254Z"
+   checksum="6b70cf980942490921f5895381c666d1"
+   last-author="jimweirich"
+   kind="file"
+   prop-time="2008-04-04T08:17:56.000000Z"/>
+</wc-entries>

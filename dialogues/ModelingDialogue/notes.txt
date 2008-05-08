@@ -27,4 +27,11 @@
 ** Webucci: Looking forward to doing some rails programming ... hope
    they don't make me write tests all the time ... instead of coding.
 
-** 
+----------------------------------------------------------------------
+
+Bring out the fact that the open 
+
+* The object guy was shying away coding.  More code examples.
+* "Well, I read ..."
+* refer to Resources rather than REST.
+* 

@@ -1,0 +1,310 @@
+Act II
+
+[The scene opens with Joe is typeing at his workstation.  A Unit Test
+screen comes up and Joe starts playing with a Rubik's cube]
+
+[Jim enters]
+
+Jim: Hey, Joe, Whatcha doin'?
+
+Joe: Well, I'm having a lot of problems solving the last layer.  I can
+     get the first two layers, but the last layer is really eluding
+     me.
+
+Jim: Oh, its simple.  You just need to apply the principles of wave
+     operators from quantum mechanics to help with the bottom layer.
+     Believe me, it really helps.
+
+Joe: Um ... nevermind.
+
+Jim: So let me ask that is different way.  *Why* are you are trying to
+     solve Rubik's cube?
+
+Joe: Oh, I'm running my unit tests.
+
+Jim: Takin' a while, huh?
+
+Joe: Just a bit.  Well, we do have a pretty large code base now, well
+     covered by unit tests.  Its no surprise that it takes a bit to
+     run.
+
+Jim: So, how long's "a bit"?
+
+Joe: [looks at his watch] Oh, around 30 minutes.
+
+Jim: Wow, that's a "large" bit.  Have you ever seen Jeff Nielson's
+     thoughts on the psychological of build times?
+
+Joe: Sounds interesting fill me in.
+
+Jim: He did some research on the effect of build time and how they
+     effect developers.  He discovered that, for unit tests, there is
+     an interesting psycholigcal effect that takes place when the
+     tests start taking longer than 10 to 30 seconds.
+
+[Joe laughs scoffingly]
+
+Jim: Really.  The number of times the unit tests were run dropped
+     dramatically when the tests took longer that 30 seconds.
+
+Joe: Oh, come on.  How in the world can do you expect me to get these
+     tests down to 30 seconds. We're talking about a substantial suite
+     of tests involving controllers, models, services, and database
+     interactions, all trying ......
+
+Jim: Well those aren't _really_ unit tests then. Michael Feathers says
+     that in order to be a unit test it must:
+
+     ## Snippet II-1
+     * not talk to the database
+     * not communicate across the network
+     * not touch the file system
+     * be able to run at the same time as any of your other unit tests
+     * not have to do special things to your environment (such as
+       editing config files) to run it.
+
+Joe: Ok, I get "not communicate across the network" and the "can't run at
+     the same time" and even the "not have to do special things", but how
+     in the world am I supposed to NOT touch the database or
+     filesystem.  This is a RAILS application, you know, MVC database
+     app with fixtures, migrations, ... EVERYthing hits the database.
+
+Jim: Certainly, some kinds of test will hit the database, but we can
+     easily minimize the number of hits on the database in many of our
+     tests.
+
+Joe: If you've got an idea I'm willing to listen.
+
+Jim: Show me one of your controller tests.
+
+Joe: Ok, here's a pretty straight forward one:
+
+   ## Snippet II-2 ' 
+   class ContactsControllerTest < ActionController::TestCase
+     fixtures :contacts
+  
+     def test_should_assign_contact_list
+       get :index
+
+       assert_response :success
+       assert_equal Contact.find(:all), assigns(:contacts)
+     end
+     ...
+   end
+
+Jim: So what are you testing here?  
+
+Joe: Well I think it's obivous, I'm making sure that the @contact
+     variable is assigned and that it contains all of the Contacts.
+
+Jim: Well yes, that's what you are testing here, but what is the
+     behavior your looking for?
+
+Joe: I'm not sure I follow.
+
+Jim: The job of a Controller in an MVC is orchestration right?  
+
+Joe: Yeah sure, in this case it's getting information from the model
+     and then making sure it's in the form that the view needs.
+
+Jim: Right, so let's test that behavior instead of making sure that
+     the ending state is what we expect. [pause] Let's break down
+     again what we are trying to test.  First, we want to make sure
+     the Controller asks for all of the contacts.  Second we want to
+     make sure that it assigns those contacts to an instance variable
+     for the view to use.  Finally we want to make sure that it
+     returns a successful return code.
+
+Joe: Ok, so how would we go about that, without hitting the database?
+
+Jim: Mocking of course.  Let's change the test to this:
+
+   ## Snippet II-3 '
+   class ContactsControllerTest < ActionController::TestCase
+     # fixtures :contacts
+  
+     def test_should_assign_contact_list
+       flexmock(Contact).should_receive(:find).with(:all).once.and_return(:contacts)
+
+       get :index
+
+       assert_response :success
+       assert_equal :contacts, assigns(:contacts)
+     end
+     ...
+   end
+
+Joe: I like it ... kind of.  
+
+Jim: Kind of?  That doesn't sound convincing.  
+
+Joe: Well, aren't you testing the implementation here?  I mean your
+     specifying exactly what's happening on the inside of the method.
+
+Jim: Yes, but don't be fooled into thinking the first test was a black
+     box either. In the end you were grabbing all of the Contacts out
+     of the database in order to match against your list. In this case
+     we are making sure that all the contacts are retrieved, the
+     contacts that are retrieved are set as the instance variable.
+
+Joe: Oh now I see it.  You are using a symbol (it could be any object)
+     and checking that the controller sets that into the approriate
+     instance variable so that the view is ready for it.
+
+Jim: Exactly.  Now from what I can see we have eliminated two database
+     calls just with that one test.  If we change all of the tests to
+     use this, we will eliminate the last database hit.
+
+Joe: The last hit?  We aren't hitting it anymore.
+
+Jim: Well, with each setup the fixtures are being inserted into the
+     database to give us a fresh start.  So really we are.
+
+Joe: I never thought of that.  Those can really add up over time.  Ok,
+     but what about a more complicated test like this one for update:
+
+     ## Snippet II-4     '
+     def test_updating_contact
+       contact = contacts(:birthday_may1)
+
+       post :update, :id => contact.id,
+         :contact => { :first_name => 'Jim'}
+
+       assert_response :redirect
+       assert_redirected_to contact_url(contact)
+       assert_equal 'Jim', Contact.find(contact.id).first_name
+       assert_equal 'Contact successfully updated', flash[:success]
+     end
+
+Jim: Ok, so what are we doing here?
+
+Joe: Well, we are doing quite a bit here, first we are getting an
+     existing contact, then we are ....
+
+Jim: Let me rephrase, I'm not asking what _is_ happening, what I'm
+     asking is what's the behavior we are trying to test?
+
+Joe: Well the controller should get the updates that are passed to it,
+     and if it is able to successfully save the model, then it should
+     redirect to the correct url and update the flash message.
+
+Jim: Exactly, so let's make it do that.  This time we are going to
+     create a mock object and then manipulate that object.  So instead
+     of:
+
+       ## Snippet II-5
+       contact = contacts(:birthday_may1)
+
+Jim: we will have:
+
+       ## Snippet II-5a
+       contact = flexmock(:model, Contact)
+
+Joe: I haven't seen :model used with flexmock before.  What's that doing?
+
+Jim: Flexmock, when used with Rails, knows about rails model objects.
+     By telling flexmock that the mock we are creating is a model, it
+     will automatically mock out several methods that Rails model
+     objects enjoy, such as id and whatnot.
+
+Joe: Is that all we need to do?
+
+Jim: Well, we have to tell the mock what it needs to expect during its
+     lifetime.
+
+       ## Snippet II-6
+       contact = flexmock(:model, Contact)
+       contact.should_receive(:update_attributes).
+         with(:contact_attributes).once
+       contact.should_receive(:save).and_return(true)
+
+Joe: Right, we update the attributes on the object, and then we save
+     the object.  That's what the controller will be doing.
+
+     But I'm don't get the :contact_attribute thing.  What's going on?
+
+Jim: We really don't care, in this test, exactly what attribute we are
+     changing.  What we need to ensure is that the controller passes
+     whatever is in the the parameter list to the model to be updated.
+     Remeber, the controller's job is orchestration.  We just need to
+     make sure the proper things get to their proper places.  The
+     controller itself really doesn't care about the gory details.
+
+Joe: So, how do we get the controller to use this mock?
+
+Jim: Simple! We just mock the finder on Contact:
+
+       ## Snippet II-7 ' 
+       flexmock(Contact).should_receive(:find).and_return(contact)
+
+Joe: Great! Are we done?
+
+Jim: Not quite.  We need to pass the :contact_attributes symbol into
+     the post call to be passed along to the controller.
+
+Joe: Cool, I'm impressed. So the whole test looks like this:
+
+     ## Snippet II-8 ' 
+     def test_updating_contact
+       contact = flexmock(:model, Contact)
+       contact.should_receive(:update_attributes).
+         with(:contact_attributes).once
+       contact.should_receive(:save).and_return(true)
+
+       flexmock(Contact).should_receive(:find).
+         and_return(contact)
+
+       post :update, :id => contact.id,
+          :contact => :contact_attributes
+
+       assert_response :redirect
+       assert_redirected_to contact_url(contact)
+       assert_equal 'Contact successfully updated', flash[:success]
+     end
+
+Joe: I find it interesting that we no longer explicitly check that the
+     model has be updated.
+
+Jim: Right.  We are not testing the model, or that Rails _really_
+     updates the model when calling update_attributes.  All we are
+     testing is that the controller gives the right data to Rails for
+     the update to happen.
+
+Joe: So, let's see if thks works! [Joe bangs on keyboard]
+
+## Snippet II-9 ' 
+[Green Bar ... test pass on screen]
+
+Joe: Sweet!  So you can use mocks for more that just mocking out
+     external services.
+
+Jim: Absolutely.  Mocks are great for isolating your tests and
+     allowing your tests to concentrate on verifying exactly what you
+     want do deal with at the moment.
+
+Joe: Great, so it looks pretty straight forward to isolate the
+     controller from the database, but what about the modals.  I'm
+     assuming that it's ok for them to hit the database because they
+     are so intimately connect to the schema.
+
+Jim: Yes and no.  You would be surprised at the amount of model
+     business logic that has nothing to do with saving or retrieving
+     from the database. Most of that logic can certainly be done
+     without any database interaction at all.
+
+Joe: Ok, I'll buy that, but what about finders.
+
+Jim: You're right.  Finders are almost always tested against the
+     database.  And it make sense since you want to really be sure
+     that whatever SQL magic is going on behind the scenes that you
+     are getting the correct ressult.  I find that finders are the
+     great divide between DB based testing and mock based testing.
+     Test your finders against the DB, and then mock the finders to
+     test everything else.
+
+Joe: Sounds good.  Say, its almost lunch time.  You hungry?
+
+Jim: I'm ready to hit the cafeteria.  I hear they are serving
+     beautiful soup.
+
+[exit Joe and Jim]

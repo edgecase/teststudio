@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="48"
+   name=""
+   committed-date="2008-04-04T08:21:44.031512Z"
+   url="http://edgerepo.com/svn/training/dialogues/trunk/MockDialogue"
+   last-author="jimweirich"
+   kind="dir"
+   uuid="2b94dd1c-c2fc-4867-a43f-21ce334f3c59"
+   repos="http://edgerepo.com/svn/training"
+   prop-time="2008-04-04T08:22:16.000000Z"
+   revision="48"/>
+<entry
+   committed-rev="48"
+   name="Rakefile"
+   text-time="2008-04-04T08:21:24.000000Z"
+   committed-date="2008-04-04T08:21:44.031512Z"
+   checksum="88b6f822920120ab7223809123986862"
+   last-author="jimweirich"
+   kind="file"/>
+<entry
+   committed-rev="50"
+   name="prompt.rb"
+   text-time="2008-04-10T04:34:34.000000Z"
+   committed-date="2008-04-10T05:23:02.431462Z"
+   checksum="987a4803895460b83ec8c6802fd894fe"
+   last-author="jimweirich"
+   kind="file"
+   revision="50"/>
+<entry
+   committed-rev="47"
+   name="act1_code.rb"
+   text-time="2008-04-02T09:21:36.000000Z"
+   committed-date="2008-04-04T08:17:50.210254Z"
+   checksum="ca0ef1ab6857b5d96f85f54a61c89fc8"
+   last-author="jimweirich"
+   kind="file"
+   revision="47"/>
+<entry
+   committed-rev="47"
+   name="unending_tests.mov"
+   text-time="2008-04-02T19:57:17.000000Z"
+   committed-date="2008-04-04T08:17:50.210254Z"
+   checksum="369379b643b94f731cfa4ebb6c75c44e"
+   last-author="jimweirich"
+   kind="file"
+   prop-time="2008-04-04T08:17:56.000000Z"
+   revision="47"/>
+<entry
+   committed-rev="49"
+   name="MockDialogue_Act1.txt"
+   text-time="2008-04-10T04:13:47.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="eecae4070132b4602e41bbf5aba1b102"
+   last-author="jimweirich"
+   kind="file"
+   revision="49"/>
+<entry
+   committed-rev="49"
+   name="MockDialogue_Act2.txt"
+   text-time="2008-04-10T04:17:26.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="a9f179f73b6e2e2c207cbd14a89e2adf"
+   last-author="jimweirich"
+   kind="file"
+   prop-time="2008-03-30T18:42:49.000000Z"
+   revision="49"/>
+<entry
+   committed-rev="49"
+   name="MockDialogue_Act3.txt"
+   text-time="2008-04-10T03:47:55.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="d9056fa352c9e2be095f27968d67aec3"
+   last-author="jimweirich"
+   kind="file"
+   revision="49"/>
+<entry
+   committed-rev="47"
+   name="test_units.rb"
+   text-time="2008-04-02T19:50:00.000000Z"
+   committed-date="2008-04-04T08:17:50.210254Z"
+   checksum="940fc23993b3eb6ebd5f7d9bd3d6160d"
+   last-author="jimweirich"
+   kind="file"
+   revision="47"/>
+<entry
+   name="images"
+   kind="dir"/>
+<entry
+   committed-rev="41"
+   name="notes.txt"
+   text-time="2008-02-29T19:30:09.000000Z"
+   committed-date="2008-03-02T04:53:58.057465Z"
+   checksum="6b38d259e69b0a505a9b463f718362d1"
+   last-author="jimweirich"
+   kind="file"
+   revision="46"/>
+<entry
+   committed-rev="47"
+   name="test_success.rb"
+   text-time="2008-04-02T20:01:04.000000Z"
+   committed-date="2008-04-04T08:17:50.210254Z"
+   checksum="a5b82fe07f1ae52ad877ed4f76508994"
+   last-author="jimweirich"
+   kind="file"
+   revision="47"/>
+<entry
+   committed-rev="46"
+   name="test_cost.rb"
+   text-time="2008-04-01T13:30:09.000000Z"
+   committed-date="2008-04-01T13:33:23.234933Z"
+   checksum="41732d114b3632df655e0a1c9f79942a"
+   last-author="jimweirich"
+   kind="file"
+   revision="46"/>
+<entry
+   committed-rev="49"
+   name="ansi_colors_test.rb"
+   text-time="2008-04-10T03:19:23.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="e3389632e22f9528cc38f441ad7e3c2c"
+   last-author="jimweirich"
+   kind="file"
+   revision="49"/>
+<entry
+   committed-rev="49"
+   name="ansi_colors.rb"
+   text-time="2008-04-10T03:20:07.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="44de7b3bd99934575e86166a5c92a292"
+   last-author="jimweirich"
+   kind="file"
+   revision="49"/>
+<entry
+   committed-rev="49"
+   name="MockDialogue_key.tgz"
+   text-time="2008-04-04T09:28:19.000000Z"
+   committed-date="2008-04-10T04:22:50.491207Z"
+   checksum="c5845b7ae3ae4c09ed07a5f4fb4a5329"
+   last-author="jimweirich"
+   kind="file"
+   prop-time="2008-04-04T08:22:22.000000Z"
+   revision="49"/>
+</wc-entries>

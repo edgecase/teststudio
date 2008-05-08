@@ -1,0 +1,469 @@
+Mock Dialogue
+By Jim Weirich and Joe O'brien
+
+Act I
+
+[The scene opens with an obviously agitated Joe on the phone]
+
+Joe: Yes, I'd like to speak to desktop services.  Yes, I'll hold.  
+
+[Short pause]
+
+Joe: Hello, desktop services? Yes, I'd like to ... Oh, my name? Joe
+     O'Brien. Yes, I'd ... [interrupted] my employee number? 43215.
+     [pause] My location is building 2, 2nd floor, desk ... ummm ...
+     [looking around for desk number], ah, here it is, desk number
+     312. [Frustrated] Look, is there anything else you need, like the
+     name of my first born?
+
+[pause]
+
+Joe: [continuing] Ok. Here's my problem. I tried to log in this moring
+     to the system and it won't accept my password. Yes, I'm sure I
+     entered it correctly. Yes, I checked the shift lock key. Yes, I
+     tried that too. You'll look into it? Yes, I will hold. [drums
+     fingers]
+
+[Jim enters and sits down at the neighboring workstation]
+
+Jim: Morning Joe! Oh, sorry, I didn't see you were on the phone.
+
+Joe: No problem, I'm talking to desktop services. I can't seem to get
+     logged in this morning.
+
+Jim: Hmm ... well, the system is working for me. I was able to get
+     right in.
+
+Joe: Great ... then the problen is mine. [talking to phone] Yes, I'm
+     still here. [pause] What? My login has bee locked out? Why?
+     [pause] ... Because of too many failed login attempts? That
+     doesn't make sense, I've been typing my password correctly all
+     along. I don't understand why [thought occurs to Joe] ... Oh
+     nevermind, I got it. Can you unlock the login for me. [pause] ...
+     Thanks.
+
+Jim: So, got you fat fingered your password, huh? What did you do,
+     login with the shift lock on?
+
+Joe: You know I've remapped shift lock to be the control key, just to
+     be more nimble in emacs. [wiggles fingers] No, the answer more
+     complicated than that.
+
+Jim: Oh? [turns around and looks at Joe].  Go on, I'm all ears.
+
+Joe: Well, you know I'm working on the new single sign-on inititive
+     for our web applications, right?
+
+Jim: Sure, you and I have paired on some of that code.
+
+Joe: Right. So yesterday I was working on the code that acutally logs
+     into our network. And I've been doing the whole thing test-first,
+     just as you taught us. So when I came to the part of the code
+     that will handle a login failure, I just wrote a test that
+     provides a bad password. The login fails, and in good TDD manner,
+     I'm forced to write the code that handles the failing login.
+
+Jim: That's good work.  So what's the problem?
+
+Joe: Well, evidently, I ran the unit tests so many times yesterday
+     that the number of failed password attempts triggered an
+     automatic lock out of my account.
+
+Jim: What, you were running the unit tests agains the REAL login
+     system?
+
+Joe: Absolutely. You know they don't have a "test" login system
+     available for us, and I have to test my code against something.
+
+Jim: And you were using your real account AND real password? [shakes
+     head]
+
+Joe: Well, yes. For the good login test. Obviously it was a bad
+     password for the failing login test. Awww, and now I'm going to
+     have to delete those tests. I can't be calling up desktop
+     services for a password reset everytime I run the unit tests.
+
+Jim: Well, there are alternatives...
+
+Joe: Like running it with your password instead?
+
+Jim: No, I was thinking along the lines of a mock object.
+
+Joe: A WHAT object?
+
+Jim: Mock object, or stub, or test double if you prefer. There are
+     several names for these things. But the basic idea is that during
+     your test, you talk to an object that only "pretends" to log into
+     the system. Externally it acts just like the real thing, so you
+     can test against it. However, internally, it does something
+     completely different.
+
+Joe: Interesting. Will you pair with me and show me how this thing
+     would work?
+
+Jim: Sure! [moves over and joins Joe at his workstation] Show me what
+     you've got.
+
+Joe: Ok, here's the first part of the code:
+
+   ## Snippet I-1
+   class ReportPrinter
+     ...
+     def start(user, password)
+       @token = @login_service.login(username, password)
+       fail "Unable to start Report Printer" if @token.nil?
+     end
+     ...
+
+Jim: Cool, so where do the login service object come from?
+
+Joe: We create that in the initializer, like so:
+     
+     ## Snippet I-2
+     def initialize
+       @login_service = LoginService.new
+     end
+
+Jim: So, to start the report printer, you log into the system and get
+     back some kind of token. What's that used for?
+
+Joe: A security token indicates you have successfully logged into the
+     system. It's just a string that identifies you as a particular
+     user. It has a built in time-out, so you can only use any given
+     token for so long before it expires. And, oh yeah, it is
+     cryptographically signed so that you can't forge it ... one of
+     those public/private key things, right?
+
+Jim: Do you care about the value of the token in your code:
+
+Joe: Nah, just whether it is nil or not. A nil token means that the
+     login has failed. If the token is good, we just pass it back to
+     the login system in later operations. For example, here's the
+     code where we check to see if we have permissions to perform a
+     print operation:
+
+     ## Snippet I-3
+     def print_report
+       if @login_service.allowed?(@token, 'print')
+         generate_report
+         send_report_to_printer
+       else
+         fail "You are not authorized to use the printer"
+       end
+     end
+
+Joe: See, we just pass the token back.  We never use its value.
+
+Jim: Good, this will be easy. You have most of the code ready. All we
+     have to do is change the initialization a bit. Here, something
+     like this: [Jim starts typing]
+
+       ## Snippet I-4
+       def initialize(login_service)
+         @login_service = login_service
+       end
+
+Joe: You've made the login_service a parameter to the initializer.
+     Why?  That seems inconvient.
+
+Jim: Perhaps it is a bit, but it makes your code less dependent on the
+     login system. We move the responsibility for creating the login
+     system out of your code and somewhere else.
+
+Joe: I don't like it.
+
+Jim: But now your code doesn't depend on the name "LoginService", only
+     that there is an object that reponds to the LoginService
+     protocol. We can give your code *any* object that acts in the
+     same way and your code won't care.
+
+Joe: Ok, that a good point [beat] ... But I still don't like it.
+
+Jim: Fair enough. Just bear with a bit more and we can fix that later.
+     But let's concentrate on the issue at hand for now.
+
+Joe: [grudgingly] Fine.     
+
+Jim: So, now we can write our test like this:
+
+       # Snippet I-5
+       def test_good_login
+         login_service = FakeLoginService.new
+         printer = ReportPrinter.new(login_service)
+         printer.start("USER", "PASSWORD")
+         ...
+       end
+         
+Joe: [thinking] Oh, I think I see where this is going. Now we can
+     write a dummy version of the login service. Here, [grabbing the
+     keyboard] let my type.   It might look like this:
+
+       ## Snippet I-5a
+       class FakeLoginService
+         def login(user, password)
+           "fake_security_token"
+         end
+         def allow?(token)
+           true
+         end
+       end
+
+Jim: Good! I like the return the "fake_security_token" string. Since
+     we don't care about the value of the string, might as well use
+     something that describes itself for when we are debugging later.
+
+Joe: Debugging? I thought you told me this TDD stuff eliminates
+     debugging. [beat] Just kidding. So, this handles the case where
+     we have a good login,  how do we handle a bad login.
+
+Jim: Well, there are a couple of ways. One way is to make the
+     FakeLoginService check the password. If you test with "PASSWORD"
+     its a good login, if it anything else, you get a failed login.
+
+       ## Snippet I-6
+       class FakeLoginService
+         def login(user, password)
+           (password == "PASSWORD") ? "fake_security_token" : nil
+         end
+       end
+
+Joe: Seems straightforward enough. And I can see adding logic to the
+     allow? method to return true or false, depending on what the test
+     needs at the time. [thinking] ... But I can see the logic getting
+     kinda convoluted if there are a lot of different scenarios and
+     you have to accommodate them all in one fake class.
+
+Jim: Right. If you're not careful, your fake objects can become as
+     complex as a real object. Then you need tests for your fakes and
+     that route leads to madness.  
+
+Joe: You mentioned other ways?  For example?     
+
+Jim: A simple way of avoiding complex fake objects is to use specific
+     fake objects for each test. We already have a fake login service
+     that works with the good login test case. Now we write one for
+     the failing test case. [grabbing keyboard] Like this:
+
+       ## Snippet I-7
+       class FakeLoginService
+         def login(user, password)
+           nil
+         end
+       end
+
+Jim: With a test that looks like this:
+
+       ## Snippet I-8
+       def test_bad_login
+         login_service = FakeLoginServiceWithFailingLogin.new
+         printer = ReportPrinter.new(login_service)
+         assert_raise LoginError do
+           printer.start("USER", "PASSWORD")
+         end
+       end
+
+Joe: Cool.  But you didn't write the allow? method for this fake.
+
+Jim: allow? is never called in our test. No reason to write it since
+     our fake class is tailored to that specific test.
+
+Joe: Great.  I like this!  [beat] .... I think.
+
+Jim: Your brow is furrowed.  What's wrong.
+
+Joe: Well, I really do like this and all, but it seems like I'm going
+     to end up writing a lot of Fake classes for all the different
+     scenarios in my class.  I wish there was an easier way.
+
+Jim: Hmmm ... what if you could customize your fake class on the fly.
+
+Joe: Customize behaviour?  I don't get it.
+
+Jim: Ok, let's talk in code. How about this for a fake class:
+
+      ## Snippet I-9
+      class FakeLoginService
+        def new(&login_behavior)
+          @login_behavior = login_behavior
+        end
+        def login(user, password)
+          @login_behavior.call(user, password)
+        end
+      end
+
+Joe: Let's see [beat]... That &login_behavior, that's a block you
+     are're passing in. You give it a block when you create it?
+
+Jim: Sure, so your good login test uses:
+
+         # Snippet I-10
+         login_service = FakeLoginService.new { "fake_security_token" }
+
+Jim: And your bad login test uses:         
+
+         ## Snippet I-11
+         login_service = FakeLoginService.new { nil }
+
+Jim: The fake is now logic free. The good login returns a token, the
+     bad login returns nil. And best of all, you specify the behavior
+     you need right in the test itself, so its clear exactly what's
+     going on.
+       
+Joe: [excited] Gotcha! Ok, I can get used to this. And we can do the
+     same thing with allow?, right? [pause, deflated]. Oh, but now we
+     need to give specify a block for the allow method's behavior.
+     That might be ok for two methods, but I can see this really
+     getting out of hand for fakes with a number of methods.
+
+Jim: Right.
+
+Joe: Dang it! I'm almost tempted to write a little DSL to make
+     specifying these little behaviors easier.
+
+Jim: [grinning] I know you like DSLs ...
+
+Joe: Yeah, this will be great! We could ... [beat]... why are you
+     grinning? You know something I don't?
+
+Jim: Actually, you might want to check RubyForge ...
+
+Joe: Someone's done this already? ... Rats! I was all set to go off on
+     a wild goose chase and you have to inject some reality here. Ok,
+     what have you got.
+
+Jim: What you need is a good mocking library. There are several
+     available. I like to use flexmock.
+
+Joe: Why that one?  How do we know it's the best one available?
+
+Jim: Just a hunch.
+
+Joe: Aren't we using mocks already?
+
+Jim: Well, technically stubs, but let's not get wrapped up in
+     terminology. A good mock library will provide both mocks and
+     stubs, so its perfect for what we're doing here.  
+
+Joe: Show me.
+
+Jim: Let's look back at our good_login test.
+
+       ## Snippet I-12
+       def test_good_login
+         login_service = FakeLoginService.new { "fake_security_token" }
+         printer = ReportPrinter.new(login_service)
+         printer.start("USER", "PASSWORD")
+         ...
+       end
+
+Jim: Instead of creating the FakeLoginService, we are going to create
+     a mock instead. 
+
+       ## Snippet I-13
+       def test_good_login
+         login_service = flexmock('mock_service')
+         ...
+       end
+
+Jim: And then we tell the mock what to expect.  
+
+       ## Snippet I-14
+       def test_good_login
+        login_service = flexmock('mock_service')
+        login_serivce.should_receive(:login).and_return('fake_security_token')
+         ...
+       end
+
+Joe: Interesting, so if I'm reading this correctly, I'm creating an
+     object on the fly and telling it what to expect? This is just
+     like our last solution except I don't have to write the fake
+     service class.
+
+Jim: Exactly. Not only that the mock can do more for us. Tell me what
+     would happen if login is never called in the code that we are testing.
+
+Joe: Well, I don't know about flexmock, but in our original code it
+     would just be ignored.
+
+Jim: Right, and the same this is true with our test as it stands now;
+     however, we could tell flexmock that login must be called exactly
+     one time. We do it like this:
+
+       ## Snippet I-15
+       def test_good_login
+        login_service = flexmock('mock_service')
+        login_serivce.should_receive(:login).and_return('fake_security_token').once
+         ...
+       end
+
+Jim: and now flexmock will loudly complain if login is never called.
+
+Joe: What?  How can it complain about something _not_ being called? 
+
+Jim: Flexmock installs a teardown method that checks all the mocks
+     after every test run. If something is missing then it complains
+     at that point (and quite loudly I might add).
+
+Joe: Ok, so let me get this straight, I'm not only creating an object
+     on the fly, but I'm also setting up expectations that will fail if
+     they are NOT met during the test.
+
+Jim: Yes.
+
+Joe: Ok, let me ask you this. In the old setup I wasn't able to test
+     this, but I'm wondering if maybe mocks can help us out here. I
+     want to verify that the user name and password that I pass into
+     the start command are the same username and password given to the
+     login method. Can mocks do that?
+
+Jim: Sure. Quite easily actually. We just tell the mock what
+     parameters to expect. The with expectation works quite nicely for
+     that. 
+
+Joe: Ok, so like this:
+     
+      ## Snippet I-16
+      def test_username_and_password_are_passed_along
+        login_service = flexmock('mock_service')
+        login_serivce.should_receive(:login).with('joe', 'ICEICEBABY').
+          and_return('fake_security_token').once
+        printer = ReportPrinter.new(login_service)
+        printer.start("joe", "ICEICEBABY")
+         ...        
+      end    
+
+Jim: Well, yes, except you don't need to keep using your own password.
+     How about something like this:
+
+      ## Snippet I-17
+      def test_username_and_password_are_passed_along
+        username, password = 'username', 'password'
+        login_service = flexmock('mock_service')
+        login_serivce.should_receive(:login).with(username, password).
+          and_return('fake_security_token').once
+        printer = ReportPrinter.new(login_service)
+        printer.start(username, password)
+         ...        
+      end    
+
+Joe: I love the way you can just tack on more options as I need them
+
+Jim: That's what we call a fluent interface.  
+
+Joe: What else can a mock do? Can it handle things like throwing
+     exceptions so I can test exception handling logic?
+
+Jim: Sure, you can throw exceptions, you can specify ranges for
+     numbers of times it executes, you can specify logic in for form of a
+     block. Just about anything you can think of you can do in a mock. 
+
+Joe: Wow, mocks are great.  Why didn't you just tell me about them from the beginning.  
+
+Jim: A lot of people think the mocks are magic, only used by advanced
+     programmers. I just wanted to you to realize that mocks are
+     simple extension to basic test techniques. Much like the
+     fundametals of arithmetic:
+
+Joe: Oh, you mean Ambition, Distraction, Uglification, and Derision.
+
+Jim: Um ... yeah, right.

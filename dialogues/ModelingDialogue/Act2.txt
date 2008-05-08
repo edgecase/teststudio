@@ -528,7 +528,7 @@ Modello: Hmmm.  Good point.  Stupid relational database!
 
 Webucci: So, is this what it means when they say Rails can't scale.
 
-Medello: Well, end of the day.  I'll see you tommorrow.
+Modello: Well, end of the day.  I'll see you tommorrow.
 
 Webucci: [Pleads] Man, somethings not right here.  Maybe this Rails
          thing isn't all its cracked up to be.  I think I'm gonna go

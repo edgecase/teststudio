@@ -49,8 +49,7 @@ class Test::Unit::TestCase
 
   def assert_validation_with_message(pattern, field)
     model_name = @invalid_model.class
-    assert ! @invalid_model.valid?, 
-      "Expected #{model_name} to be invalid, but it was not."
+    @invalid_model.valid?
     assert @invalid_model.errors.on(field),
       "Expected #{model_name} to have an error on #{field}, but it did not."
     actual_error = @invalid_model.errors.on(field).to_s

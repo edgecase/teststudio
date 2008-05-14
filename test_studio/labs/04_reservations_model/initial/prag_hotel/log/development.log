@@ -431,3 +431,22 @@ Migrating to CreateReservations (2)
   [4;35;1mSQL (0.003024)[0m   [0mCREATE TABLE schema_info (version integer)[0m
   [4;36;1mSQL (0.002109)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
   [4;35;1mSQL (0.002142)[0m   [0mUPDATE schema_info SET version = 2[0m
+  [4;36;1mSQL (0.000490)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000412)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000248)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000589)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.000479)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000088)[0m   [0;1mPRAGMA index_list(reservations)[0m
+  [4;35;1mSQL (0.000085)[0m   [0mPRAGMA index_list(room_types)[0m
+  [4;36;1mSQL (0.000214)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: no such table: reservations: DROP TABLE reservations[0m
+  [4;36;1mSQL (0.002894)[0m   [0;1mCREATE TABLE reservations ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime DEFAULT NULL, "updated_at" datetime DEFAULT NULL) [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: no such table: room_types: DROP TABLE room_types[0m
+  [4;36;1mSQL (0.002319)[0m   [0;1mCREATE TABLE room_types ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "rack_rate" decimal NOT NULL, "created_at" datetime DEFAULT NULL, "updated_at" datetime DEFAULT NULL) [0m
+  [4;35;1mSQL (0.002981)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.002525)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.002724)[0m   [0mUPDATE schema_info SET version = 2[0m

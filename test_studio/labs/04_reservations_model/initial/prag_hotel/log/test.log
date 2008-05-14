@@ -18,3 +18,8 @@
   [4;36;1mRoomType Load (0.000254)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name = 'foo') LIMIT 1[0m
   [4;35;1mRoomType Load (0.000300)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'Doesn''t Matter') LIMIT 1[0m
   [4;36;1mRoomType Load (0.000172)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000146)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name = 'foo') LIMIT 1[0m
+  [4;35;1mRoomType Create (0.000489)[0m   [0mINSERT INTO room_types ("name", "rack_rate", "updated_at", "created_at") VALUES('foo', 4.0, '2008-05-13 21:19:04', '2008-05-13 21:19:04')[0m
+  [4;36;1mRoomType Load (0.000241)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name = 'foo') LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000294)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'Doesn''t Matter') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000171)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m

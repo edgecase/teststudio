@@ -3,6 +3,7 @@ class CreateReservations < ActiveRecord::Migration
     create_table :reservations do |t|
       t.date :check_in
       t.date :check_out
+      t.string :name
       t.integer :rate
       t.integer :number_of_rooms
       t.integer :room_type_id

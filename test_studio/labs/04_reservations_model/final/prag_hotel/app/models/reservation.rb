@@ -26,12 +26,7 @@ class Reservation < ActiveRecord::Base
   
   def validate
     if check_in && check_out
-#      errors.add("check_out", "must be after checkout") unless time_at_midnight(check_in) >= time_at_midnight(check_out)
-      ci = time_at_midnight(check_in)
-      co = time_at_midnight(check_out)
-      if ((ci > co) || (ci == co))
-        errors.add("check_out", "must be after checkout")
-      end
+      errors.add("check_out", "must be after checkout") if time_at_midnight(check_in) >= time_at_midnight(check_out)
     end
   end
   

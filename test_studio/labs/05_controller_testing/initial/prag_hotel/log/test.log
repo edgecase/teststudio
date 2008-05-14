@@ -113,5 +113,11 @@
   [4;35;1mRoomType Load (0.000133)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
   [4;36;1mRoomType Load (0.000128)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
   [4;35;1mRoomType Load (0.000137)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
-  [4;36;1mRoomType Load (0.000181)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
-  [4;35;1mRoomType Load (0.000133)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000176)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000137)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000226)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000153)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000190)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000134)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000198)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000135)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m

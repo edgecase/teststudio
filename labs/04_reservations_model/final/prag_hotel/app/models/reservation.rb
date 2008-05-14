@@ -26,12 +26,13 @@ class Reservation < ActiveRecord::Base
   
   def validate
     if check_in && check_out
-      errors.add("check_out", "must be after checkout") unless time_at_midnight(check_in) <= time_at_midnight(check_out)
+      errors.add("check_out", "must be after checkout") if time_at_midnight(check_in) >= time_at_midnight(check_out)
     end
   end
   
   def self.valid_options
     {
+      :name => 'King',
       :check_in => 2.days.from_now,
       :check_out => 4.days.from_now,
       :rate => 100,
@@ -42,6 +43,6 @@ class Reservation < ActiveRecord::Base
   
   private
   def time_at_midnight(date_in)
-    date = Time.parse(date_in.year, date_in.month, date_in.day, 0, 0)
+    date_in.to_date
   end
 end

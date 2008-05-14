@@ -2,6 +2,8 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 
+require 'flexmock/test_unit'
+
 class Test::Unit::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
@@ -20,6 +22,13 @@ class Test::Unit::TestCase
         assert_validates_numericality_of field
       end
     end
+    
+    def test_validates_uniqueness_of(field)
+      test_name = "test_validates_uniqueness_of_#{field}".to_sym
+      define_method test_name do
+        assert_validates_uniqueness_of field
+      end
+    end
   end
   
   def assert_validates_presence_of(field)
@@ -33,7 +42,7 @@ class Test::Unit::TestCase
   end
 
   def assert_validates_uniqueness_of(field)
-    model_one = make_model_with(field => :duplicate_value)
+    flexmock(model_under_test).should_receive(:find).and_return(:duplicate_value)
     @invalid_model = make_model_with(field => :duplicate_value)
     assert_validation_with_message(/has already been taken/, field)
   end

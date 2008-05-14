@@ -7,10 +7,11 @@
 # * Name is require
 # * Name is unique
 #
-class RoomType < ActiveRecord::Bas
+class RoomType < ActiveRecord::Base
   
   validates_presence_of :name
-  validates_uniqueness_of :name
   validates_presence_of :rack_rate
+  
+  validates_uniqueness_of :name
 
 end

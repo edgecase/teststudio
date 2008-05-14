@@ -12,13 +12,18 @@
 ActiveRecord::Schema.define(:version => 2) do
 
   create_table "reservations", :force => true do |t|
+    t.date     "check_in"
+    t.date     "check_out"
+    t.integer  "rate"
+    t.integer  "number_of_rooms"
+    t.integer  "room_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "room_types", :force => true do |t|
-    t.string   "name",       :null => false
-    t.decimal  "rack_rate",  :null => false
+    t.string   "name"
+    t.decimal  "rack_rate"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

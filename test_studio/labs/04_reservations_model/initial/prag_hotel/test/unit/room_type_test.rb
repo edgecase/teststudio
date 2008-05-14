@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RoomTypeTest < ActiveSupport::TestCase
-  def test_should_require_room_type
+   def test_should_require_room_type
     @rt = RoomType.new(:name => nil, :rack_rate => 4.00)
 
     assert_validates_presence_of(:name)

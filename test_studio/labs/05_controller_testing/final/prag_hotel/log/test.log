@@ -991,3 +991,226 @@ Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:40:58) [GET]
   [4;36;1mRoomType Load (0.000208)[0m   [0;1mSELECT * FROM room_types [0m
 Rendering reservations/new
 Completed in 0.00260 (384 reqs/sec) | Rendering: 0.00186 (71%) | DB: 0.00021 (7%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:42:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000188)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01809 (55 reqs/sec) | Rendering: 0.00471 (26%) | DB: 0.00019 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:42:23) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00512 (195 reqs/sec) | Rendering: 0.00419 (81%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:42:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000249)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00317 (315 reqs/sec) | Rendering: 0.00211 (66%) | DB: 0.00025 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:42:23) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000206)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00258 (387 reqs/sec) | Rendering: 0.00182 (70%) | DB: 0.00021 (7%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:43:20) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01608 (62 reqs/sec) | Rendering: 0.00670 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:44:06) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01576 (63 reqs/sec) | Rendering: 0.00657 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:45:42) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01592 (62 reqs/sec) | Rendering: 0.00673 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:46:02) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01588 (62 reqs/sec) | Rendering: 0.00677 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:46:11) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01576 (63 reqs/sec) | Rendering: 0.00660 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:46:21) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01581 (63 reqs/sec) | Rendering: 0.00656 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:46:56) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01582 (63 reqs/sec) | Rendering: 0.00671 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:47:20) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01589 (62 reqs/sec) | Rendering: 0.00660 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:48:05) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01726 (57 reqs/sec) | Rendering: 0.00679 (39%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:48:53) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01589 (62 reqs/sec) | Rendering: 0.00664 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:49:20) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01585 (63 reqs/sec) | Rendering: 0.00671 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:49:54) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01568 (63 reqs/sec) | Rendering: 0.00657 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:50:05) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01578 (63 reqs/sec) | Rendering: 0.00675 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:50:14) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01563 (63 reqs/sec) | Rendering: 0.00656 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:51:11) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01657 (60 reqs/sec) | Rendering: 0.00671 (40%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:51:20) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01593 (62 reqs/sec) | Rendering: 0.00673 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:53:19) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01551 (64 reqs/sec) | Rendering: 0.00651 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:53:39) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01586 (63 reqs/sec) | Rendering: 0.00659 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:55:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01567 (63 reqs/sec) | Rendering: 0.00666 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:56:16) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01564 (63 reqs/sec) | Rendering: 0.00650 (41%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:56:31) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01573 (63 reqs/sec) | Rendering: 0.00665 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:56:57) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01577 (63 reqs/sec) | Rendering: 0.00663 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:18) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01581 (63 reqs/sec) | Rendering: 0.00671 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:21) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000187)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01830 (54 reqs/sec) | Rendering: 0.00490 (26%) | DB: 0.00019 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:21) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00469 (213 reqs/sec) | Rendering: 0.00387 (82%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:21) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000218)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00303 (330 reqs/sec) | Rendering: 0.00208 (68%) | DB: 0.00022 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:21) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000239)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00271 (368 reqs/sec) | Rendering: 0.00186 (68%) | DB: 0.00024 (8%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]

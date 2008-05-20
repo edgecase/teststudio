@@ -87,7 +87,7 @@ class ReservationsControllerTest < ActionController::TestCase
    def test_new_requests_availability_from_rate_calculator
      king_room = RoomType.new(:name => "King", :rack_rate => 90.0)
      double_room = RoomType.new(:name => "Double", :rack_rate => 80.0)
-     flexmock(RoomType).should_receive(:find).with(:all).once.and_return {
+     flexmock(RoomType).should_receive(:find).with(:all).and_return {
        [ king_room, double_room ]
      }
      check_in = Date.new(2008, 2, 14)
@@ -101,12 +101,16 @@ class ReservationsControllerTest < ActionController::TestCase
        :room_type_id => 0,
      }
 
-     assert_equal [king_room, 81], assigns(:availability).first
-     assert_equal [double_room, 72], assigns(:availability).last
-     assert_equal 2, assigns(:availability).size
+     assert_availability(king_room, 81, assigns(:availability).first)
+     assert_availability(double_room, 72, assigns(:availability).last)
    end
 
    private
+
+   def assert_availability(room_type, rack_rate, availability)
+     assert_equal room_type, availability.first
+     assert_in_delta rack_rate, availability.last, 0.000001
+   end
 
    def stub_view
      view = flexmock("MockView")

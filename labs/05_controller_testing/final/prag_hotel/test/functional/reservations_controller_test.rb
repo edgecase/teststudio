@@ -112,18 +112,6 @@ class ReservationsControllerTest < ActionController::TestCase
      assert_in_delta rack_rate, availability.last, 0.000001
    end
 
-   def stub_view
-     view = flexmock("MockView")
-     view.should_receive(
-       :new => view,
-       :assigns => {},
-       :file_exists? => true,
-       :render_file => true,
-       :first_render => true)
-     flexmock(@controller.class).should_receive(:view_class).
-       and_return(view)
-   end
-
    def assert_date_equal(expected_date, actual_date)
      assert_equal expected_date, actual_date,
        "Expected Date #{expected_date}, but got date #{actual_date}"

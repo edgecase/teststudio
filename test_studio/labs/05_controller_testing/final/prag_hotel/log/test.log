@@ -1214,3 +1214,10 @@ Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:57:21) [GET]
   [4;36;1mRoomType Load (0.000239)[0m   [0;1mSELECT * FROM room_types [0m
 Rendering reservations/new
 Completed in 0.00271 (368 reqs/sec) | Rendering: 0.00186 (68%) | DB: 0.00024 (8%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:58:09) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.01585 (63 reqs/sec) | Rendering: 0.00678 (42%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]

@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'test/unit'
-require 'rate_calculator'
-require 'flexmock/test_unit'
+require File.dirname(__FILE__) + '/../test_helper'
+
 require 'date'
 
 ######################################################################

@@ -796,3 +796,198 @@ Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:42:28) [GET]
   [4;36;1mRoomType Load (0.000146)[0m   [0;1mSELECT * FROM room_types [0m
 Rendering reservations/new
 Completed in 0.00224 (446 reqs/sec) | Rendering: 0.00161 (71%) | DB: 0.00015 (6%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+  [4;36;1mRoomType Load (0.000245)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000163)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:37) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000198)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01830 (54 reqs/sec) | Rendering: 0.00473 (25%) | DB: 0.00020 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:37) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00491 (203 reqs/sec) | Rendering: 0.00391 (79%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:37) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000256)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00326 (306 reqs/sec) | Rendering: 0.00208 (63%) | DB: 0.00026 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:37) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000201)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00258 (387 reqs/sec) | Rendering: 0.00184 (71%) | DB: 0.00020 (7%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+  [4;36;1mRoomType Load (0.000238)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000156)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:58) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000194)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01813 (55 reqs/sec) | Rendering: 0.00478 (26%) | DB: 0.00019 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00500 (200 reqs/sec) | Rendering: 0.00401 (80%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:59) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000269)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00403 (248 reqs/sec) | Rendering: 0.00258 (64%) | DB: 0.00027 (6%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:24:59) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000505)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00346 (288 reqs/sec) | Rendering: 0.00229 (65%) | DB: 0.00050 (14%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+  [4;36;1mRoomType Load (0.000295)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000186)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:08) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000211)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01842 (54 reqs/sec) | Rendering: 0.00493 (26%) | DB: 0.00021 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:08) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00489 (204 reqs/sec) | Rendering: 0.00397 (81%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:08) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000262)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00333 (300 reqs/sec) | Rendering: 0.00228 (68%) | DB: 0.00026 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:08) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000267)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00290 (345 reqs/sec) | Rendering: 0.00197 (67%) | DB: 0.00027 (9%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+  [4;36;1mSQL (0.000308)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000413)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000237)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000332)[0m   [0mSELECT * FROM schema_info[0m
+  [4;36;1mSQL (0.000343)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000106)[0m   [0mPRAGMA index_list(reservations)[0m
+  [4;36;1mSQL (0.000072)[0m   [0;1mPRAGMA index_list(room_types)[0m
+  [4;36;1mRoomType Load (0.000312)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000223)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:58) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000198)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.01975 (50 reqs/sec) | Rendering: 0.00483 (24%) | DB: 0.00020 (1%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00470 (212 reqs/sec) | Rendering: 0.00388 (82%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:58) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000241)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00316 (316 reqs/sec) | Rendering: 0.00210 (66%) | DB: 0.00024 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:27:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000206)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00263 (379 reqs/sec) | Rendering: 0.00188 (71%) | DB: 0.00021 (7%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]
+  [4;36;1mRoomType Load (0.000244)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000217)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000246)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000160)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000237)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000166)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000274)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000163)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000242)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000163)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000208)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000252)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000294)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000167)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000178)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000173)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000264)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000201)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+  [4;36;1mRoomType Load (0.000243)[0m   [0;1mSELECT * FROM room_types WHERE (room_types.name IS NULL) LIMIT 1[0m
+  [4;35;1mRoomType Load (0.000158)[0m   [0mSELECT * FROM room_types WHERE (room_types.name = 'King') LIMIT 1[0m
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:40:58) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000211)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.04220 (23 reqs/sec) | Rendering: 0.00489 (11%) | DB: 0.00021 (0%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:40:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0.0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+Rendering reservations/new
+Completed in 0.00524 (190 reqs/sec) | Rendering: 0.00432 (82%) | DB: 0.00000 (0%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0.0&reservation%5Broom_type_id%5D=0]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:40:58) [GET]
+  Session ID: 
+  Parameters: {"action"=>"new", "controller"=>"reservations"}
+  [4;35;1mRoomType Load (0.000236)[0m   [0mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00318 (314 reqs/sec) | Rendering: 0.00212 (66%) | DB: 0.00024 (7%) | 200 OK [http://test.host/reservations/new]
+
+
+Processing ReservationsController#new (for 0.0.0.0 at 2008-05-19 19:40:58) [GET]
+  Session ID: 
+  Parameters: {"reservation"=>{"rate"=>0, "check_out"=>Fri, 15 Feb 2008, "room_type_id"=>0, "check_in"=>Thu, 14 Feb 2008, "number_of_rooms"=>1}, "action"=>"new", "controller"=>"reservations"}
+  [4;36;1mRoomType Load (0.000208)[0m   [0;1mSELECT * FROM room_types [0m
+Rendering reservations/new
+Completed in 0.00260 (384 reqs/sec) | Rendering: 0.00186 (71%) | DB: 0.00021 (7%) | 200 OK [http://test.host/reservations/new?reservation%5Bcheck_in%5D=2008-02-14&reservation%5Bcheck_out%5D=2008-02-15&reservation%5Bnumber_of_rooms%5D=1&reservation%5Brate%5D=0&reservation%5Broom_type_id%5D=0]

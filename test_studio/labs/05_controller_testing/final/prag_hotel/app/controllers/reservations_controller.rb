@@ -14,6 +14,15 @@ class ReservationsController < ApplicationController
     update_availability
   end
   
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update_attributes(params[:reservation])
+      redirect_to :action => 'show'
+    else
+      render :action => 'edit'
+    end
+  end
+
   def create
     @reservation = Reservation.new(params[:reservation])
     if @reservation.save

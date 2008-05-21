@@ -50,7 +50,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   def test_create_when_save_fails
-    reservation_options = Reservation.valid_options
+    invalid_options = Reservation.valid_options
     reservation = flexmock(:model, Reservation, reservation_options)
     reservation.should_receive(:save).once.and_return(false)
     flexmock(Reservation).should_receive(:new).once.and_return(reservation)
@@ -60,6 +60,7 @@ class ReservationsControllerTest < ActionController::TestCase
     assert assigns(:availability)
     assert_template "new"
   end  
+
 
   def test_new_sets_view_variables
     get :new

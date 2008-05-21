@@ -54,7 +54,7 @@ class ReservationsControllerTest < ActionController::TestCase
     # Test that when "new" is sent
     #
     # * "new" template is rendered
-    # * @reservations and @availability is set
+    # * @reservation and @availability are set
     #
     # ...
   end

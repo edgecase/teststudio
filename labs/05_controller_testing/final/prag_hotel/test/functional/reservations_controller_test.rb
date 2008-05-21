@@ -141,6 +141,32 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_template "show"
   end
 
+  def test_update_redirects_to_show_on_success
+    reservation = flexmock(:model,
+      Reservation, :update_attributes => true)
+    flexmock(Reservation).should_receive(:find).
+      and_return(reservation)
+
+    put :update, :id => reservation.id,
+      :reservation => {}
+
+    assert_redirected_to :action => 'show'
+  end
+
+  def test_update_renders_edit_on_failure
+    reservation = flexmock(:model,Reservation)
+    reservation.should_receive(:update_attributes).
+      once.with(:options).and_return(false)
+    flexmock(Reservation).should_receive(:find).
+      and_return(reservation)
+
+    put :update, :id => reservation.id,
+      :reservation => :options
+
+    assert_template 'edit'
+  end
+
+  
   private
 
   def assert_availability(room_type, rack_rate, availability)

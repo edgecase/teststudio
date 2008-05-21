@@ -1,6 +1,21 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
+class ApplicationController
+  self.send(:public, :render)
+  self.send(:public, :render_with_no_layout)
+end
+
 class ReservationsControllerTest < ActionController::TestCase
+
+  def test_view
+    res = flexmock(:model, Reservation, Reservation.valid_options)
+    @controller.assigns =  [res]
+
+    @controller.render_with_no_layout :action => 'index'
+
+    puts @response.body
+  end
+
   def test_url_generating
     assert_generates "/reservations",
       :controller => "reservations", :action => "index"
@@ -80,7 +95,7 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_date_equal tomorrow, assigns(:reservation).check_out
     assert_equal 1, assigns(:reservation).number_of_rooms
   end
-
+  
   def test_new_with_explicit_check_in_and_check_out_dates
     check_in = Date.new(2008, 2, 14)
     check_out = Date.new(2008, 2, 15)

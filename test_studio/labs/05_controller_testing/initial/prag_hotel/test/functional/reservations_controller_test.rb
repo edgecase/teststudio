@@ -109,6 +109,8 @@ class ReservationsControllerTest < ActionController::TestCase
     # ...
   end
 
+  # For Extra Credit, add test for edit/update/destroy.
+
   private
 
   # Some helper functions you might find useful.

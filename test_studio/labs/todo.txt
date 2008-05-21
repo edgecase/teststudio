@@ -1,0 +1,9 @@
+Clarify availability service lab
+ - Make sure lab is correct
+ - what does 1.0 mean versus 0 (available for occupancy)
+
+
+Add instructions to selenium / watir slides
+ - things like what the options are
+ - what the commands are
+ - etc...

@@ -63,3 +63,14 @@ DAILIES.each do |key, labs|
     end
   end
 end
+
+DOWNLOAD_HOST = 'umlcoop'
+DOWNLOAD_DIR  = 'htdocs/test_studio'
+DOWNLOAD_SITE = "#{DOWNLOAD_HOST}:#{DOWNLOAD_DIR}"
+
+desc "Upload all the packages to the web site"
+task :upload do
+  sh "ssh #{DOWNLOAD_HOST} mkdir -p #{DOWNLOAD_DIR}"
+  sh "scp pkg/*.tgz #{DOWNLOAD_SITE}"
+  sh "scp pkg/*.zip #{DOWNLOAD_SITE}"
+end

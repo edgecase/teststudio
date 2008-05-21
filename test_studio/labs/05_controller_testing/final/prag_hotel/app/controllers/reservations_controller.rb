@@ -14,12 +14,17 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(params[:reservation])
     if @reservation.save
       flash[:message] = "Reservation Saved"
-      redirect_to :action => "show", :id => @reservation
+      redirect_to :action => "show", :id => @reservation.id
     else
       update_availability
       render :action=>'new'
     end
   end
+  
+  def show
+    @reservation = Reservation.find(params[:id])
+  end
+  
   
   private
 

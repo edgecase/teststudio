@@ -9,6 +9,7 @@ Number of Rooms: <%= @reservation.number_of_rooms -%><br />
   <% @availability.each do |room_type, rate| -%>
     <li>
       <% form_for(:reservation, @reservation, :url => { :action => "create" }) do |f| -%>
+	    <%= f.text_field('name')%>
         <%= f.hidden_field('check_in') %>
         <%= f.hidden_field('check_out') %>
         <%= f.hidden_field('number_of_rooms') %>

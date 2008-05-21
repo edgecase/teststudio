@@ -1,6 +1,8 @@
 stash
+.DS_Store
 *~
 *.log
 *.sqlite3
 schema.rb
 pkg
+coverage

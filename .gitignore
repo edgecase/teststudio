@@ -1,2 +1,5 @@
-**/*~
 stash
+*~
+*.log
+*.sqlite3
+schema.rb

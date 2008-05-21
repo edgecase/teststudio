@@ -1,0 +1,30 @@
+<% if flash[:message] %>
+  <b><%= flash[:message] %></b>
+<% end %>
+
+<br /><br />
+
+Reservations:
+
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Check In</th>
+    <th>Check Out</th>
+    <th>Number of Rooms</th>
+    <th>Delete Reservation</th>
+  </tr>
+  <% @reservations.each do |reservation| %>
+    <tr>
+      <td><%= link_to reservation.name, reservation_url(reservation) %></td>
+      <td><%= reservation.check_in %></td>
+      <td><%= reservation.check_out %></td>
+      <td><%= reservation.number_of_rooms %></td>
+      <td><%= link_to "X", reservation_url(reservation), :method => :delete, :confirm => "Are you Sure?" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to "Create A New Reservation", new_reservation_url %>

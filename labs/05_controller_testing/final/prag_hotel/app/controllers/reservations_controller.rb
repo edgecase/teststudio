@@ -10,6 +10,17 @@ class ReservationsController < ApplicationController
     update_availability
   end
   
+  def create
+    @reservation = Reservation.new(params[:reservation])
+    if @reservation.save
+      flash[:message] = "Reservation Saved"
+      redirect_to :action => "show", :id => @reservation
+    else
+      update_availability
+      render :action=>'new'
+    end
+  end
+  
   private
 
   def default_reservation

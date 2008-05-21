@@ -6,3 +6,21 @@ one:
   rate: 100
   number_of_rooms: 1
   room_type_id: 1
+  name: Jones
+
+two:
+  check_in: 2008-05-03
+  check_out: 2008-05-04
+  rate: 100
+  number_of_rooms: 1
+  room_type_id: 1
+  name: Zork
+
+
+three:
+  check_in: 2008-05-03
+  check_out: 2008-05-04
+  rate: 100
+  number_of_rooms: 1
+  room_type_id: 1
+  name: David

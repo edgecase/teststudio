@@ -1,5 +1,9 @@
 require 'rate_calculator'
 class ReservationsController < ApplicationController
+  def index
+    @reservations = Reservation.find(:all)
+  end
+  
   def new
     if params[:reservation]
       @reservation = 
@@ -23,6 +27,16 @@ class ReservationsController < ApplicationController
   
   def show
     @reservation = Reservation.find(params[:id])
+  end
+
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    if @reservation.destroy
+      flash[:message] = "Reservation for #{@reservation.name} deleted"
+    else
+      flash[:message] = "Reservation for #{@reservation.name} could not be deleted"   
+    end
+    redirect_to :action => 'index'
   end
   
   

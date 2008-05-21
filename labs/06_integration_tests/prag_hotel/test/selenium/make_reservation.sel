@@ -1,0 +1,10 @@
+Selenium parses the file into HTML 
+using Redcloth (Textile)
+The test runner only parses HTML tables 
+as input so you can document away on each 
+of your tests
+
+|open|/|
+|verifyTextPresent| Pragmatic Hotel||
+|clickAndWait|new_link||
+|verifyTextPresent|Room Availability||

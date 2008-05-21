@@ -44,23 +44,11 @@ class ReservationsControllerTest < ActionController::TestCase
       {:controller => 'reservations', :action => 'destroy', :id => "1"},
       {:path => 'reservations/1', :method => "delete"})
   end
+
   def test_routing
     assert_routing "/reservations",
       :controller => "reservations", :action => "index"
   end
-
-  def test_create_when_save_fails
-    reservation_options = Reservation.valid_options
-    reservation = flexmock(:model, Reservation, reservation_options)
-    reservation.should_receive(:save).once.and_return(false)
-    flexmock(Reservation).should_receive(:new).once.and_return(reservation)
-
-    post :create, :reservation => reservation_options
-
-    assert assigns(:availability)
-    assert_template "new"
-  end  
-
 
   def test_new_sets_view_variables
     get :new
@@ -119,9 +107,40 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   def test_create_reserves_a_room
-    
+    reservation_options = Reservation.valid_options
+    reservation = flexmock(:model, Reservation, reservation_options)
+    reservation.should_receive(:save).once.and_return(true)
+    flexmock(Reservation).should_receive(:new).once.and_return(reservation)
+
+    post :create, :reservation => reservation_options
+
+    assert_match(/saved/i, flash[:message])
+    assert_redirected_to :action => "show", :id => reservation.id
   end
   
+  def test_create_when_save_fails
+    reservation_options = Reservation.valid_options
+    reservation = flexmock(:model, Reservation, reservation_options)
+    reservation.should_receive(:save).once.and_return(false)
+    flexmock(Reservation).should_receive(:new).once.and_return(reservation)
+
+    post :create, :reservation => reservation_options
+
+    assert assigns(:availability)
+    assert_template "new"
+  end  
+
+  def test_show
+    reservation_options = Reservation.valid_options
+    reservation = flexmock(:model, Reservation, reservation_options)
+    flexmock(Reservation).should_receive(:find).with(reservation.id.to_s).once.and_return(reservation)
+
+    get :show, :id => reservation.id
+
+    assert_equal reservation, assigns(:reservation)
+    assert_template "show"
+  end
+
   private
 
   def assert_availability(room_type, rack_rate, availability)

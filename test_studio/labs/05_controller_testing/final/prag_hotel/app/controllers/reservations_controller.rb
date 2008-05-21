@@ -39,7 +39,6 @@ class ReservationsController < ApplicationController
     redirect_to :action => 'index'
   end
   
-  
   private
 
   def default_reservation

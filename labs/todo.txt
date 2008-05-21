@@ -7,3 +7,7 @@ Add instructions to selenium / watir slides
  - things like what the options are
  - what the commands are
  - etc...
+
+Add Hpricot to list of studio dependencies.
+
+Add a view testing lab.

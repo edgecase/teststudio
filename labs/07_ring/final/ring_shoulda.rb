@@ -66,131 +66,123 @@ class RingTest < Test::Unit::TestCase
       assert_match(/zero/, ex.message)
     end
   end
+
+  def setup_ring_with_fixed_size
+    @max_size = 3
+    @ring = Ring.new(@max_size)
+  end
+
+  context "A Ring when being created with an initial size" do
+
+    setup do
+      setup_ring_with_fixed_size
+    end
+
+    should "report it's size as the initial size" do
+      assert_equal @max_size, @ring.size
+    end
+
+    should "report it's length as zero" do
+      assert_equal 0, @ring.length
+    end
+
+    should "report as empty" do
+      assert @ring.empty?
+    end
+  end
+
+  context "A Ring when an item is added" do
+
+    setup do
+      setup_ring_with_fixed_size
+      @ring.insert(:one)
+    end
+    
+    should "report it's length as one" do
+      assert_equal 1, @ring.length
+    end
+
+    should "report it's size as the initial size" do
+      assert_equal @max_size, @ring.size
+    end
+  end
+
+  context "A Ring when removing an item" do
+    setup do
+      setup_ring_with_fixed_size
+      @ring.insert(:one)
+      @ring.insert(:two)
+    end
+    
+    should "decrement it's length by one" do
+      @ring.remove
+      assert_equal 1, @ring.length
+    end
+    
+    should "remove the oldest item" do
+      assert_equal :one, @ring.remove
+      assert_equal :two, @ring.remove
+    end
+  end
+
+  context "A Ring when empty" do
+
+    setup do
+      setup_ring_with_fixed_size
+    end
+
+    should "say it's empty" do
+      assert @ring.empty?
+    end
+
+    should "return nil when removing items" do
+      assert_nil @ring.remove
+    end
+
+    should "not change length when removing items" do
+      @ring.remove
+      assert_equal 0, @ring.length
+      assert @ring.empty?
+    end
+  end
+
+  context "A Ring when full" do
+
+    setup do
+      setup_ring_with_fixed_size
+      @ring.insert(:oldest)
+      @ring.insert(:next_oldest)
+      @ring.insert(:last)
+    end
+
+    should "say it's full" do
+      assert @ring.full?
+    end
+
+    should "not grow when adding new items" do
+      @ring.insert(:newest)
+      assert_equal 3, @ring.length
+    end
+
+    should "drop the oldest item when adding new items" do
+      @ring.insert(:newest)
+      assert_equal :next_oldest, @ring.remove
+    end
+  end
+
+  context "A Ring when calling elements" do
+    setup do
+      setup_ring_with_fixed_size
+      @ring.insert(:one)
+      @ring.insert(:two)
+    end
+
+    should "return all of it's elements" do
+      assert_equal [:one, :two], @ring.elements
+    end
+
+    should "return elements as an array" do
+      assert @ring.elements.kind_of?(Array)
+    end
+  end
 end
-#   context "A Ring when setup with an initial size", :shared => true do
-#     before(:each) do
-#     @max_size = 3
-#       @ring = Ring.new(@max_size)
-#     end
-#   end
-
-#   context "A Ring when being created with an initial size" do
-
-#   it_should_behave_like "when setup with an initial size"
-
-#   it "should report it's size as the initial size" do
-#     @ring.size.should == @max_size
-#   end
-
-#   it "should report it's length as zero" do
-#     @ring.length.should be_zero
-#   end
-
-#   it "should report as empty" do
-#     @ring.should be_empty
-#   end
-# end
-
-# describe Ring, "when an item is added" do
-
-#   it_should_behave_like "when setup with an initial size"
-
-#   before(:each) do
-#     @ring.insert(:one)
-#   end
-
-#   it "should report it's length as one" do
-#     @ring.length.should == 1
-#   end
-
-#   it "should report it's size as the initial size" do
-#     @ring.size.should == @max_size
-#   end
-# end
-
-# describe Ring, "when removing an item" do
-
-#   before(:each) do
-#     @ring = Ring.new(3)
-#     @ring.insert(:one)
-#     @ring.insert(:two)
-#   end
-
-#   it "should decrement it's length by one" do
-#     @ring.remove
-#     @ring.length.should == 1
-#   end
-
-#   it "should remove the item in FIFO order" do
-#     @ring.remove.should == :one
-#     @ring.remove.should == :two
-#   end
-
-# end
-
-# describe Ring, "when empty" do
-
-#   before(:each) do
-#     @max_size = 3
-#     @ring = Ring.new(@max_size)
-#   end
-
-#   it "should say it's empty" do
-#     @ring.should be_empty
-#   end
-
-#   it "should return nil when removing items" do
-#     @ring.remove.should be_nil
-#   end
-
-#   it "should not change size when removing items" do
-#     @ring.remove
-#     @ring.size == 0
-#     @ring.should be_empty
-#   end
-# end
-
-# describe Ring, "when full" do
-
-#   before(:each) do
-#     @max_size = 3
-#     @ring = Ring.new(@max_size)
-#     @ring.insert(:oldest)
-#     @ring.insert(:next_oldest)
-#     @ring.insert(:last)
-#   end
-
-#   it "should say it's full" do
-#     @ring.should be_full
-#   end
-
-#   it "should not grow when adding new items" do
-#     @ring.insert(:newest)
-#     @ring.size.should == 3
-#   end
-
-#   it "should drop the oldest item when adding new items" do
-#     @ring.insert(:newest)
-#     @ring.remove.should == :next_oldest
-#   end
-
-# end
-
-# describe Ring, "when calling elements" do
-
-#   before(:each) do
-#     @max_size = 3
-#     @ring = Ring.new(@max_size)
-#     @ring.insert(:one)
-#     @ring.insert(:two)
-#   end
-
-#   it "should return all of it's elements" do
-#     @ring.elements.should == [:one, :two]
-#   end
-
-#   it "should return elements as an array" do
-#     @ring.elements.should be_kind_of(Array)
-#   end
-
-# end

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: King
+  rack_rate: 80
+
+two:
+  name: Double
+  rack_rate: 90

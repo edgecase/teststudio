@@ -11,4 +11,10 @@ describe Reservation, "- when being created" do
     reservation.should have(1).errors_on(:name)
     reservation.errors.on(:name).should == "can't be blank"
   end
+
+  it "should fail utterly" do
+    false.should be_true
+  end
+  
+  it "should do something else eventually"
 end

@@ -15,6 +15,10 @@ DAILIES = {
     labno = fn.pathmap("%n").split('_').first.to_i
     labno >= 5  && labno <= 6
   },
+  "pkg/day03" => LABS.select { |fn|
+    labno = fn.pathmap("%n").split('_').first.to_i
+    labno >= 7  && labno <= 6
+  },
 }
 
 TAR_FILES = LABS.pathmap("pkg/%f.tgz")

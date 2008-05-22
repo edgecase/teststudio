@@ -53,6 +53,8 @@ describe Ring, "when being created with no parameters" do
 
 end
 
+# This before actions in this describe block will be shared amoung
+# several other startups.
 describe "when setup with an initial size", :shared => true do
   before(:each) do
     @max_size = 3
@@ -105,11 +107,7 @@ end
 describe Ring, "when full" do
 
   before(:each) do
-    @max_size = 3
-    @ring = Ring.new(@max_size)
-    @ring.insert(:oldest)
-    @ring.insert(:next_oldest)
-    @ring.insert(:last)
+    # implement this
   end
 
   it "should say it's full"

@@ -1,22 +1,36 @@
 
+# A Ring data structure is similar to a fixed sized FIFO queue.
+# Elements inserted into the ring can be removed in FIFO order.  If
+# the ring is full, the next insertion will drop the oldest element of
+# the ring.
+#
 class Ring 
-  attr_reader :size
+  attr_reader :size, :elements
+
   def initialize(size=0)
     @size = size
     @elements = []
   end
+
   def empty?
     length == 0
   end
+
   def length
     @elements.size
   end
+
   def insert(item)
+    remove if full?
     @elements << item
   end
+
   def remove
+    @elements.shift
   end
+
   def full?
+    length == size
   end
 end
 
@@ -41,7 +55,6 @@ describe Ring, "when being created with no parameters" do
 end
 
 describe "when setup with an initial size", :shared => true do
-  
   before(:each) do
     @max_size = 3
     @ring = Ring.new(@max_size)
@@ -92,24 +105,57 @@ describe Ring, "when removing an item" do
 
   it "should decrement it's length by one" do
     @ring.remove
-    @ring.length.should be_equal(1)
     @ring.length.should == 1
   end
 
-  it "should remove the item in FIFO order"
+  it "should remove the item in FIFO order" do
+    @ring.remove.should == :one
+    @ring.remove.should == :two
+  end
 
 end
 
 describe Ring, "when full" do
 
-  it "should say it's full"
-  it "should drop off oldest item when a new item added"
+  before(:each) do
+    @max_size = 3
+    @ring = Ring.new(@max_size)
+    @ring.insert(:oldest)
+    @ring.insert(:next_oldest)
+    @ring.insert(:last)
+  end
+
+  it "should say it's full" do
+    @ring.should be_full
+  end
+
+  it "should not grow when adding new items" do
+    @ring.insert(:newest)
+    @ring.size.should == 3
+  end
+
+  it "should drop the oldest item when adding new items" do
+    @ring.insert(:newest)
+    @ring.remove.should == :next_oldest
+  end
 
 end
 
 describe Ring, "when calling elements" do
 
-  it "should return all of it's elements"
-  it "should return elements as an array"
+  before(:each) do
+    @max_size = 3
+    @ring = Ring.new(@max_size)
+    @ring.insert(:one)
+    @ring.insert(:two)
+  end
+
+  it "should return all of it's elements" do
+    @ring.elements.should == [:one, :two]
+  end
+
+  it "should return elements as an array" do
+    @ring.elements.should be_kind_of(Array)
+  end
 
 end

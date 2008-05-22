@@ -17,7 +17,7 @@ DAILIES = {
   },
   "pkg/day03" => LABS.select { |fn|
     labno = fn.pathmap("%n").split('_').first.to_i
-    labno >= 7  && labno <= 6
+    labno > 6
   },
 }
 

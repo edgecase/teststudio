@@ -15,6 +15,7 @@ describe "equality checks" do
     a = [1,2]
     b = a
 
+    a.should == b
     a.should be(b)
     a.should be_equal(b)
   end

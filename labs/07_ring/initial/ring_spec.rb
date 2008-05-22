@@ -53,6 +53,15 @@ describe Ring, "when being created with no parameters" do
 
 end
 
+# Another example description on how to detect execeptions.
+describe "when created with a zero size" do
+  it "should throw an execption" do
+    lambda {
+      Ring.new(0)
+    }.should raise_error(ArgumentError)
+  end
+end
+
 # This before actions in this describe block will be shared amoung
 # several other startups.
 describe "when setup with an initial size", :shared => true do

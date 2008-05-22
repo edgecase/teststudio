@@ -8,6 +8,7 @@ class Ring
   attr_reader :size, :elements
 
   def initialize(size=1)
+    fail ArgumentError, "Ring size cannot be zero" if size == 0
     @size = size
     @elements = []
   end
@@ -52,6 +53,14 @@ describe Ring, "when being created with no parameters" do
     @ring.length.should == 0
   end
 
+end
+
+describe "when created with a zero size" do
+  it "should throw an execption" do
+    lambda {
+      Ring.new(0)
+    }.should raise_error(ArgumentError)
+  end
 end
 
 describe "when setup with an initial size", :shared => true do

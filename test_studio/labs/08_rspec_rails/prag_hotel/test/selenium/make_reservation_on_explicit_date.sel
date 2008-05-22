@@ -1,0 +1,13 @@
+TODO: Create a selenium tests that creates a reservation on an
+explicit test of dates (the make_reservation example uses the default
+dates).  Verify that the resulting dates do match the requested dates.
+
+|open|/|
+|verifyTextPresent| Pragmatic Hotel||
+|clickAndWait|new_link||
+|verifyTextPresent|Room Availability||
+|(enter a name for reservation)|||
+|(select a check in date ... may take serveral lines)|||
+|(select a check out date ... may take serveral lines)|||
+|clickAndWait|//input[@value='Book this room']||
+|(verify the result page is correct)|||

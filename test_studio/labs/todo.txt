@@ -11,3 +11,9 @@ Add instructions to selenium / watir slides
 Add Hpricot to list of studio dependencies.
 
 Add a view testing lab.
+
+Add slide on running spec with formaters 
+
+Slides on CI. Motivation, history, need.  
+
+

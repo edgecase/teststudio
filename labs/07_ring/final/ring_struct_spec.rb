@@ -7,7 +7,7 @@
 class Ring 
   attr_reader :size, :elements
 
-  def initialize(size=0)
+  def initialize(size=1)
     @size = size
     @elements = []
   end
@@ -44,8 +44,8 @@ describe Ring, "when being created with no parameters" do
     @ring.should be_empty
   end
 
-  it "should have a size of zero" do
-    @ring.size.should == 0
+  it "should have a size of one" do
+    @ring.size.should == 1
   end
 
   it "should have a length of zero" do
@@ -78,7 +78,7 @@ describe "when being created with an initial size" do
   end
 end
 
-describe Ring, "when an items is added" do
+describe Ring, "when an item is added" do
 
   it_should_behave_like "when setup with an initial size"
 
@@ -113,6 +113,28 @@ describe Ring, "when removing an item" do
     @ring.remove.should == :two
   end
 
+end
+
+describe Ring, "when empty" do
+
+  before(:each) do
+    @max_size = 3
+    @ring = Ring.new(@max_size)
+  end
+
+  it "should say it's empty" do
+    @ring.should be_empty
+  end
+
+  it "should return nil when removing items" do
+    @ring.remove.should be_nil
+  end
+
+  it "should not change size when removing items" do
+    @ring.remove
+    @ring.size == 0
+    @ring.should be_empty
+  end
 end
 
 describe Ring, "when full" do

@@ -15,6 +15,10 @@ class Ring
     # Implement this method
   end
 
+  def full?
+    # Implement this method
+  end
+
   def length
     # Implement this method
   end
@@ -26,12 +30,9 @@ class Ring
   def remove
     # Implement this method
   end
-
-  def full?
-    # Implement this method
-  end
 end
 
+# This describ block is already implemented for demo purposes.
 describe Ring, "when being created with no parameters" do
 
   before(:each) do
@@ -83,9 +84,7 @@ end
 describe Ring, "when removing an item" do
 
   before(:each) do
-    @ring = Ring.new(3)
-    @ring.insert(:one)
-    @ring.insert(:two)
+    # implement this
   end
 
   it "should decrement it's length by one"
@@ -95,8 +94,7 @@ end
 describe Ring, "when empty" do
 
   before(:each) do
-    @max_size = 3
-    @ring = Ring.new(@max_size)
+    # implement this
   end
 
   it "should say it's empty"

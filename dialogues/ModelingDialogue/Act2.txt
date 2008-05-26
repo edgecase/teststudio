@@ -242,13 +242,13 @@ Webucci: And it worked great.  But then we started talking about
          objects.  So Restolio is all "We just have to normalize our
          schema", or as he called it: refactoring.
 
-Modello: [shakes head] Oy-vey.
+Modello: [shakes head] Oh-my.
 
 Webucci: So he created this "event definition" object to keep the time
          in. But just made things more confusing.  Pretty soon we
          ended up with any changes to an event definition requiring us
-         to destroy all the event and recreate them.  It just seems
-         like a mess.  
+         to destroy all the events and recreate them.  It just seems
+         like a mess.
 
 Modello: Sounds like you've had quite a day.  Still excited about
          Rails.
@@ -262,7 +262,7 @@ Webucci: Ok, so what's your idea?
 
 Modello: What you've failed to do is proper domain analysis and object
          modelling.  A simple application of some domain driven design
-         will solve all your problems.
+         should solve your problem.
 
 Webucci: Oh, we're doing that ... we call all our tables models now.
 
@@ -272,9 +272,16 @@ Modello: Oh my.  We need to talk.  The first thing we need to do is
 Webucci: Behaviors?  You mentioned that before.  What are you talking
          about?
 
-Modello: An object oriented design is more concerned about the
-         behaviours of the sytem rather than the exact way the data is
-         stored, that just an implementation detail.
+Modello: All objects consist of both data and behavior.  The data is
+         stored in attributes and the behaviors are the methods
+         exposed by the object.
+
+Webucci: Sure, makes sense.         
+
+Modello: Since we tend to make the data private, an object oriented
+         design tends to be more concerned about the behaviours of the
+         sytem rather than the exact way the data is stored.  The data
+         becomes just an implementation detail.
 
 Webucci: hmm.  So we don't care how we store it in the database?
 

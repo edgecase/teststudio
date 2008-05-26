@@ -199,7 +199,7 @@ Webucci: Ok, so when the date changes, we change the event definition?
          What happens to the individual events.
 
 Restolio: Well first, We will need a has_many declaration in the
-          EventDefition.  Then we take the event, find its definition,
+          EventDefinition.  Then we take the event, find its definition,
           and find all the events that belong to that definition.
 
 Webucci: And what do we do with them.

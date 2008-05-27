@@ -49,7 +49,7 @@ Modello: Ok, but why don't you just start with what the
 Restolio: We would worry about if it was a big app, but
           this is such a staightforward application
           that I don't want to spend a of overhead in
-          too much design.
+          unneeded design.
 
 Modello: Humor me.
 

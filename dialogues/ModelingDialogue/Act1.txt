@@ -84,8 +84,7 @@ Webucci: So when you say model, you are really talking
          that MVC thing that rails gives you.  So what
          columns does the Room table need.
 
-Restolio: Well, in Rails (unlike PHP), we don't talk
-          about columns.  We are doing object oriented
+Restolio: Well, in Rails we are doing object oriented
           design, so we want to talk about model
           attributes rather than columns.
 
@@ -94,7 +93,7 @@ Modello: Well, OO design is more than just talking
 
 Restolio: Yeah, right, OK.
 
-Webucci: OK, so what *attribute* does a room table
+Webucci: OK, so what *attributes* does a room table
          have.
 
 Restolio: [pedantically] A room *model* has a name, its

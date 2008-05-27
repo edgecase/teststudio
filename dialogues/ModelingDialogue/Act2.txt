@@ -75,7 +75,7 @@ Webucci: [grumpily] Yeah, yeah... create an event *object* for each
 
 Restolio: Thanks, much better.
 
-Webucci: But how many do we event *objects* do we create?
+Webucci: But how do we know how many event *objects* we create?
 
 Restolio: As many as we need.
 
@@ -391,7 +391,9 @@ Modello: Oh, these are called CRC cards, short for
          Its a nice way of capturing some initial
          design thoughts.
 
-Webucci: Interesting... so classes I get, but what are resposibilities?  Are those the behaviours we keep talking about?
+Webucci: Interesting... so classes I get, but what are
+         resposibilities?  Are those the behaviours we keep
+         talking about?
 
 Modello: Exactly!  What's the next behavior?
 
@@ -449,12 +451,15 @@ Modello: Ok, now we have identified our essential
          ever change, but they are more stable than say
          the implentation details.
 
-Webucci: What's the collaborators section for?
+Modello: Now let's look at those cards again and figure
+         what our collaborators are.
 
-Modello: We can list any other object that a Calendar
-         needs in order for it to accomplish its
-         responsibilites. What other objects might a
-         Calendar need to work with.
+Webucci: Collaborators.. what are those?
+
+Modello: Collaborators are other objects that an object 
+         needs to work with in order for it to accomplish its
+         responsibilites.  So what other objects might a
+         Calendar need to work with?
 
 Webucci: Hmmm ... Events for sure.
 
@@ -496,13 +501,15 @@ Modello: Maybe, maybe not. We don't know, that's an
 Webucci: But don't we have to figure that out for the
          system to actually work?
 
-Modello: Sure. Eventually. Let's not bury ourselves in
+Modello: Sure. Eventually. Let's not bury ourselves in implementation 
          details yet.
 
-Webucci: Alright smart guy, how about recurring events.
-         Those were a real pain in Restollio's design.
+Webucci: Hmmpf. Alright smart guy, let's talk about
+         those recurring events.  Those were a real
+         pain in Restollio's design.  What's your plan
+         there?
 
-Modello: Have I ever told you about temporal expressions?
+Modello: Have you heard about temporal expressions?
 
 Webucci: Temporal ma-whuzzit?
 
@@ -525,14 +532,14 @@ class MonthTE
   end
 end
 
-te = MonthTE.new(1)
+te = MonthTE.new(12)
 te.include?(Date.today)
 
 Modello: TE is our Temporal Expression. You give it any
          date and it will return true if that date is
          in January of any year.
 
-Webucci: Ok, so you can schedule events in January ...
+Webucci: Ok, so you can schedule events in December ...
 
 Modello: Or any other month for that matter, depending
          on how you initialize it. Now imagine another
@@ -543,7 +550,7 @@ Modello: Or any other month for that matter, depending
 [possible slide put here]
 
 Webucci: Great, so now we can schedule things in
-         January or schedule things on the fifth of the
+         December or schedule things on the 25th of the
          month, but I'm still not quite sure where you
          are going with this.
 
@@ -558,12 +565,12 @@ class And
 end
 
 Modello: Now we can take a temporal expression for
-         January, and one for the fifth of the month,
+         December, and one for the 25th of the month,
          and get a composite expression for scheduling
-         things that only happen on January 5th of the
-         year. With a handful of really simple temporal
-         expressions you can hanlde any kind of
-         recurring event you might run into.
+         things that only happen on Christmas. With a
+         handful of really simple temporal expressions
+         you can handle any kind of recurring event you
+         might run into.
 
 Webucci: So you are saying, if we have enough of these
          litte temporal expression guys and ways to
@@ -582,9 +589,12 @@ Modello: I haven't really thought about that. That's an
          implementation detail. We'll get to it
          eventually.
 
-Webucci: Seems kind of important to me, but we'll move
-         on. Show me how you would create a meeting for
-         the second Tuesday of every month.
+Webucci: Seems like we'll need some of those
+         "implementation details" to actually have an
+         implentation.  But fine, if you're sure we can
+         deal with it later.  Let's take a more
+         interesting example..  how would you create a
+         meeting for the second Tuesday of every month.
 
 Modello: Well we need a temporal expression that
          matches a particular week of the month and a
@@ -638,14 +648,14 @@ Modello: If we were using GemStone we wouldn't have
          relational databases.
 
 Webucci: Impotence what now? I think I got an email
-         about that recently.
+         about that here somewhere.
 
 Modello: No, no, impeeedence. Object orientation and
          relational databases are like oil and water,
          they don't mix well. So are the tests still
          passing?
 
-Webucci: Hang on their still running. Ok, yeah
+Webucci: Hang on.... Ok, yeah
          everything's green, but WOW is it slow.
 
 Modello: Don't worry, that's just a implementation
@@ -662,12 +672,17 @@ Webucci: Speaking of performance, you do realize that
 Modello: Hmmm. Good point. Stupid relational database!
 
 Webucci: So, is this what it means when they say Rails
-         can't scale.
+         can't scale?  I mean, there is no way this
+         approach is going to work.
 
-Modello: Well, end of the day. I'll see you tommorrow.
+Modello: Oh, look at the time. I'm speaking at the
+         Object Technology Users Group tonight and I
+         need to get going.  We'll address these
+         implementation details tommorrow.
 
-Webucci: [Pleads] Man, somethings not right here. Maybe
-         this Rails thing isn't all its cracked up to
-         be. I think I'm gonna go work on my resume.
+Webucci: [Pleads] Easy for him to say.  Man, somethings
+         not right here. Maybe this Rails thing isn't
+         all its cracked up to be. I think I'm gonna go
+         work on my resume.
 
 # LocalWords:  Restolio Webucci LocalWords Galilean

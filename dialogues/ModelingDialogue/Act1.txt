@@ -1,7 +1,7 @@
 # -*- mode: text; fill-column: 55 -*-
 
 A Dialogue Concerning the Two Chief Modelling Systems
-(A Galilien Dialogue)
+(A Galilean Dialogue)
 
 Persona dramatica:
 

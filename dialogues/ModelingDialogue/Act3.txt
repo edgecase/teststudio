@@ -1,231 +1,280 @@
-A Dialogue Concerning the Two Chief Modelling Systems
-(A Galilien Dialogue)
-_
+# -*- mode: text; fill-column: 55 -*-
+
+A Dialogue Concerning the Two Chief Modeling Systems
+(A Galilean Dialogue)
+
 Act III
-_
-[The act opens with Webucci working at the laptop, obviously thinking
-very hard.  Restolio and Modello enter.]
 
-Restolio: ... and so I say to the guy, "If it walks like a duck, and
-          talks like a duck, it must *be* a duck".
+[The act opens with Webucci working at the laptop,
+obviously thinking very hard. Restolio and Modello
+enter.]
 
-Modello: Ha! That's a great story.  I wish I was there to see it.
+Restolio: ... and so I say to the guy, "If it walks
+          like a duck, and talks like a duck, it must
+          *be* a duck".
 
-Restolio: No kidding.  It was great fun.  [to Webucci] Hey there.
-          You're working early.  What's up?
+Modello: Ha! That's a great story. I wish I was there
+         to see it.
 
-Webucci: I've been trying to sort out the issues we are having with
-         the ECal system.  Both of you seem to have good ideas, but
-         they seem to be total opposites and I'm not sure how to bring
-         them together.
+Restolio: No kidding. It was great fun. [to Webucci]
+          Hey there. You're working early. What's up?
 
-Modello: Well, obviously, you need to start with the behaviour of the
-         system.
+Webucci: I've been trying to sort out the issues we are
+         having with the ECal system. Both of you seem
+         to have good ideas, but they seem to be total
+         opposites and I'm not sure how to bring them
+         together.
 
-Restolio: Oh no, its just a simple rails app.  You get a good schema
-          going and the rest is cake.
+Modello: Well, obviously, you need to start with the
+         behavior of the system.
 
-Modello: You fool! [smiling]  The schema is an implementation detail,
-         behaviour is king.
+Restolio: Oh no, its just a simple rails app. You get a
+          good schema going and the rest is cake.
 
-Webucci: Acting like that, I think both of you are fools. Neither of
-         you actually got anywhere with building the app. There has to
-         be some kind of middle ground.
+Modello: You fool! [smiling] The schema is an
+         implementation detail, behavior is king.
+
+Webucci: Acting like that, I think both of you are
+         fools. Neither of you actually got anywhere
+         with building the app. There has to be some
+         kind of middle ground.
 
 Modello: Hmmph.
 
 Restolio: Well....
 
-Webucci: Look.  Restolio came up with a pretty good database schema
-         for the basic stuff, but then it got really clunky when it
-         came to recurring events.  Modello has a cool design for
-         recurring events, but storing them to the database stinks.
-         What can we do to bring these designs together.
+Webucci: Look. Restolio came up with a pretty good
+         database schema for the basic stuff, but then
+         it got really clunky when it came to recurring
+         events. Modello has a cool design for
+         recurring events, but storing them to the
+         database stinks. What can we do to bring these
+         designs together.
 
-Modello: Well, it comes down to a matter of how you model your
-         software...
+Modello: Well, it comes down to a matter of how you
+         model your software...
 
 Webucci: Yeah, I don't get that. What is "modeling".
 
-Modello: A model is an abstraction of what your are trying to
-         understand.  
+Modello: A model is an abstraction of what your are
+         trying to understand.
 
 Restolio: Understand, or represent?
 
-Modello: Yes.  Either.  Both.  Its a simplification that helps us
-         understand the real world.  By using a model, we can
-         meaningully reason about it without dealing with all the
-         complexities that are inherit in the real thing.
+Modello: Yes. Either. Both. Its a simplification that
+         helps us understand the real world. By using a
+         model, we can meaningfully reason about it
+         without dealing with all the complexities that
+         are inherit in the real thing.
 
-Restolio: You want to start by identifying the "things" in your
-          system.  Those are the nouns and then you figure out where
-          all the data goes.
+Restolio: You want to start by identifying the "things"
+          in your system. Those are the nouns and then
+          you figure out where all the data goes.
 
-Modello: No, no.  The important thing to focus on is the behaviour,
-         the verbs in the system.
+Modello: No, no. The important thing to focus on is the
+         behavior, the verbs in the system.
 
-Webucci: Its obvious that you two have different ways to design the
-         system.  How do I know which one is right?
+Webucci: Its obvious that you two have different ways
+         to design the system. How do I know which one
+         is right?
 
-Modello: Well, obviously I am.  But seriously.  I've been taught that
-         a model, one is neither right nor wrong, but useful or not
-         useful.
+Modello: Well, obviously I am. But seriously. I've been
+         taught that a model, one is neither right nor
+         wrong, but useful or not useful.
 
 Webucci: Really.  How do you mean?
 
-Modello: Here's an example from physics.  Back in the 16th century,
-         scientists were arguing about the nature of the solar system
-         and there were two competing theories (or models).
+Modello: Here's an example from physics. Back in the
+         16th century, scientists were arguing about
+         the nature of the solar system and there were
+         two competing theories (or models).
 
-Restolio: Yeah, I remember that from science class.  That was the
-          thing with Galileo and the earth revolving around the sun,
-          right?
+Restolio: Yeah, I remember that from science class.
+          That was the thing with Galileo and the earth
+          revolving around the sun, right?
 
-Modello: Yep.  The prevailing theory of the day was that all heavenly
-         bodies revolved around the Earth.  Their geocentric "model"
-         had the Earth at the center of the Universe and everything
-         else revolving around it in a complicated series of celestial
-         spheres.
+Modello: Yep. The prevailing theory of the day was that
+         all heavenly bodies revolved around the Earth.
+         Their geocentric "model" had the Earth at the
+         center of the Universe and everything else
+         revolving around it in a complicated series of
+         celestial spheres.
 
 Webucci: Over complicated, that sounds familiar.
 
-Modello: Yeah, right.  [continuing] The alternate model of the solar
-         system was proposed by a fellow named Copernicus.  His model
-         had the Sun was the center of the solar system and the earth
-         and all the planets revolved around it.  Only the moon was
-         left revolving around the Earth.
+Modello: Yeah, right. [continuing] The alternate model
+         of the solar system was proposed by a fellow
+         named Copernicus. His model had the Sun was
+         the center of the solar system and the earth
+         and all the planets revolved around it. Only
+         the moon was left revolving around the Earth.
 
-Restolio: What idiots!  Could it be more obvious that helio-centric
-          model is the right one
+Restolio: What idiots! Could it be more obvious that
+          helio-centric model is the right one
 
-Modello: Actually, it wasn't obvious at all.  All our senses seem to
-         tell us that the Earth is stationary made a lot of sense.  In
-         fact, Copernicus himself wasn't sure his model actually
-         represented reality.  He just prefered the Helio-centric
-         version because the mathematics involved were much more
+Modello: Actually, it wasn't obvious at all. All our
+         senses seem to tell us that the Earth is
+         stationary. It made a lot of sense. In fact,
+         Copernicus himself wasn't sure his model
+         actually represented reality. He just
+         preferred the Helio-centric version because
+         the mathematics involved were much more
          elegant.
 
-Webucci: So what you're saying that a model isn't right or wrong,
-         but whatever gets the job done.
+Webucci: So what you're saying that a model isn't right
+         or wrong, but whatever gets the job done.
 
-Modello: Right.  Its either useful or not useful.  Galileo was a fan
-         of Copernicus's model, and tried to get other scientists of
-         the day to accept it as well.  In fact, he wrote a four port
-         dialogue in which the characters "Salviati", "Sagredo", and,
-         um, "Simplicio" discuss the two world systems and Salviati
-         argues for Copernicus's model and Simplicio argues for
-         Ptolemy' model.
+Modello: Right. Its either useful or not useful.
+         Galileo was a fan of Copernicus's model, and
+         tried to get other scientists of the day to
+         accept it as well. In fact, he wrote a four
+         port dialogue in which the characters
+         "Salviati", "Sagredo", and, um, "Simplicio"
+         discuss the two world systems and Salviati
+         argues for Copernicus's model and Simplicio
+         argues for Ptolemy' model.
 
-Restolio: Isn't that what got him in trouble with the church,
-          proposing that the Earth wasn't the center of the universe?
+Restolio: Isn't that what got him in trouble with the
+          church, proposing that the Earth wasn't the
+          center of the universe?
 
-Modello: Actually, the truth is more complicated than that.  The
-         church was quite ready to accept Copernicus's model, if not
-         as reality, as an explaination of reality; mainly because it
-         was so useful in predicting planetary motions.  No, what
-         pushed them over the edge was that he put the words of the
-         Pope in the mouth of his simpleton character name
-         "Simplicio".  Not a smart political move.
+Modello: Actually, the truth is more complicated than
+         that. The church was quite ready to accept
+         Copernicus's model, if not as reality, as an
+         explanation of reality; mainly because it was
+         so useful in predicting planetary motions. No,
+         what pushed them over the edge was that he put
+         the words of the Pope in the mouth of his
+         simpleton character name "Simplicio". Not a
+         smart political move.
 
-Webucci: Man, I hope I'm not Simplcio.
+Webucci: Man, I hope I'm not Simplicio.
 
-[Restolio and Modello make non-commital gestures]
+[Restolio and Modello make non-committal gestures]
 
-Restolio: That's a fascinating history lesson, but how does that help
-          us here?
+Restolio: That's a fascinating history lesson, but how
+          does that help us here?
 
-Webucci: So if neither model is "wrong", how do we find one that's
-         actually useful?  It seemed like neither one helped us solve
-         the problem.
+Webucci: So if neither model is "wrong", how do we find
+         one that's actually useful? It seemed like
+         neither one helped us solve the problem.
 
-Restolio: Well, no, not really.  While recurring events wasn't the
-          prettiest thing we ever created, its always better to stick
-          with the standards. Data is the key.  Programs come and go,
-          and change all the time, but data lives forever.  If you get
-          your data model wrong now your gonna have to live with it
-          for a long long time. 
+Restolio: Well, no, not really. While recurring events
+          wasn't the prettiest thing we ever created,
+          its always better to stick with the
+          standards. Data is the key. Programs come and
+          go, and change all the time, but data lives
+          forever. If you get your data model wrong now
+          your gonna have to live with it for a long
+          long time.
 
-Webucci:  Ok, I can see that ... to a point. But eventually the system
-          has to do something doesn't it?
+Webucci: OK, I can see that ... to a point. But
+          eventually the system has to do something
+          doesn't it?
 
-Restolio: There is a solid mathematical foundation for data
-          modeling. Tuple relational calculus, domain relational
-          calculus.  It's all there, solid mathamatics.   
+Restolio: There is a solid mathematical foundation for
+          data modeling. Tuple relational calculus,
+          domain relational calculus. It's all there,
+          solid mathematics.
 
 Modello: All bow down to the alter of C.J. Date.
 
-Restolio: Date was a genius. Read "The Third Manifesto" for a view of
-          how data modeling should be.  
+Restolio: Date was a genius. Read "The Third Manifesto"
+          for a look at how data modeling should be.
           
-Webucci: That's intersting, but it still has to _do_ something doesn't
-         it?
+Webucci: That's interesting, but it still has to _do_
+         something doesn't it?
 
-Restolio: Sure, but if you get the data part right the rest is easy.
+Restolio: Sure, but if you get the data part right the
+          rest is easy.
 
-Webucci: Didn't see too easy when we were working on recurring
-         events.  
+Webucci: Didn't see too easy when we were working on
+         recurring events.
 
-Modello: Data modeling is good for when you are ready to design the
-          data portions of your architecture, but I find that
-          concentrating too early on concrete data structures, tends
-          to leave your system fragile.
+Modello: Data modeling is good for when you are ready
+         to design the data portions of your
+         architecture, but I find that concentrating
+         too early on concrete data structures, tends
+         to leave your system fragile.
 
-Webucci: Concetrating on it too late didn't seem to work so
-         well. Look, I hear you guys, there seem to be good points on
-         either side.  Neither seem to work by themselves.  Can't we
-         find the strengths of each and put them together.
+Webucci: Concentrating on it too late didn't seem to
+         work so well. Look, I hear you guys, there
+         seem to be good points on either side. Neither
+         seem to work by themselves. Can't we find the
+         strengths of each and put them together.
 
-Restolio: Well that temporal event thing really works with the
-          recurring events, but mapping that to a database is problematic.  
+Restolio: Well that temporal event thing really works
+          with the recurring events, but mapping that
+          to a database is problematic.
 
-Modello: The key is that we have the objects there. Perhaps we can
-         figure out a way to serialize them instead of persisting them
-         directly to database tables.  Actually temporal expressions
-         are 'expressions.' Perhaps we could design an expression
-         language that would be easy to serialize and store in a
-         single field in the database.  
+Modello: The key is that we have the objects there.
+         That ActiveRecord mapping _was_ pretty ugly.
+         Perhaps we can figure out a way to serialize
+         them instead of persisting them directly to
+         database tables. 
 
-Restolio: Ohh, a DSL!  I love it! 
+Restolio: What are you thinking?
 
-Webucci: That takes care of storing them in the database though.  We
-          still have the problem of trying to find which events  occur
-          on a given date. We don't want to loop through every event
-          in the database.  
+Modello: Actually temporal expressions are
+         'expressions.' Perhaps we could design an
+         expression language that would be easy to
+         serialize and store in a single field in the
+         database.
 
-Restolio: So the issue right now is performance when searching for
-          events. We can't check every event. What if we could limit
-          the number of events we have to check, would that be useful?
+Restolio: Oh, a DSL! I love it! But that would pretty
+          well make them invisible to SQL queries.  
 
-Modello: Yes. What do you have in mind?
+Webucci: Right sounds like we are making things worse.
+         How are we going to find which events occur on
+         a given date. We definitely don't want to loop
+         through every event in the database.
 
-Restolio: Well I'm thinking that most events will be non-recurring, a
-          single event.  Most of the rest of the events may recurred
-          for a limited time, for example: week of where a meeting is
-          scheduled every day.  Only a small fraction of the events
-          will be open ended.  If we store an explicit start and end
-          date with each event, then it's very easy to query for a
-          list of events that happen to fall on a paricular date.
-          Perhaps that will narrow down the list of events enough that
-          performance will not be a problem.
+Restolio: So the issue right now is performance when
+          searching for events. We can't check every
+          event. What if we could limit the number of
+          events we have to check, would that be
+          useful?
+
+Modello: Possibly. What do you have in mind?
+
+Restolio: Well I'm thinking that most events will be
+          non-recurring, a single event. Most of the
+          rest of the events may recurred for a limited
+          time, for example: week of where a meeting is
+          scheduled every day. Only a small fraction of
+          the events will be open ended. If we store an
+          explicit start and end date with each event,
+          then it's very easy to query for a list of
+          events that happen to fall on a particular
+          date. Perhaps that will narrow down the list
+          of events enough that performance will not be
+          a problem.
 
 Webucci: But doesn't this screw up the object model?
 
-Restolio: No, not really.  [glances at Modello for confirmation] The
-          central part of the object model was the behavior of a
-          calendar and how it supports two operations.  (1) return a
-          list of event for a given date, time and room, and (2)
-          record an event for a given room at a given date and time.
-          How we implement that behaviour is an implementation
-          detail.  [to Modello] Right?
+Restolio: No, not really. [glances at Modello for
+          confirmation] The central part of the object
+          model was the behavior of a calendar and how
+          it supports two operations. (1) return a list
+          of event for a given date, time and room, and
+          (2) record an event for a given room at a
+          given date and time. How we implement that
+          behavior is an implementation detail. [to
+          Modello] Right?
 
-Modello: Absolutely.  We keep the essential behaviour of the system
-         constant and work out the storage requirements as needed.
-         And Restolio's data model for rooms, events and groups seems
-         like a good fit for the very data oriented portion of the
-         application.  After all, it is a simple Rails app.
+Modello: Absolutely. We keep the essential behavior of
+         the system constant and work out the storage
+         requirements as needed. And Restolio's data
+         model for rooms, events and groups seems like
+         a good fit for the very data oriented portion
+         of the application. After all, it is a simple
+         Rails app.
 
-Webucci: So, both modeling techniques are useful.  It all depends on
-         what you are working on.  Cool!  Well, I'm ready to start
-         writing some tests.  Who's with me?
+Webucci: So, both modeling techniques are useful. It
+         all depends on what you are working on. Cool!
+         Well, I'm ready to start writing some tests.
+         Who's with me?
 
  [End Act III]
+
+# LocalWords:  Webucci Modello Restolio Simplicio Salviati LocalWords Galilean

@@ -1,6 +1,6 @@
 # -*- mode: text; fill-column: 55 -*-
 
-A Dialogue Concerning the Two Chief Modelling Systems
+A Dialogue Concerning the Two Chief Modeling Systems
 (A Galilean Dialogue)
 
 Persona dramatica:
@@ -20,7 +20,7 @@ Webucci -- A recent convert to Rails from PHP.  He is
 
 Act I
 
-[The act opens as our developement team is discussing a
+[The act opens as our development team is discussing a
 new project]
 
 Restolio: We got the customer requirements for our new
@@ -43,11 +43,11 @@ Modello: Whoa.  Design before requirements?  Surely the
 Restolio: Oh no.  This is a really simple rails app.  I
           was just outlining what we will be needing.
 
-Modello: Ok, but why don't you just start with what the
+Modello: OK, but why don't you just start with what the
          customer is *asking* for.
 
 Restolio: We would worry about if it was a big app, but
-          this is such a staightforward application
+          this is such a straightforward application
           that I don't want to spend a of overhead in
           unneeded design.
 
@@ -64,13 +64,13 @@ Webucci: Oh, kinda like a calendar, only electronic.
 Modello: Hey, why don't we call it ECal.  It has a nice
          ring to it.
 
-Restolio: [annoyed at the diversion] Ok, fine.  So,
+Restolio: [annoyed at the diversion] OK, fine.  So,
           here's what I'm thinking.  We need a Room
           model, a Group model and an Meeting model.
 
 Webucci: Group model?
 
-Restolio: Yah, the group that is reserving the room.
+Restolio: Yeah, the group that is reserving the room.
           We need to record that.
 
 Modello: [snidely] Looks like you've thought through
@@ -92,9 +92,9 @@ Restolio: Well, in Rails (unlike PHP), we don't talk
 Modello: Well, OO design is more than just talking
          about attributes...
 
-Restolio: Yeah, right, ok.
+Restolio: Yeah, right, OK.
 
-Webucci: Ok, so what *attribute* does a room table
+Webucci: OK, so what *attribute* does a room table
          have.
 
 Restolio: [pedantically] A room *model* has a name, its
@@ -139,7 +139,7 @@ Webucci: Wait, I thought there were only four verbs in
          Rest. Am I missing something?
 
 Restolio: There are only 4 HTTP verbs that are used in
-          REST.  But a restfull Rails controller needs
+          REST.  But a restful Rails controller needs
           to implement these seven actions.
 
 Modello: Wow, how did we get from talking about object
@@ -151,7 +151,7 @@ Restolio: Because we are using REST, we don't have to
           think about stuff like that.  Remember, its a
           simple Rails application.
 
-Restolio: Ok, so our Meeting, *ahem*, Event belongs to
+Restolio: OK, so our Meeting, *ahem*, Event belongs to
           a Room and belongs to a Group.
 
 Webucci: Oh, and a Group has many Events.  And a Room
@@ -162,7 +162,7 @@ Restolio: That's the beauty of following Rails
           conventions.
 
 Modello: Since we *are* building an electronic
-         calendar, I'm thinking a colendar object might
+         calendar, I'm thinking a calendar object might
          be useful.
 
 Restolio: Nah, the entire database is our calendar.  We
@@ -174,3 +174,5 @@ Webucci: So, are we ready to code?
 Restolio: Almost.  Let's talk about validations ...
 
 [... end of act ...]
+
+ LocalWords:  Modello OO Restolio Webucci PHP app FaceBook ECal MVC um Nah

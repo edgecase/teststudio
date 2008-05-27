@@ -325,10 +325,21 @@ Webucci: Well I think you would need to be able to ask it if a room
 Modello: Ok, behavior number one, asking if a room is reserved.  Go
          on.
 
-[list pops up with behavior number one on it]
+[CRC card with first responsibility is shown]
 
-Webucci: and I guess the obvious one is that it has to be able to
-         reserve a room in the first place. 
+Webucci: Hey, what's that you are writing?
+
+Modello: Oh, these are called CRC cards, short for classes,
+         responsibilities and collaborators.  Its a nice way of
+         capturing some initial design thoughts.
+
+Webucci: Cool!  I and guess the responsibilities become these
+         behaviours we are talking about?
+
+Modello: Exactly!  What's the next behavior?
+
+Webucci: I guess the obvious one is that it has to be able to reserve
+         a room in the first place.
 
 Modello: Behavior number two: reserve a room (at a date and time). And
          what else?
@@ -373,12 +384,33 @@ Modello: Ok, now we have identified our essential behaviors.  The
          change, but they are more stable than say the implentation
          details.
 
-Webucci: Great, but I still don't see any code.  
+Webucci: What's the collaborators section for?
 
-Modello: Now that we've identified our essential behaviors we can
-         write the rest of the application based on them.  For example
-         to ask if there are any conflicts for a room, you could write
-         this code:
+Modello: We can list any other object that a Calendar needs in order
+         for it to accomplish its responsibilites.  What other objects
+         might a Calendar need to work with.
+
+Webucci: Hmmm ... Events for sure.
+
+Modello: Gotcha.
+
+Webucci: What about rooms and groups?
+
+Modello: Rooms prehaps, since you will be supplying a room object when
+         looking for conflicts. I don't know if a Calendar will
+         interact directly with Groups or not.
+
+Webucci: Don't you need to know that to complete the CRC card?
+
+Modello: The card is only for organizing your thinking.  There's no
+         need to capture every detail.  This look good so far?
+
+Webucci: Hmmm, I think so.  
+
+Modello: Great, now that we've identified our essential behaviors we
+         can write the rest of the application based on them.  For
+         example to ask if there are any conflicts for a room, you
+         could write this code:
 
 Calendar.find_events(room, date, start_time, end_time).empty?
 

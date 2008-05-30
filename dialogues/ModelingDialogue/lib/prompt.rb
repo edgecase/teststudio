@@ -60,10 +60,29 @@ def window(index)
   return start, index
 end
 
+def line_out(s, limit)
+  lines = s.split("\n")
+  while !lines.empty?
+    puts lines.shift
+    limit -= 1
+    return 0 if limit <= 0
+  end
+  if limit > 0
+    puts
+    limit -= 1
+  end
+  limit
+end
+
 files = ARGV.to_a.dup
 ARGV.clear
 
-calibrate
+if files.first =~ /^\d+$/
+  $lines = files.shift.to_i
+else
+  calibrate
+end
+
 puts "#$lines lines"
 paragraphs = []
 files.each do |fn|
@@ -75,9 +94,13 @@ files.each do |fn|
         break if line.blank?
         p << line
       end
-      paragraphs << p
+      paragraphs << p if p.size > 0
     end while line
   end
+end
+
+paragraphs.each_with_index do |p,i|
+  puts "#{i}: [#{p}]"
 end
 
 print RESET
@@ -85,7 +108,10 @@ clear
 start = 0
 index = 0
 loop do
-  (start..index).each do |i|
+  clear
+  limit = $lines
+  i = index
+  while limit > 0 && i < paragraphs.size
     out = paragraphs[i]
     next if out.nil?
     case out
@@ -106,8 +132,8 @@ loop do
     else
       out = out.sub(/^/, color) 
     end
-    puts out
-    puts if start != index
+    limit = line_out(out, limit)
+    i += 1
   end
   cmd = pause
   case cmd

@@ -14,6 +14,5 @@ task :test_success do
 end
 
 task :prompt, :lines do |t, args|
-  puts "DBG: args=#{args}"
   ruby "-Ilib lib/prompt.rb #{args.lines} Act1.txt Act2.txt Act3.txt"
 end

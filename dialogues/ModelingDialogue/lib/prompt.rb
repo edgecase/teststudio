@@ -63,7 +63,12 @@ end
 files = ARGV.to_a.dup
 ARGV.clear
 
-calibrate
+if files.first =~ /^\d+$/
+  $lines = files.shift.to_i
+else
+  calibrate
+end
+
 puts "#$lines lines"
 paragraphs = []
 files.each do |fn|
@@ -85,6 +90,7 @@ clear
 start = 0
 index = 0
 loop do
+  clear
   (start..index).each do |i|
     out = paragraphs[i]
     next if out.nil?

@@ -70,12 +70,13 @@ Webucci: Well that seems pretty easy. For each
 
 Restolio: Ahem
 
-Webucci: [grumpily] Yeah, yeah... create an event *object* for each
-         time it recurs.
+Webucci: [grumpily] Yeah, yeah... create an event
+         *object* for each time it recurs.
 
 Restolio: Thanks, much better.
 
-Webucci: But how do we know how many event *objects* we create?
+Webucci: But how do we know how many event *objects* we
+         create?
 
 Restolio: As many as we need.
 
@@ -167,9 +168,9 @@ Restolio: I think we can figure it out. Any event
 Webucci: Ummm, I guess we could try that, but seems
          kinda squirrelly.
 
-Restolio: Hmmm.. it would be better if we could change it in
-          one spot. The problem seems to be that we
-          have a lot of duplicate data. What if we
+Restolio: Hmmm.. it would be better if we could change
+          it in one spot. The problem seems to be that
+          we have a lot of duplicate data. What if we
           normalized our schema so that the duplication
           is removed.
 
@@ -229,8 +230,8 @@ Webucci: Ok, so when the date changes, we change the
          The date is on the event, not the event
          definition.  What do we do?
 
-Restolio: Well, we take the event, find its definition, and find
-          all the events that belong to that
+Restolio: Well, we take the event, find its definition,
+          and find all the events that belong to that
           definition.
 
 Webucci: And what do we do with them?
@@ -456,10 +457,10 @@ Modello: Now let's look at those cards again and figure
 
 Webucci: Collaborators.. what are those?
 
-Modello: Collaborators are other objects that an object 
-         needs to work with in order for it to accomplish its
-         responsibilites.  So what other objects might a
-         Calendar need to work with?
+Modello: Collaborators are other objects that an object
+         needs to work with in order for it to
+         accomplish its responsibilites. So what other
+         objects might a Calendar need to work with?
 
 Webucci: Hmmm ... Events for sure.
 
@@ -680,7 +681,7 @@ Modello: Oh, look at the time. I'm speaking at the
          need to get going.  We'll address these
          implementation details tommorrow.
 
-Webucci: [Pleads] Easy for him to say.  Man, somethings
+Webucci: [Pleads] Easy for him to say. Man, somethings
          not right here. Maybe this Rails thing isn't
          all its cracked up to be. I think I'm gonna go
          work on my resume.

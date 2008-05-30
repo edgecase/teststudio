@@ -60,6 +60,20 @@ def window(index)
   return start, index
 end
 
+def line_out(s, limit)
+  lines = s.split("\n")
+  while !lines.empty?
+    puts lines.shift
+    limit -= 1
+    return 0 if limit <= 0
+  end
+  if limit > 0
+    puts
+    limit -= 1
+  end
+  limit
+end
+
 files = ARGV.to_a.dup
 ARGV.clear
 
@@ -91,7 +105,9 @@ start = 0
 index = 0
 loop do
   clear
-  (start..index).each do |i|
+  limit = $lines
+  i = index
+  while limit > 0 && i < paragraphs.size
     out = paragraphs[i]
     next if out.nil?
     case out
@@ -112,8 +128,8 @@ loop do
     else
       out = out.sub(/^/, color) 
     end
-    puts out
-    puts if start != index
+    limit = line_out(out, limit)
+    i += 1
   end
   cmd = pause
   case cmd

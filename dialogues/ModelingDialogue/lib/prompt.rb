@@ -94,9 +94,13 @@ files.each do |fn|
         break if line.blank?
         p << line
       end
-      paragraphs << p
+      paragraphs << p if p.size > 0
     end while line
   end
+end
+
+paragraphs.each_with_index do |p,i|
+  puts "#{i}: [#{p}]"
 end
 
 print RESET

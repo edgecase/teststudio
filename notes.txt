@@ -1,0 +1,2 @@
+* Add lab numbers to slides
+* Lab has meaning of availability backwards

@@ -99,10 +99,6 @@ files.each do |fn|
   end
 end
 
-paragraphs.each_with_index do |p,i|
-  puts "#{i}: [#{p}]"
-end
-
 print RESET
 clear
 start = 0

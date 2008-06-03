@@ -28,6 +28,7 @@ PACKAGE_FILES = TAR_FILES + ZIP_FILES +
   DAILIES.keys.map { |fn| "#{fn}.tgz" } +
   DAILIES.keys.map { |fn| "#{fn}.zip" }
 
+desc "default action => :package"
 task :default => :package
 
 desc "Create the package files for the labs"

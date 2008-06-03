@@ -43,4 +43,3 @@ class RateCalculator
     end
   end
 end
-

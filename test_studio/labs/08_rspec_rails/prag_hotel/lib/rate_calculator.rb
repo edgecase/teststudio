@@ -18,7 +18,7 @@ class RateCalculator
 
   def daily_rate(date, rooms, availability)
     rate = @rack_rate
-    if availability <= 0.95
+    if availability > 0.05
       rate = apply_day_of_week_discounts(rate, date)
       rate = apply_number_of_rooms_discounts(rate, rooms)
     end

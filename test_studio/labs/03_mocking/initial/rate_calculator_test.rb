@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../test_helper'
-
+require 'test/unit'
+require 'rate_calculator'
 require 'date'
 
 ######################################################################
@@ -11,9 +11,6 @@ class RateCalculatorTest < Test::Unit::TestCase
     (Date.new(2007,8,19) .. Date.new(2007,8,26)).to_a
 
   def setup
-    @service = flexmock("availability service")
-    @service.should_receive(:availability).with(Date, "King").and_return(1.0)
-    flexmock(AvailabilityService).should_receive(:new).and_return(@service)
     @calculator = RateCalculator.new
   end
 
@@ -62,15 +59,6 @@ class RateCalculatorTest < Test::Unit::TestCase
     assert_rate expected_rate, multiple_days(Wednesday, NextSunday)
   end
 
-  def test_full_rate_if_nothing_available
-    @service.should_receive(:availability).once.with(Monday, "Double").
-      and_return(0.0)
-    
-    actual_rate = @calculator.rate(Monday, Tuesday, 1, "Double")
-
-    assert_equal 100.0, actual_rate
-  end
-
   private
 
   def basic_rate(day)
@@ -78,11 +66,11 @@ class RateCalculatorTest < Test::Unit::TestCase
   end
   
   def room_nights(rooms, day)
-    @calculator.rate(day, day+1, rooms, "King")
+    @calculator.rate(day, day+1, rooms)
   end
 
   def multiple_days(check_in, check_out)
-    @calculator.rate(check_in, check_out, 1, "King")
+    @calculator.rate(check_in, check_out, 1)
   end
 
   def assert_rate(expected, actual)

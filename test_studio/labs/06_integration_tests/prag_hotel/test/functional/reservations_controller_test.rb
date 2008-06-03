@@ -59,6 +59,7 @@ class ReservationsControllerTest < ActionController::TestCase
       {:controller => 'reservations', :action => 'destroy', :id => "1"},
       {:path => 'reservations/1', :method => "delete"})
   end
+
   def test_routing
     assert_routing "/reservations",
       :controller => "reservations", :action => "index"

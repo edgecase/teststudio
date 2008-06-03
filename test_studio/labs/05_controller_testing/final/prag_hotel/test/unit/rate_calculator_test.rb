@@ -12,7 +12,7 @@ class RateCalculatorTest < Test::Unit::TestCase
 
   def setup
     @service = flexmock("availability service")
-    @service.should_receive(:availability).with(Date, "King").and_return(0.0)
+    @service.should_receive(:availability).with(Date, "King").and_return(1.0)
     flexmock(AvailabilityService).should_receive(:new).and_return(@service)
     @calculator = RateCalculator.new
   end
@@ -64,7 +64,7 @@ class RateCalculatorTest < Test::Unit::TestCase
 
   def test_full_rate_if_nothing_available
     @service.should_receive(:availability).once.with(Monday, "Double").
-      and_return(1.0)
+      and_return(0.0)
     
     actual_rate = @calculator.rate(Monday, Tuesday, 1, "Double")
 

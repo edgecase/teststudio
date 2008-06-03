@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# -*- ruby -*-
+
+TEST_FILES = FileList['*_test.rb']
+
+task :default => :test
+
+task :test do
+  ruby TEST_FILES
+end  

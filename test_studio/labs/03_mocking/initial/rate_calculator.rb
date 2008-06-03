@@ -1,4 +1,3 @@
-
 class RateCalculator
   
   def initialize(rack_rate=100)
@@ -46,4 +45,3 @@ class RateCalculator
     end
   end
 end
-

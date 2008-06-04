@@ -108,7 +108,16 @@ class ReservationsControllerTest < ActionController::TestCase
     #
     # ...
   end
+  
+  def test_new_sets_view_variables
+    get :new
 
+    assert_response :success
+    assert_template "new"
+    assert assigns(:reservation)
+    assert assigns(:availability)
+  end
+  
   # For Extra Credit, add test for edit/update/destroy.
 
   private

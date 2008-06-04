@@ -20,4 +20,12 @@ describe ReservationsController, "when calling index" do
     response.should render_template('reservations/index')
   end
 
+  it "should set assigns correctly" do
+    flexmock(Reservation).should_receive(:find).and_return(:reservations)
+
+    get :index
+
+    assigns[:reservations].should == :reservations
+  end
+
 end

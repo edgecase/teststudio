@@ -1,0 +1,30 @@
+* Theme?
+  * StarWars (the dark side),
+  * Enterprise/StarTrek?
+  * Something  else
+
+Chris's Thoughts:
+Closet rubyist
+J2EE programmer (who gradually sees the light)
+J2EE architect (who stubbornly stays in the dark)
+
+It breaks down nicely into the galileo format, except now there is a
+more obvious solution we'll be driving at. There are so many topics we
+could hit:
+
+Struts vs Rails (complex code melts away as you move to Ruby)
+EJB vs ActiveResource
+Deployment cycle times vs refresh the page and see changes
+Testing
+Huge ant files vs Rake (I like this one -- jim)
+
+Other ideas:
+* Astronaut Architects
+* Committee Decisions
+* XML Situps
+* JRuby integration
+
+Quotes:
+
+
+

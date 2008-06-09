@@ -19,6 +19,7 @@ DAILIES = {
     labno = fn.pathmap("%n").split('_').first.to_i
     labno > 6
   },
+  "pkg/all_labs" => LABS,
 }
 
 TAR_FILES = LABS.pathmap("pkg/%f.tgz")

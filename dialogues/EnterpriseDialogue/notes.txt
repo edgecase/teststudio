@@ -12,11 +12,12 @@ It breaks down nicely into the galileo format, except now there is a
 more obvious solution we'll be driving at. There are so many topics we
 could hit:
 
-Struts vs Rails (complex code melts away as you move to Ruby)
-EJB vs ActiveResource
-Deployment cycle times vs refresh the page and see changes
-Testing
-Huge ant files vs Rake (I like this one -- jim)
+* Struts vs Rails (complex code melts away as you move to Ruby)
+* EJB vs ActiveResource
+* Deployment cycle times vs refresh the page and see changes
+* Testing
+* Huge ant files vs Rake (I like this one -- jim)
+  * Some further notes: http://blog.foemmel.com/2006/12/jrake-part-1-compiling.html
 
 Other ideas:
 * Astronaut Architects

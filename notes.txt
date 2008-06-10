@@ -1,2 +1,9 @@
+TODO:
+* Break model testing into
+  (1) Business logic testing, and
+  (2) Finder testing
+  And downplay the metaprogramming
+
+FIXED:
 * Add lab numbers to slides
 * Lab has meaning of availability backwards

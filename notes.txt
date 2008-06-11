@@ -5,6 +5,7 @@ TODO:
   And downplay the metaprogramming
 * Add slides for RSpec/before(:each), etc
 * Change ring example to nested context rather than shared behavior.
+* Add a section javascript testing
 
 FIXED:
 * Add lab numbers to slides

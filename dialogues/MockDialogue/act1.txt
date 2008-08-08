@@ -56,7 +56,7 @@ Joe: Well, you know I'm working on the new single sign-on inititive
 
 Jim: Sure, you and I have paired on some of that code.
 
-Joe: Right. So yesterday I was working on the code that acutally logs
+Joe: Right. So yesterday I was working on the code that actually logs
      into our network. And I've been doing the whole thing test-first,
      just as you taught us. So when I came to the part of the code
      that will handle a login failure, I just wrote a test that
@@ -454,7 +454,7 @@ Joe: What else can a mock do? Can it handle things like throwing
      exceptions so I can test exception handling logic?
 
 Jim: Sure, you can throw exceptions, you can specify ranges for
-     numbers of times it executes, you can specify logic in for form of a
+     numbers of times it executes, you can specify logic in the form of a
      block. Just about anything you can think of you can do in a mock. 
 
 Joe: Wow, mocks are great.  Why didn't you just tell me about them from the beginning.  

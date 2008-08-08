@@ -13,6 +13,7 @@ task :test_success do
 end
 
 desc "Run the teleprompter"
-task :prompt do
-  ruby "prompt.rb act*.txt"
+task :prompt, :lines do |t, args|
+  acts = FileList['act*.txt']
+  ruby "-Ilib lib/prompt.rb #{args.lines} #{acts}"
 end

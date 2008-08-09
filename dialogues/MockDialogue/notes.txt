@@ -3,4 +3,6 @@ Notes on the Mock Dialogues.
 * Need to address the promise of addressing the constructor injection
   issue in act I.
 
-* Double check Nielson reference.
+* Talk about using real objects in test vs mocks.
+
+* Talk about exposing implementation.

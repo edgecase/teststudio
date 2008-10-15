@@ -1,0 +1,13 @@
+Tests not running, tests only written with new code, not maintained
+Cargo cult programming
+   Adding a delete method to each AR class since sometimes destroy
+   doesn't work
+Metaprogramming example
+   User has meta methods for each friend (aka. user.bob, user.bill, etc)
+   But now all friends of Mr. Des Troy can't be deleted
+Code everyone is afraid to touch
+     wacky message code
+     MessageCreatorParams.new     
+     MessageCreator.instance.new_message
+     PendingMessage and PostedMessage clases in separate tables
+meta p. delegator that checks for something but only used once

@@ -1,0 +1,27 @@
+# -*- mode: text; fill-column: 55 -*-
+
+A Dialogue Concerning the Two Chief Modeling Systems
+(A Galilean Dialogue)
+
+Act I
+
+[Slides showing the setup.  ]
+
+Joe: Hi Chris.  Welcome to our Rails Guru code review.
+
+Chris: Thanks.  I'm really looking forward to hearing
+       what you guys have to say about our code base.
+
+Jim:  Great.  I've got to say that we do have some
+      questions about the code.
+
+Chris: I'm sure you do.
+
+[INTRO RE TESTING]
+[BRITTLE TESTS]
+
+{testing for invalid models, better approach to use
+valid_options hash.  Change on option at a time.}
+
+[SUMMARY]
+

@@ -8,7 +8,14 @@ module System
     self
   end
 end
-    
+
+
+module Kernel
+  private
+  def new(klass)
+    klass.new
+  end
+end
 
 class Object
   def method_missing(sym, *args, &block)
@@ -38,6 +45,9 @@ module IoCapture
   end
 end
 
+# used for test
+class A ; end
+
 class RavaTest < Test::Unit::TestCase
   include IoCapture
 
@@ -63,4 +73,12 @@ class RavaTest < Test::Unit::TestCase
     end
     assert_equal "Hello, World\n", result
   end
+
+  def test_new_method
+    a = new A
+
+    assert_not_nil a
+    assert_instance_of A, a
+  end
+
 end

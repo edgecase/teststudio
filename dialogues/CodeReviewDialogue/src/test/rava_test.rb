@@ -1,37 +1,5 @@
 require 'test/unit'
-
-module System
-  def self.println(*args)
-    puts(*args)
-  end
-  def self.out
-    self
-  end
-end
-
-
-module Kernel
-  private
-  def new(klass)
-    klass.new
-  end
-end
-
-class Object
-  def method_missing(sym, *args, &block)
-    new_sym = sym.to_s
-    if new_sym =~ /[A-Z]/
-      new_sym = rava_case(new_sym)
-      send(new_sym, *args, &block)
-    else
-      super(sym, *args, &block)
-    end
-  end
-
-  def rava_case(string)
-    string.gsub(/([A-Z]+[a-z]*)/) { |m| "_" + m.downcase }
-  end
-end
+require 'rava'
 
 require 'stringio'
 module IoCapture
@@ -56,11 +24,11 @@ class RavaTest < Test::Unit::TestCase
     assert_equal 123, "123".toI
   end
 
-  def test_original_method_missing
-    assert_raise(NoMethodError) do
-      1.xyz
-    end
-  end
+#   def test_original_method_missing
+#     assert_raise(NoMethodError) do
+#       1.xyz
+#     end
+#   end
 
   def test_rava_case
     assert_equal "hello_world", rava_case("helloWorld")
@@ -80,5 +48,4 @@ class RavaTest < Test::Unit::TestCase
     assert_not_nil a
     assert_instance_of A, a
   end
-
 end

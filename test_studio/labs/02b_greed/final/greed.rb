@@ -24,4 +24,3 @@ def score(roll)
   end
   score
 end
-    

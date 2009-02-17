@@ -60,7 +60,7 @@ class ReservationsController < ApplicationController
   end
   
   def update_availability
-    rooms = RoomType.find(:all)
+    rooms = RoomType.all
     @availability = rooms.collect { |room|
       [
         room,

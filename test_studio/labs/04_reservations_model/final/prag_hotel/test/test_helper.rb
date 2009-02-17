@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 
 require 'flexmock/test_unit'
+require 'shoulda/rails'
 
 class Test::Unit::TestCase
   self.use_transactional_fixtures = true

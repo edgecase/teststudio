@@ -3,6 +3,6 @@ require 'rake/testtask'
 task :default => :test
 
 Rake::TestTask.new do |t|
-  t.verbose = false
+  t.verbose = true
   t.test_files = FileList['*_test.rb']
 end

@@ -2,29 +2,42 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ReservationTest < ActiveSupport::TestCase
 
-  test_validates_presence_of :name 
-  test_validates_presence_of :check_in 
-  test_validates_presence_of :check_out
-  test_validates_presence_of :number_of_rooms 
-  test_validates_presence_of :rate
-    
-  test_validates_numericality_of :number_of_rooms
-  
-  def test_validates_check_out_is_after_check_in
-    assert_check_in_should_be_after_check_out(3.days.from_now, 2.days.from_now)
-    assert_check_in_should_be_after_check_out(1.days.from_now, 1.days.from_now)
+  context 'A reservation' do
+    should_validate_presence_of :name, :check_in, :check_out, :number_of_rooms, :rate
+    should_validate_numericality_of :number_of_rooms
 
-    assert_valid(model_with_dates(1.days.from_now, 2.days.from_now))
+    context 'with a check_out date after the check_in date' do
+      setup do
+        @reservation = reservation_with_dates(1.day.from_now, 2.days.from_now)
+      end
+      should 'be valid' do
+        assert @reservation.valid?
+      end
+    end
+
+    context 'with check in and check out dates on the same day' do
+      setup do
+        @reservation = reservation_with_dates(1.day.from_now, 1.days.from_now)
+      end
+      should 'not be valid' do
+        assert_validation_errors(@reservation, :check_out, /must.*after/i)
+      end
+    end
+
+    context 'with check in after check out' do
+      setup do
+        @reservation = reservation_with_dates(2.day.from_now, 1.days.from_now)
+      end
+      should 'not be valid' do
+        assert_validation_errors(@reservation, :check_out, /must.*after/i)
+      end
+    end
   end
-  
+
   private
-  def assert_check_in_should_be_after_check_out(check_in, check_out)
-    @invalid_model = model_with_dates(check_in, check_out)
-    assert_validation_with_message(/must be after checkout/, :check_out)
-  end
   
-  def model_with_dates(check_in, check_out)
-    make_model_with(:check_in => check_in, :check_out => check_out)
+  def reservation_with_dates(check_in, check_out)
+    make_model_with(Reservation, :check_in => check_in, :check_out => check_out)
   end
   
 end

@@ -62,15 +62,12 @@ class ReservationsController < ApplicationController
   def update_availability
     rooms = RoomType.all
     @availability = rooms.collect { |room|
-      [
-        room,
-        RateCalculator.new(room.rack_rate).
-        rate(
-          @reservation.check_in, 
-          @reservation.check_out,
-          @reservation.number_of_rooms,
-          room.name)
-      ]
+      rate = RateCalculator.new(room.rack_rate).rate(
+        @reservation.check_in, 
+        @reservation.check_out,
+        @reservation.number_of_rooms,
+        room.name)
+      [ room, rate ]
     }
   end
 end

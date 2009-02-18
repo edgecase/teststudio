@@ -1,8 +1,9 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
-require 'shoulda/rails'
+
 require 'flexmock/test_unit'
+require 'shoulda/rails'
 
 class Test::Unit::TestCase
   self.use_transactional_fixtures = true
@@ -47,35 +48,31 @@ class Test::Unit::TestCase
     assert_validation_with_message(/has already been taken/, field)
   end
 
-  def assert_validation_with_message(pattern, field)
-    model_name = @invalid_model.class
-    @invalid_model.valid?
-    assert @invalid_model.errors.on(field),
+  def assert_validation_errors(model, field, pattern=nil)
+    model_name = model.class
+    model.valid?
+    assert model.errors.on(field),
       "Expected #{model_name} to have an error on #{field}, but it did not."
-    actual_error = @invalid_model.errors.on(field).to_s
-    assert_match(pattern, actual_error,
-      "Expected #{model_name} to have the error #{pattern}\n Real message was: #{actual_error}")
+    actual_error = model.errors.on(field).to_s
+    if pattern
+      assert_match(pattern, actual_error,
+        "Expected #{model_name} to have the error #{pattern}\n Real message was: #{actual_error}")
+    end
   end
 
   private
 
-  def make_model_with(new_options={})
-    make_model {|options| options.merge!(new_options)}
+  def make_model_with(model_class, new_options={})
+    make_model(model_class) {|options| options.merge!(new_options)}
   end
 
-  def make_model_without(field)
-    make_model {|options| options.delete(field) }
+  def make_model_without(model_class, field)
+    make_model(model_class) {|options| options.delete(field) }
   end
   
-  def make_model
-    model = model_under_test
-    options = model.valid_options
+  def make_model(model_class)
+    options = model_class.valid_options
     yield options if block_given?
-    model.new options
+    model_class.new(options)
   end
-  
-  def model_under_test
-    self.class.to_s.gsub('Test', '').constantize
-  end
-
 end

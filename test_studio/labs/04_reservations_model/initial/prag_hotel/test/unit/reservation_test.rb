@@ -2,9 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ReservationTest < ActiveSupport::TestCase
 
-  # add your tests here
-  def test_something
-    assert true
+  context 'YOUR CONTEXT HERE' do
+    setup do
+      # WRITE THIS CODE
+    end
+    should 'YOUR TEST HERE' do
+      # WRITE THIS CODE
+    end
   end
   
 end

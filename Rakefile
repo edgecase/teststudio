@@ -70,7 +70,7 @@ DAILIES.each do |key, labs|
   end
 end
 
-DOWNLOAD_HOST = 'umlcoop'
+DOWNLOAD_HOST = 'linode'
 DOWNLOAD_DIR  = 'htdocs/test_studio'
 DOWNLOAD_SITE = "#{DOWNLOAD_HOST}:#{DOWNLOAD_DIR}"
 

@@ -5,7 +5,7 @@ require 'rake/clean'
 
 CLOBBER.include("pkg")
 
-LABS = FileList['labs/*'].select { |fn| fn.pathmap("%f") =~ /^\d\d_/ }
+LABS = FileList['labs/*'].select { |fn| fn.pathmap("%f") =~ /^\d\d[a-z]?_/ }
 DAILIES = {
   "pkg/day01" => LABS.select { |fn|
     labno = fn.pathmap("%n").split('_').first.to_i

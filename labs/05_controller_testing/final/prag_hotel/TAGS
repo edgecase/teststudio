@@ -1,0 +1,138 @@
+
+app/controllers/application.rb,81
+class ApplicationController < ActionController::BaseApplicationController4,154
+
+app/controllers/reservations_controller.rb,338
+class ReservationsController < ApplicationControllerReservationsController2,26
+  def indexindex3,79
+  def newnew7,143
+  def updateupdate17,340
+  def createcreate26,553
+  def showshow37,832
+  def destroydestroy41,899
+  def default_reservationdefault_reservation53,1220
+  def update_availabilityupdate_availability62,1416
+
+app/helpers/application_helper.rb,48
+module ApplicationHelperApplicationHelper2,86
+
+app/helpers/reservations_helper.rb,49
+module ReservationsHelperReservationsHelper1,0
+
+app/models/reservation.rb,192
+class Reservation < ActiveRecord::BaseReservation16,343
+  def validatevalidate27,630
+  def self.valid_optionsvalid_options33,808
+  def time_at_midnight(date_in)time_at_midnight45,1034
+
+app/models/room_type.rb,97
+class RoomType < ActiveRecord::BaseRoomType9,101
+  def self.valid_optionsvalid_options16,263
+
+config/boot.rb,793
+module RailsRails6,175
+    def boot!boot!8,204
+    def booted?booted?15,302
+    def pick_bootpick_boot19,361
+    def vendor_rails?vendor_rails?23,437
+    def preinitializepreinitialize28,539
+    def preinitializer_pathpreinitializer_path32,639
+  class BootBoot37,729
+    def runrun38,742
+  class VendorBoot < BootVendorBoot44,837
+    def load_initializerload_initializer45,863
+  class GemBoot < BootGemBoot50,971
+    def load_initializerload_initializer51,994
+    def load_rails_gemload_rails_gem57,1108
+      def rubygems_versionrubygems_version69,1599
+      def gem_versiongem_version73,1699
+      def load_rubygemsload_rubygems83,1955
+      def parse_gem_version(text)parse_gem_version96,2391
+        def read_environment_rbread_environment_rb101,2532
+
+config/environment.rb,0
+
+config/environments/development.rb,0
+
+config/environments/production.rb,0
+
+config/environments/test.rb,0
+
+config/initializers/inflections.rb,0
+
+config/initializers/mime_types.rb,0
+
+config/routes.rb,0
+
+db/migrate/001_create_room_types.rb,118
+class CreateRoomTypes < ActiveRecord::MigrationCreateRoomTypes1,0
+  def self.upup2,48
+  def self.downdown11,181
+
+db/migrate/002_create_reservations.rb,124
+class CreateReservations < ActiveRecord::MigrationCreateReservations1,0
+  def self.upup2,51
+  def self.downdown15,291
+
+db/schema.rb,0
+
+lib/availability_service.rb,104
+class AvailabilityServiceAvailabilityService1,0
+  def availability(date, room_type)availability2,26
+
+lib/rate_calculator.rb,394
+class RateCalculatorRateCalculator3,32
+  def initialize(rack_rate=100)initialize5,56
+  def rate(check_in_date, check_out_date, rooms, room_type)rate10,163
+  def daily_rate(date, rooms, availability)daily_rate19,426
+  def apply_day_of_week_discounts(rate, date)apply_day_of_week_discounts28,662
+  def apply_number_of_rooms_discounts(rate, rooms)apply_number_of_rooms_discounts36,806
+
+public/dispatch.rb,0
+
+test/functional/reservations_controller_test.rb,741
+class ReservationsControllerTest < ActionController::TestCaseReservationsControllerTest3,52
+  def test_new_requests_availability_from_rate_calculatortest_new_requests_availability_from_rate_calculator64,2022
+  def test_create_reserves_a_roomtest_create_reserves_a_room85,2708
+  def test_create_when_save_failstest_create_when_save_fails97,3174
+  def test_showtest_show109,3591
+  def test_update_redirects_to_show_on_successtest_update_redirects_to_show_on_success120,3956
+  def test_update_renders_edit_on_failuretest_update_renders_edit_on_failure132,4281
+  def assert_availability(room_type, rack_rate, availability)assert_availability148,4666
+  def assert_date_equal(expected_date, actual_date)assert_date_equal153,4841
+
+test/test_helper.rb,813
+class Test::Unit::TestCaseTest8,177
+    def test_validates_presence_of(field)test_validates_presence_of13,306
+    def test_validates_numericality_of(field)test_validates_numericality_of20,510
+    def test_validates_uniqueness_of(field)test_validates_uniqueness_of27,726
+  def assert_validates_presence_of(field)assert_validates_presence_of35,940
+  def assert_validates_numericality_of(field)assert_validates_numericality_of40,1098
+  def assert_validates_uniqueness_of(field)assert_validates_uniqueness_of45,1273
+  def assert_validation_errors(model, field, pattern=nil)assert_validation_errors51,1538
+  def make_model_with(model_class, new_options={})make_model_with65,1983
+  def make_model_without(model_class, field)make_model_without69,2109
+  def make_model(model_class)make_model73,2226
+
+test/unit/rate_calculator_test.rb,1293
+class RateCalculatorTest < Test::Unit::TestCaseRateCalculatorTest8,160
+  def setupsetup13,343
+  def test_weekday_rate_is_discounted_ten_percenttest_weekday_rate_is_discounted_ten_percent20,601
+  def test_rate_is_based_on_percentage_not_absolute_valuetest_rate_is_based_on_percentage_not_absolute_value26,777
+  def test_weekend_rate_is_discounted_twenty_percenttest_weekend_rate_is_discounted_twenty_percent31,922
+  def test_midrange_room_should_get_additional_twenty_precent_discounttest_midrange_room_should_get_additional_twenty_precent_discount38,1104
+  def test_large_number_of_rooms_should_get_additional_thirty_precent_discounttest_large_number_of_rooms_should_get_additional_thirty_precent_discount45,1435
+  def test_multiple_days_are_the_sum_of_the_individual_daystest_multiple_days_are_the_sum_of_the_individual_days51,1694
+  def test_multiple_days_are_the_sum_of_the_individual_days_over_weekendtest_multiple_days_are_the_sum_of_the_individual_days_over_weekend57,1934
+  def test_full_rate_if_nothing_availabletest_full_rate_if_nothing_available65,2227
+  def basic_rate(day)basic_rate76,2488
+  def room_nights(rooms, day)room_nights80,2543
+  def multiple_days(check_in, check_out)multiple_days84,2628
+  def assert_rate(expected, actual)assert_rate88,2729
+
+test/unit/reservation_test.rb,150
+class ReservationTest < ActiveSupport::TestCaseReservationTest3,52
+  def reservation_with_dates(check_in, check_out)reservation_with_dates39,1109
+
+test/unit/room_type_test.rb,63
+class RoomTypeTest < ActiveSupport::TestCaseRoomTypeTest4,81

@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'spec'
 
 # A Ring data structure is similar to a fixed sized FIFO queue.
 # Elements inserted into the ring can be removed in FIFO order.  If

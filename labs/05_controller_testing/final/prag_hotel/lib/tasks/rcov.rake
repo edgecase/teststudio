@@ -10,6 +10,7 @@ namespace 'rcov' do
     t.rcov_opts = [
       '-x', '^config/boot',
       '-x', '^/Library',
+      '-x', '^/Users/jim/.gem',
       '--rails', '--sort', 'coverage']     
   end 
 end 

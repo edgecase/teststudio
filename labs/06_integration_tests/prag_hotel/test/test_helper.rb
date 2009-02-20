@@ -5,6 +5,12 @@ require 'test_help'
 require 'flexmock/test_unit'
 require 'shoulda/rails'
 
+require "webrat"
+
+Webrat.configure do |config|
+  config.mode = :rails
+end
+
 class Test::Unit::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false

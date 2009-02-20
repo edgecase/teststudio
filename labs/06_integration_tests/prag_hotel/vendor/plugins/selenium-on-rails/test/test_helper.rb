@@ -1,7 +1,35 @@
 ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
-require 'test_help'
+$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
+
+require 'rubygems'
+gem 'activesupport'
+require 'active_support'
+
+require 'action_view/template_handler'
+require 'action_view/template_handlers/compilable'
+require 'action_view/template_handlers/builder'
+require 'action_view/template_handlers/erb'
+require 'action_view/template_handlers/rjs'
+require 'action_view/base'
+require 'action_view/partials'
+require 'action_view/template_error'
+require 'action_controller'
+
+require 'selenium_on_rails/suite_renderer'
+require 'selenium_on_rails/fixture_loader'
+require 'selenium_helper'
 require 'controllers/selenium_controller'
+require File.expand_path(File.dirname(__FILE__) + "/../routes")
+require 'action_controller/test_process'
+
+SeleniumController.append_view_path File.expand_path(File.dirname(__FILE__))
+
+def setup_controller_test(controller)
+  @controller = controller.new
+  ActionController::Routing::Routes.draw
+  @request    = ActionController::TestRequest.new
+  @response   = ActionController::TestResponse.new
+end
 
 module SeleniumOnRails::Paths
   def selenium_tests_path
@@ -16,13 +44,13 @@ class SeleniumController
     raise e
   end
       
-  def render options = nil, deprecated_status = nil
+  def render options = nil
     if override_layout? options
       options[:layout] = false
-      super options, deprecated_status
+      super options
       return response.body = @layout_override.gsub('@content_for_layout', response.body)
     end
-    super options, deprecated_status
+    super options
   end
   
   private
@@ -67,4 +95,5 @@ class TestView < ActionView::Base
     @override, @override_type = nil, nil
     result
   end
+  
 end

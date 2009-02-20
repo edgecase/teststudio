@@ -4,8 +4,8 @@ namespace 'rcov' do
   Rcov::RcovTask.new do |t| 
     t.name = "all" 
     t.libs << "test" 
-    t.test_files = 
-      FileList['test/**/*test.rb']   
+    t.test_files =
+      FileList['test/**/*test.rb']
     t.verbose = true 
     t.rcov_opts = [
       '-x', '^config/boot',

@@ -1,4 +1,8 @@
+*.sqlite3
 .DS_Store
+TAGS
 demos
+log
 pkg
 scratch
+tmp

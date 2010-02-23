@@ -3,8 +3,8 @@ class GamesController < ApplicationController
   end
 
   def create
-    @human_player = HumanPlayer.create(params[:game])
-    @game = Game.create(:human_player => @human_player)
+    @human_player = HumanPlayer.new(params[:game])
+    @game = Game.new(:human_player => @human_player)
     if @game.human_player.save && @game.save
       session[:game] = @game.id
       redirect_to choose_players_game_path(@game)

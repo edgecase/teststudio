@@ -8,6 +8,10 @@ class HumanPlayerTest < ActiveSupport::TestCase
       @player = HumanPlayer.new
       @player.roller = @roller
     end
+    
+    should 'be described' do
+      assert_equal "Human", @player.description
+    end
 
     context 'when taking a turn' do
       setup do

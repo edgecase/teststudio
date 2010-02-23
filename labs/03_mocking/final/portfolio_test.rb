@@ -14,6 +14,8 @@ class PortfolioTest < Test::Unit::TestCase
     @port = Portfolio.new
   end
   
+  private # ----------------------------------------------------------
+
   def setup_quote_service(opts={})
     @quote_mock.should_receive(:login).with("USER", "PASSWORD").
       once.ordered(:first)
@@ -29,6 +31,8 @@ class PortfolioTest < Test::Unit::TestCase
       and_return(value).once.ordered(:logged_in)
   end
   
+  public # -----------------------------------------------------------
+
   def test_one_stock_returns_stock_value
     setup_quote_service do
       expect_stock("APPL", 100)

@@ -4,23 +4,14 @@ require 'quote_service'
 
 class Portfolio
   def initialize
-    @quote_service = QuoteService.new
-    @names = []
+    # Implement this
   end
 
   def add_stock(name)
-    @names << name
+    # Implement thisn
   end
 
   def value
-    result = nil
-    @quote_service.login("user", "pw")
-    result = @names.inject(0) { |sum, stock|
-      sum + @quote_service.quote(stock)
-    }
-    @quote_service.logout
-    result
-  rescue StandardError
-    result
+    # Implement thisn
   end
 end

@@ -1,4 +1,7 @@
 class QuoteService
+  class LoginError < StandardError
+  end
+
   class NotImplementedError < StandardError
   end
 

@@ -1,0 +1,14 @@
+Lab 03 - Quote Service Mocking
+
+Complete the Quote Service example that was demoed in the class.  In addition to the normal semantics of the portfolio object, make sure the following quote service protocol requirements are met.
+
+* Login must be called first
+* Logout must be called last
+* Quote must be called multiple times, once for each tracked quote
+* Value returned from quote must be the sum of all the single stock values
+* Quote returns nil if login fails
+* Quote returns good value if logout fails
+
+Extra Credit:
+
+Working with remote objects (such as the quote server) is hard.  Are there any failure scenarios that are not covered in the above requirements?  If so, write additional tests to cover missing requirements and get the code to pass.

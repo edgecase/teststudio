@@ -10,7 +10,6 @@ class SimulateRollsController < ApplicationController
 
   def simulate
     roll = params[:faces].split('-').map { |s| s.to_i }
-    session[:simulation] ||= []
     sim_data.push(roll)
     redirect_to :action => :index
   end
@@ -18,14 +17,14 @@ class SimulateRollsController < ApplicationController
   private
 
   def render_simulation
-    if sim_data
-      render :text => "SIMULATING: #{sim_data.inspect}"
-    else
+    if sim_data.empty?
       render :text => "SIMULATION IS OFF"
+    else
+      render :text => "SIMULATING: #{sim_data.inspect}"
     end
   end
 
   def sim_data
-    session[:simulation]
+    session[:simulation] ||= []
   end
 end

@@ -1,6 +1,26 @@
 require 'test_helper'
 
 class SimulateRollsControllerTest < ActionController::TestCase
+  context 'The index action' do
+    context 'when not simulating' do
+      should 'render no simulation' do
+        flexmock(@controller).should_receive(:render).once.with(:text => "SIMULATION IS OFF")
+        flexmock(@controller).should_receive(:render)
+        get :index
+      end
+    end
+    context 'when simulating' do
+      setup do
+        session[:simulation] = [[1]]
+      end
+      should 'render simulation' do
+        flexmock(@controller).should_receive(:render).once.with(:text => "SIMULATING: [[1]]")
+        flexmock(@controller).should_receive(:render)
+        get :index
+      end
+    end
+  end
+
   context 'The clear action' do
     setup do
       get :clear

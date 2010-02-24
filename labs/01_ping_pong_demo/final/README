@@ -1,0 +1,11 @@
+Write a classify_triangle method that look like this:
+
+  def classify_triangle(a, b, c)
+    # your code
+  end
+
+Where a, b, and c are the sides of a triangle.  classify_triangle returns:
+
+* :equilateral -- if all sides are equal
+* :isosceles -- if only two sides are equal
+* :scalene -- if no sides are equal

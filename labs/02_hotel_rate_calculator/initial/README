@@ -11,3 +11,9 @@ The rate should be calculated according the the following rules
 * The rate for a range of dates is the sum of the individual daily rates.
 * Dates during the week get a 10% discount off of the rack rate. 
 * Dates on weekends get a 20% discount off of the rack rate.
+
+If you get done with the above, add the following extra credit rules:
+
+* 10-49 rooms get an extra 20% off the rack_rate.
+* 50+ rooms get an extra 30% off the rack_rate.
+* At no time should the combined discount exceed 40%.

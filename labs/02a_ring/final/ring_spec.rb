@@ -7,11 +7,11 @@ require 'spec'
 # the ring.
 #
 class Ring 
-  attr_reader :size, :elements
+  attr_reader :max_size, :elements
 
-  def initialize(size=1)
-    fail ArgumentError, "Ring size cannot be zero" if size == 0
-    @size = size
+  def initialize(max_size=1)
+    fail ArgumentError, "Ring max size cannot be zero" if max_size == 0
+    @max_size = max_size
     @elements = []
   end
 
@@ -33,7 +33,7 @@ class Ring
   end
 
   def full?
-    length == size
+    length == max_size
   end
 end
 
@@ -47,8 +47,8 @@ describe Ring, "when being created with no parameters" do
     @ring.should be_empty
   end
 
-  it "should have a size of one" do
-    @ring.size.should == 1
+  it "should have a max size of one" do
+    @ring.max_size.should == 1
   end
 
   it "should have a length of zero" do
@@ -57,7 +57,7 @@ describe Ring, "when being created with no parameters" do
 
 end
 
-describe "when created with a zero size" do
+describe "when created with a zero max size" do
   it "should throw an execption" do
     lambda {
       Ring.new(0)
@@ -65,19 +65,19 @@ describe "when created with a zero size" do
   end
 end
 
-describe "when setup with an initial size", :shared => true do
+describe "when setup with an initial max size", :shared => true do
   before(:each) do
     @max_size = 3
     @ring = Ring.new(@max_size)
   end
 end
 
-describe "when being created with an initial size" do
+describe "when being created with an initial max size" do
 
-  it_should_behave_like "when setup with an initial size"
+  it_should_behave_like "when setup with an initial max size"
 
-  it "should report it's size as the initial size" do
-    @ring.size.should == @max_size
+  it "should report it's max size as the initial size" do
+    @ring.max_size.should == @max_size
   end
 
   it "should report it's length as zero" do
@@ -91,7 +91,7 @@ end
 
 describe Ring, "when an item is added" do
 
-  it_should_behave_like "when setup with an initial size"
+  it_should_behave_like "when setup with an initial max size"
 
   before(:each) do
     @ring.insert(:one)
@@ -101,8 +101,8 @@ describe Ring, "when an item is added" do
     @ring.length.should == 1
   end
 
-  it "should report it's size as the initial size" do
-    @ring.size.should == @max_size
+  it "should report it's max size as the initial size" do
+    @ring.max_size.should == @max_size
   end
 end
 
@@ -141,9 +141,9 @@ describe Ring, "when empty" do
     @ring.remove.should be_nil
   end
 
-  it "should not change size when removing items" do
+  it "should not change max size when removing items" do
     @ring.remove
-    @ring.size == 0
+    @ring.max_size == 0
     @ring.should be_empty
   end
 end
@@ -164,7 +164,7 @@ describe Ring, "when full" do
 
   it "should not grow when adding new items" do
     @ring.insert(:newest)
-    @ring.size.should == 3
+    @ring.max_size.should == 3
   end
 
   it "should drop the oldest item when adding new items" do

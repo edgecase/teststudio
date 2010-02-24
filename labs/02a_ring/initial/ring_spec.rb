@@ -5,9 +5,9 @@
 # the ring.
 #
 class Ring 
-  attr_reader :size, :elements
+  attr_reader :max_size, :elements
 
-  def initialize(size=1)
+  def initialize(max_size=1)
     # Implement this method
   end
 
@@ -43,8 +43,8 @@ describe Ring, "when being created with no parameters" do
     @ring.should be_empty
   end
 
-  it "should have a size of one" do
-    @ring.size.should == 1
+  it "should have a max size of one" do
+    @ring.max_size.should == 1
   end
 
   it "should have a length of zero" do
@@ -54,7 +54,7 @@ describe Ring, "when being created with no parameters" do
 end
 
 # Another example description on how to detect execeptions.
-describe "when created with a zero size" do
+describe "when created with a zero max size" do
   it "should throw an execption" do
     lambda {
       Ring.new(0)
@@ -64,32 +64,32 @@ end
 
 # This before actions in this describe block will be shared amoung
 # several other startups.
-describe "when setup with an initial size", :shared => true do
+describe "when setup with an initial max size", :shared => true do
   before(:each) do
     @max_size = 3
     @ring = Ring.new(@max_size)
   end
 end
 
-describe "when being created with an initial size" do
+describe "when being created with an initial max size" do
 
-  it_should_behave_like "when setup with an initial size"
+  it_should_behave_like "when setup with an initial max size"
 
-  it "should report it's size as the initial size"
+  it "should report it's max_size as the initial size"
   it "should report it's length as zero"
   it "should say that it is empty"
 end
 
 describe Ring, "when an item is added" do
 
-  it_should_behave_like "when setup with an initial size"
+  it_should_behave_like "when setup with an initial max size"
 
   before(:each) do
     @ring.insert(:one)
   end
 
   it "should report it's length as one"
-  it "should report it's size as the initial size"
+  it "should report it's max size as the initial max size"
 end
 
 describe Ring, "when removing an item" do
@@ -110,7 +110,7 @@ describe Ring, "when empty" do
 
   it "should say it's empty"
   it "should return nil when removing items"
-  it "should not change size when removing items"
+  it "should not change max size when removing items"
 end
 
 describe Ring, "when full" do

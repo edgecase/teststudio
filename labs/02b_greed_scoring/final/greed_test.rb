@@ -39,7 +39,7 @@ class GreedTest < Test::Unit::TestCase
     end
   end
 
-  context 'The score of triple 1s' do
+  context 'The score of triple ones' do
     setup { @roll = [ 1, 1, 1 ] }
     should 'be 1000' do
       assert_equal 1000, score([1,1,1])

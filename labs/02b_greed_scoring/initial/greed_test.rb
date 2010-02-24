@@ -30,7 +30,7 @@ class GreedTest < Test::Unit::TestCase
     # WRITE THE SETUP AND SHOULDs HERE
   end
 
-  context 'The score of triple 1s' do
+  context 'The score of triple ones' do
     # WRITE THE SETUP AND SHOULDs HERE
   end
 

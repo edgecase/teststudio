@@ -1,0 +1,8 @@
+Lab 2a: Ring
+
+Implement a ring using the outline in:
+        
+   ring_spec.rb
+
+* Drive the implementation using RSpec
+* See if you can get to 100% coverage

@@ -1,0 +1,32 @@
+GREED RULES
+
+Greed is a dice game for two or more players using 5 six-sided dice
+
+* Each player takes a turn consisting of several rolls
+* The player decides whether to roll again, or not
+* Each turn is scored and the points are added to the player's total score.
+
+Scoring rules:
+
+* A triplet of any number is worth 100 * that number
+* Except a triplet of ones, which are worth 1000 points
+* Single "ones" are worth 100 points
+* Single "fives" are worth 50 points
+* All other values do not contribute points to the roll.
+
+Turn Rules:
+
+* If a roll scored points, those points are added to the turns points,
+  and the player may roll again with any non-scoring dice.
+
+* If all dice have scored, then the player may roll again with all 
+  five of the dice.
+
+* If a roll does not score any points, then the player loses his turn
+  and loses any points from that turn.  This is called going "bust".
+
+* If a player elects to stop rolling before going bust, the points
+  accumulated in this turn are added to his total score.
+
+* A player must roll at least 300 in a single turn before he is
+  allowed to start accumulating points.

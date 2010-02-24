@@ -8,19 +8,15 @@ CLOBBER.include("pkg")
 LABS = FileList['labs/*'].select { |fn| fn.pathmap("%f") =~ /^\d\d[a-z]?_/ }
 DAILIES = {
   "pkg/day01" => LABS.select { |fn|
-    labno = fn.pathmap("%n").split('_').first.to_i
-    labno < 5
+    fn =~ /^labs\/0[123]/
   },
   "pkg/day02" => LABS.select { |fn|
-    labno = fn.pathmap("%n").split('_').first.to_i
-    labno >= 5  && labno <= 6
-  },
-  "pkg/day03" => LABS.select { |fn|
-    labno = fn.pathmap("%n").split('_').first.to_i
-    labno > 6
+    fn =~ /^labs\/(0[^123]|[^0])/
   },
   "pkg/all_labs" => LABS,
 }
+puts "DBG: LABS=#{LABS.inspect}"
+puts "DBG: DAILIES=#{DAILIES.inspect}"
 
 TAR_FILES = LABS.pathmap("pkg/%f.tgz")
 ZIP_FILES = LABS.pathmap("pkg/%f.zip")
@@ -28,6 +24,8 @@ ZIP_FILES = LABS.pathmap("pkg/%f.zip")
 PACKAGE_FILES = TAR_FILES + ZIP_FILES +
   DAILIES.keys.map { |fn| "#{fn}.tgz" } +
   DAILIES.keys.map { |fn| "#{fn}.zip" }
+
+task :noop
 
 desc "default action => :package"
 task :default => :package

@@ -24,6 +24,8 @@ Rails::Initializer.run do |config|
   config.gem "cucumber" #, :version => "0.4.2"
   config.gem "polyglot" #, :version => "0.2.9"
   config.gem "webrat" #, :version => "0.4.4"
+  config.gem "factory_girl"
+  config.gem "faker"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

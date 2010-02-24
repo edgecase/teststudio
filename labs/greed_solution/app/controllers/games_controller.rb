@@ -27,8 +27,7 @@ class GamesController < ApplicationController
       flash[:error] = "Please select at least one computer player"
       redirect_to choose_players_game_path(@game)
     else
-      @game.computer_players.clear
-      @game.computer_players << ComputerPlayer.new(:strategy => strategy_name)
+      @game.computer_player = ComputerPlayer.new(:strategy => strategy_name)
       @game.save
       redirect_to computer_turn_game_path(@game)
     end
@@ -36,22 +35,21 @@ class GamesController < ApplicationController
 
   def computer_turn
     setup_page_data
-    @game.computer_players.each do |cp|
-      cp.roller = roller
-      turn = cp.take_turn
-      cp.score += turn.score
-      cp.save
-    end
+    cp = @game.computer_player
+    cp.roller = roller
+    turn = cp.take_turn
+    cp.score += turn.score
+    cp.save
     redirect_to computer_turn_results_game_path(@game)
   end
 
   def computer_turn_results
     setup_page_data
-    if @game.computer_players.first.score >= 3000
-      @winner = @game.computer_players.first.name
+    if @game.computer_player.score >= 3000
+      @winner = @game.computer_player.name
       render :action => "game_over"
     else
-      @turn_histories = @game.computer_players.map { |p| p.turns.last }
+      @turn_histories = [@game.computer_player.turns.last]
     end
   end
 

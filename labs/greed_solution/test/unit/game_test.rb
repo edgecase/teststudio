@@ -6,9 +6,10 @@ class GameTest < ActiveSupport::TestCase
       @game = Game.new
       @cp = ComputerPlayer.new
       @hp = HumanPlayer.new
-      @game.computer_players = [@cp]
+      @game.computer_player = @cp
       @game.human_player = @hp
     end
+
     should 'combine its computer players and human player' do
       assert_equal [@cp, @hp], @game.players
     end
@@ -19,7 +20,7 @@ class GameTest < ActiveSupport::TestCase
         @roll = Roll.new(:faces => @faces)
         @turn = Turn.new(:rolls => [@roll])
         @player = ComputerPlayer.new(:turns => [@turn])
-        @game = Game.new(:computer_players => [@player])
+        @game = Game.new(:computer_player => @player)
         
         @game.save
       end

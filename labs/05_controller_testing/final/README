@@ -1,0 +1,6 @@
+LAB 5a: RCov Coverage
+---------------------
+
+Add the RCov task to the project.  Run it and find where additional
+coverage is needed.  Add the missing coverage.  Repeat until 100%
+covered.

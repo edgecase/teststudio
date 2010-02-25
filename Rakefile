@@ -5,7 +5,11 @@ require 'rake/clean'
 
 CLOBBER.include("pkg")
 
-LABS = FileList['labs/*'].select { |fn| fn.pathmap("%f") =~ /^\d\d[a-z]?_/ }
+LABS = FileList['labs/*'].select { |fn|
+  fn.pathmap("%f") =~ /^\d\d[a-z]?_/
+}.reject { |fn|
+  fn =~ /todo|tgz/
+}
 DAILIES = {
   "pkg/day01" => LABS.select { |fn|
     fn =~ /^labs\/0[123]/
@@ -15,8 +19,6 @@ DAILIES = {
   },
   "pkg/all_labs" => LABS,
 }
-puts "DBG: LABS=#{LABS.inspect}"
-puts "DBG: DAILIES=#{DAILIES.inspect}"
 
 TAR_FILES = LABS.pathmap("pkg/%f.tgz")
 ZIP_FILES = LABS.pathmap("pkg/%f.zip")
@@ -31,7 +33,15 @@ desc "default action => :package"
 task :default => :package
 
 desc "Create the package files for the labs"
-task :package => PACKAGE_FILES
+task :package => [:cleanse_labs] + PACKAGE_FILES
+
+desc "Clease the lab directories before packaging"
+task :cleanse_labs do
+  rm FileList['labs/**/*.log', 'labs/**/*.sqlite3']
+end
+
+desc "Create the daily packages"
+task :dailies => [:cleanse_labs, "pkg", "pkg/day01.zip", "pkg/day02.zip"]
 
 directory "pkg"
 

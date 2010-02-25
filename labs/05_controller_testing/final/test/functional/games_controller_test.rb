@@ -6,19 +6,13 @@ class GamesControllerTest < ActionController::TestCase
     @params = {}
   end
   
-  def teardown
-    super
-  end
+  # ==================================================================
 
   def do_new
     get :new, @params
   end
 
   context 'The new action' do
-    setup do
-      @action = :new
-    end
-
     should 'render the default action' do
       flexmock(@controller).should_receive(:render).once.with()
       do_new

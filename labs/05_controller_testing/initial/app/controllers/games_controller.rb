@@ -16,8 +16,7 @@ class GamesController < ApplicationController
   end
 
   def choose_players
-    @game = Game.find(params[:id])
-    @players = AutoPlayer.players
+    # IMPLEMENT THE CODE FOR THIS CONTOLLER
   end
 
   def assign_players
@@ -63,28 +62,15 @@ class GamesController < ApplicationController
   end
 
   def human_holds
-    setup_page_data
-    @game.human_player.holds
-    @game.human_player.save!
-    if @game.human_player.score >= 3000
-      @winner = @game.human_player.name
-      render :action => "game_over"
-    else
-      redirect_to computer_turn_game_path(@game)
-    end
+    # WRITE THIS ACTION
   end
 
   def human_rolls
-    setup_page_data
-    @game.human_player.roller = roller
-    @game.human_player.rolls_again
-    @game.human_player.save!
-    redirect_to human_turn_game_path(@game)
+    # WRITE THIS ACTION
   end
 
   def human_turn
-    setup_page_data
-    @rolls = @game.human_player.turns.last.rolls
+    # WRITE THIS ACTION
   end
 
   private

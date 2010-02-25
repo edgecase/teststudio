@@ -6,22 +6,23 @@ class GamesControllerTest < ActionController::TestCase
     @params = {}
   end
   
-  def teardown
-    super
-  end
+  # ==================================================================
 
+  # Controller tests issue the get/post/put/delete commands often.
+  # So, for each action, we create a special method "do_action" that
+  # calls that action with a set of parameters.  Since the parameters
+  # will very according to context and setup, we pass the parameters
+  # to the method as an instance variable.
   def do_new
     get :new, @params
   end
 
+  # The new action is very simple.  All it needs to do is render the
+  # new template.
   context 'The new action' do
-    setup do
-      @action = :new
-    end
-
     should 'render the default action' do
-      flexmock(@controller).should_receive(:render).once.with()
       do_new
+      assert_template "new"
     end
   end
 
@@ -31,36 +32,46 @@ class GamesControllerTest < ActionController::TestCase
     post :create, @params
   end
 
+  # The top level context for testing the "create" action of the
+  # controller.  
   context 'The create action' do
     setup do
+      # Create the game and human objects need for the test.  Note the
+      # use of factory girl for easy object creation.  We pull the
+      # human player into its own instance variable for easy access in
+      # other parts of the test.
+      #
       @game = Factory(:game)
       @human = @game.human_player
 
+      # Now setup Game and HumanPlayer to return our game and player
+      # objects when asked to creat new ones.
       flexmock(HumanPlayer, :new => @human)
       flexmock(Game, :new => @game)
 
+      # Setup the parameters to a default value that is good for most
+      # things.
       @params = { :game => { :name => @human.name } }
-      flexmock(@controller).should_receive(:render).with().by_default
     end
 
+    # Since the create action saves the game and human player, we want
+    # to test a scenario where the save succeeds.  The is part of the
+    # "Happy Path".
     context 'when save succeeds' do
       setup do
-        flexmock(@game)
-        @game.should_receive(:save).and_return(true).once
+        flexmock(@game).should_receive(:save).and_return(true).once
         # HACK: Unable to mock for some reason
         def @human.save; true; end
       end
 
       should 'save the game id in a session' do
         do_create
-
         assert_equal @game.id, session[:game]
       end
 
       should 'redirect to the choose a player option' do
         do_create
-
-        assert_redirected_to :controller => "games", :action => "choose_players", :id => @game.id
+        assert_redirected_to :action => "choose_players", :id => @game.id
       end
     
       should 'assign human player for the view' do
@@ -74,16 +85,23 @@ class GamesControllerTest < ActionController::TestCase
       end
     end
 
+    # Here is where we start looking at the non-Happy paths.  This
+    # scenario looks into what happens if the save to the database
+    # fails for some reason.
     context 'when save on human fails' do
       setup do
+        # We know that saving the human player without a name is an
+        # error.
         @human.name = nil
+
+        # And once the human save fails, the game should never be
+        # asked to save itself.
         flexmock(@game).should_receive(:save).never
-        flexmock(@game, :id => 123)
       end
 
       should 'redirect to new game' do
         do_create
-        assert_redirected_to :controller => "games", :action => "new"
+        assert_redirected_to :action => "new"
       end
       
       should 'assign flash messages' do
@@ -94,6 +112,9 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   # ==================================================================
+  
+  # The choose players action is incomplete in the controller.
+  # Implement the specified actions.
   
   def do_choose_players
     get :choose_players, @params
@@ -183,6 +204,7 @@ class GamesControllerTest < ActionController::TestCase
 
   context 'The computer_turn action' do
     setup do
+      # We left the setup here for you to reuse
       @game = Factory(:game)
       @turn = Factory.build(:turn, :player => @computer)
       flexmock(@turn).should_receive(:score => 100)
@@ -193,10 +215,7 @@ class GamesControllerTest < ActionController::TestCase
     end
     
     should 'allow the computer to have a turn' do
-      flexmock(@computer).should_receive(:take_turn).and_return(@turn).once
-      flexmock(@computer).should_receive(:save).once.and_return(true)
-      do_computer_turn
-      assert_equal 150, @computer.score
+      # WRITE THIS SPEC
     end
   end
 
@@ -208,13 +227,7 @@ class GamesControllerTest < ActionController::TestCase
 
   context 'The computer_turn_results action' do
     setup do
-      @game = Factory(:game)
-      @computer = Factory.build(:computer_player, :score => 50)
-      turn = Factory(:turn, :player => @computer)
-      @computer.turns << turn
-      @game.computer_player = @computer
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
-      @params = { :id => @game.id.to_s }
+      # WRITE THIS SETUP
     end
     
     context 'when no winner' do
@@ -222,12 +235,10 @@ class GamesControllerTest < ActionController::TestCase
         @computer.score = 100
       end
       should 'display turn histories' do
-        do_computer_turn_results
-        assert_not_nil assigns(:turn_histories)
+        # WRITE THIS SPEC
       end
       should 'render the computer turn page' do
-        do_computer_turn_results
-        assert_template "computer_turn_results"
+        # WRITE THIS SPEC
       end
     end
 
@@ -236,12 +247,10 @@ class GamesControllerTest < ActionController::TestCase
         @computer.score = 3000
       end
       should 'assign the winner' do
-        do_computer_turn_results
-        assert_not_nil assigns(:winner)
+        # WRITE THIS SPEC
       end
       should 'render the game over' do
-        do_computer_turn_results
-        assert_template "game_over"
+        # WRITE THIS SPEC
       end
     end
   end
@@ -285,9 +294,7 @@ class GamesControllerTest < ActionController::TestCase
     end
     
     should 'hold the human' do
-      flexmock(@human).should_receive(:holds).once
-      flexmock(@human).should_receive(:save!).once.and_return(true)
-      do_human_holds
+      # WRITE THIS SPEC
     end
     
     context 'when the human wins' do
@@ -295,12 +302,10 @@ class GamesControllerTest < ActionController::TestCase
         flexmock(@human).should_receive(:score).and_return(3000)
       end
       should 'assign a winner' do
-        do_human_holds
-        assert_equal @human.name, assigns(:winner)
+        # WRITE THIS SPEC
       end
       should 'show the game over page' do
-        do_human_holds
-        assert_template "game_over"
+        # WRITE THIS SPEC
       end
     end
 
@@ -310,8 +315,7 @@ class GamesControllerTest < ActionController::TestCase
       end
 
       should 'given the computer a turn' do
-        do_human_holds
-        assert_redirected_to :action => "computer_turn"
+        # WRITE THIS SPEC
       end
     end
   end
@@ -324,6 +328,7 @@ class GamesControllerTest < ActionController::TestCase
 
   context 'The human_rolls action' do
     setup do
+      # YOU CAN REUSE THIS SETUP
       @human = Factory.build(:human_player)
       @game = Factory(:game, :human_player => @human)
       flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
@@ -333,14 +338,11 @@ class GamesControllerTest < ActionController::TestCase
     end
 
     should 'tell the human to roll again' do
-      flexmock(@human).should_receive(:rolls_again).once
-      flexmock(@human).should_receive(:save!).once
-      do_human_rolls
+      # WRITE THIS SPEC
     end
 
     should 'display the human turn page' do
-      do_human_rolls
-      assert_redirected_to :action => "human_turn"
+      # WRITE THIS SPEC
     end
   end
   # ==================================================================
@@ -351,6 +353,7 @@ class GamesControllerTest < ActionController::TestCase
 
   context 'The human_turn action' do
     setup do
+      # YOU CAN REUSE THIS SETUP
       @human = Factory.build(:human_player)
       @game = Factory(:game, :human_player => @human)
       flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
@@ -360,8 +363,7 @@ class GamesControllerTest < ActionController::TestCase
     end
 
     should 'set the human rolls' do
-      do_human_turn
-      assert_equal @human.turns.last.rolls, assigns(:rolls)
+      # WRITE THIS SPEC
     end
   end
 end

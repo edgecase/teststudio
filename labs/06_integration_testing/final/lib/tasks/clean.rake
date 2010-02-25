@@ -1,5 +1,4 @@
 require 'rake/clean'
 
-CLEAN.include('log/*')
-CLEAN.include('tmp/*')
+CLEAN.include('log/*', 'tmp/*', 'coverage')
 CLOBBER.include('db/development.sqlite3','db/test.sqlite3', 'TAGS')

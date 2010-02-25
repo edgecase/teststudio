@@ -1,8 +1,6 @@
-LAB 6: Integration Testing
---------------------------
+LAB 5a: RCov Coverage
+---------------------
 
-There is a skeleton setup for Cucumber testing in the features
-directory.  Look at the following files for more information:
-
-* features/step_definitions/greed_steps.rb
-* features/playing_a_game.features
+Add the RCov task to the project.  Run it and find where additional
+coverage is needed.  Add the missing coverage.  Repeat until 100%
+covered.

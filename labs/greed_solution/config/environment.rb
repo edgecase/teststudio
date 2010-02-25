@@ -19,7 +19,6 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "flexmock" #, :version => "0.8.6"
 #  config.gem "shoulda" #, :version => "2.10.1", :lib => "shoulda"
   config.gem "cucumber" #, :version => "0.4.2"
   config.gem "polyglot" #, :version => "0.2.9"

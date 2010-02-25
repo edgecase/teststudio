@@ -3,10 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'flexmock/test_unit'
 require 'flexmock/rails'
-require 'shoulda'
-require 'factory_girl'
-require 'faker'
-require 'factories'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method

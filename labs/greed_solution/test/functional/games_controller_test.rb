@@ -48,7 +48,8 @@ class GamesControllerTest < ActionController::TestCase
         flexmock(@game)
         @game.should_receive(:save).and_return(true).once
         # HACK: Unable to mock for some reason
-        def @human.save; true; end
+#        def @human.save; true; end
+        flexmock(@human).should_receive(:save).and_return(true).once
       end
 
       should 'save the game id in a session' do

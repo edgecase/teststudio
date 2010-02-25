@@ -1,0 +1,8 @@
+LAB 6: Integration Testing
+--------------------------
+
+There is a skeleton setup for Cucumber testing in the features
+directory.  Look at the following files for more information:
+
+* features/step_definitions/greed_steps.rb
+* features/playing_a_game.features

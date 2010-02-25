@@ -17,6 +17,7 @@ Create a Player model
     
   Validations: 
     - name must be included
+    - name must be unique
     - score must be included
     - score must be a number
     - strategy must be included

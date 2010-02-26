@@ -37,7 +37,11 @@ task :package => [:cleanse_labs] + PACKAGE_FILES
 
 desc "Clease the lab directories before packaging"
 task :cleanse_labs do
-  rm FileList['labs/**/*.log', 'labs/**/*.sqlite3']
+  rm FileList[
+    'labs/**/*.log',
+    'labs/**/*.sqlite3',
+    'labs/**/*.sqlite3-journal'
+  ]
 end
 
 desc "Create the daily packages"

@@ -18,7 +18,7 @@ end
 Given /^I take a turn$/ do
   # -----------------------------------------------------------------
   # FILL IN: Implement this step.  Suggestion: just click the "Start
-  # Your Turn" button).
+  # Your Turn" link).
   # -----------------------------------------------------------------
 end
 

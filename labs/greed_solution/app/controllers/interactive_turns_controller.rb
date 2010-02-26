@@ -1,4 +1,4 @@
-class PlaysController < ApplicationController
+class InteractiveTurnsController < ApplicationController
   def computer_turn
     setup_page_data
     cp = @game.computer_player
@@ -6,14 +6,14 @@ class PlaysController < ApplicationController
     turn = cp.take_turn
     cp.score += turn.score
     cp.save
-    redirect_to computer_turn_results_play_path(@game)
+    redirect_to computer_turn_results_noninteractive_turn_path(@game)
   end
 
   def computer_turn_results
     setup_page_data
     if @game.computer_player.score >= 3000
       @winner = @game.computer_player.name
-      render :action => "game_over"
+      render :template => "common/game_over"
     else
       @most_recent_turn = [@game.computer_player.turns.last]
     end
@@ -25,7 +25,7 @@ class PlaysController < ApplicationController
     @game.human_player.start_turn
     @game.human_player.roll_dice
     @game.human_player.save!
-    redirect_to human_turn_play_path(@game)
+    redirect_to human_turn_interactive_turn_path(@game)
   end
 
   def human_holds
@@ -34,9 +34,9 @@ class PlaysController < ApplicationController
     @game.human_player.save!
     if @game.human_player.score >= 3000
       @winner = @game.human_player.name
-      render :action => "game_over"
+      render :template => "common/game_over"
     else
-      redirect_to computer_turn_play_path(@game)
+      redirect_to computer_turn_noninteractive_turn_path(@game)
     end
   end
 
@@ -45,7 +45,7 @@ class PlaysController < ApplicationController
     @game.human_player.roller = roller
     @game.human_player.rolls_again
     @game.human_player.save!
-    redirect_to human_turn_play_path(@game)
+    redirect_to human_turn_interactive_turn_path(@game)
   end
 
   def human_turn

@@ -2,7 +2,7 @@
   <h1><span>total points</span></h1>
   <ul>
     <% @game.players.each do |player| -%>
-      <%= render :partial => "player",
+      <%= render :partial => "common/player",
             :locals => { :player => player, :current => false } -%>
     <% end -%>
   </ul>        
@@ -13,7 +13,7 @@
     <div class="turn">
       <h1>Your Turn</h1>
       <% @rolls.each do |roll| -%>
-        <%= render :partial => "rolls",
+        <%= render :partial => "common/rolls",
               :locals => { :player => @game.human_player, :roll => roll } -%>
       <% end -%>
     </div>
@@ -22,7 +22,7 @@
     <% if @rolls.last.action == :bust -%>
       <%= link_to "Continue", computer_turn_noninteractive_turn_path(@game), :class => 'button' %>
     <% else -%>
-      <%= link_to "Roll again", human_rolls_interactive_play_path(@game), :class => 'button' %>
+      <%= link_to "Roll again", human_rolls_interactive_turn_path(@game), :class => 'button' %>
       <%= link_to "Hold", human_holds_interactive_turn_path(@game), :class => 'button' %>
     <% end -%>
   </p>

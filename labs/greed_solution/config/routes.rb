@@ -37,6 +37,10 @@ ActionController::Routing::Routes.draw do |map|
     :member => {
       :choose_players => :get,
       :assign_players => :post,
+    })
+
+  map.resources(:plays,
+    :member => {
       :computer_turn => :get,
       :computer_turn_results => :get,
       :human_start_turn => :get,

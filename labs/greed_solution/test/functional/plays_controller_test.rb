@@ -54,7 +54,7 @@ class PlaysControllerTest < ActionController::TestCase
       end
       should 'display turn histories' do
         do_computer_turn_results
-        assert_not_nil assigns(:turn_histories)
+        assert_not_nil assigns(:most_recent_turn)
       end
       should 'render the computer turn page' do
         do_computer_turn_results

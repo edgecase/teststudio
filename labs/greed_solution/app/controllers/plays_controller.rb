@@ -15,7 +15,7 @@ class PlaysController < ApplicationController
       @winner = @game.computer_player.name
       render :action => "game_over"
     else
-      @turn_histories = [@game.computer_player.turns.last]
+      @most_recent_turn = [@game.computer_player.turns.last]
     end
   end
 

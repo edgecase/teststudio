@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     strategy_name = params[:player] || []
     if strategy_name.blank?
       flash[:error] = "Please select at least one computer player"
-      redirect_to choose_players_play_path(@game)
+      redirect_to choose_players_game_path(@game)
     else
       @game.computer_player = ComputerPlayer.new(:strategy => strategy_name)
       @game.save

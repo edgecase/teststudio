@@ -6,10 +6,6 @@ class ComputerPlayerTest < ActiveSupport::TestCase
       @player = ComputerPlayer.new(:strategy => "Randy")
     end
 
-    should 'have an automatic playing style' do
-      assert_equal :automatic, @player.play_style
-    end
-
     should 'create their strategy' do
       assert_instance_of Randy, @player.logic
     end

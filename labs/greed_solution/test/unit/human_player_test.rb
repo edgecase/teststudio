@@ -9,10 +9,6 @@ class HumanPlayerTest < ActiveSupport::TestCase
       @player.roller = @roller
     end
     
-    should 'have an interactive playing style' do
-      assert_equal :interactive, @player.play_style
-    end
-
     should 'be described' do
       assert_equal "Human", @player.description
     end

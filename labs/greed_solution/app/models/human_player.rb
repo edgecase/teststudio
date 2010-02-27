@@ -4,6 +4,10 @@ class HumanPlayer < Player
   def description
     "Human"
   end
+  
+  def play_style
+    :interactive
+  end
 
   def start_turn
     turn = Turn.new

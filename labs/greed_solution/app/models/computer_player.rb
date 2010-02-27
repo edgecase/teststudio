@@ -3,6 +3,10 @@ class ComputerPlayer < Player
   delegate :name, :description, :roll_again?, :to => :logic
   attr_writer :logic
 
+  def play_style
+    :automatic
+  end
+
   def logic
     @logic ||= make_strategy
   end

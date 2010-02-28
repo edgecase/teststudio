@@ -71,9 +71,7 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
       should 'given the computer a turn' do
         do_human_holds
-        assert_redirected_to(
-          :controller => "non_interactive_turns",
-          :action => "computer_turn")
+        assert_redirected_to start_turn_path(@game, @game.computer_player)
       end
     end
   end

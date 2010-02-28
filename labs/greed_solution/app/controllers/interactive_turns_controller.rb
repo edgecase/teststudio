@@ -36,7 +36,7 @@ class InteractiveTurnsController < ApplicationController
       @winner = @game.human_player.name
       render :template => "common/game_over"
     else
-      redirect_to computer_turn_non_interactive_turn_path(@game)
+      redirect_to start_turn_path(@game, @game.computer_player)
     end
   end
 

@@ -20,7 +20,7 @@
   </div>
   <p>
     <% if @rolls.last.action == :bust -%>
-      <%= link_to "Continue", computer_turn_noninteractive_turn_path(@game), :class => 'button' %>
+      <%= link_to "Continue", start_turn(@game, @game.computer_player), :class => 'button' %>
     <% else -%>
       <%= link_to "Roll again", human_rolls_interactive_play_path(@game), :class => 'button' %>
       <%= link_to "Hold", human_holds_interactive_turn_path(@game), :class => 'button' %>

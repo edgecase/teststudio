@@ -6,7 +6,7 @@ class InteractiveTurnsController < ApplicationController
     turn = cp.take_turn
     cp.score += turn.score
     cp.save
-    redirect_to computer_turn_results_noninteractive_turn_path(@game)
+    redirect_to computer_turn_results_non_interactive_turn_path(@game)
   end
 
   def computer_turn_results
@@ -36,7 +36,7 @@ class InteractiveTurnsController < ApplicationController
       @winner = @game.human_player.name
       render :template => "common/game_over"
     else
-      redirect_to computer_turn_noninteractive_turn_path(@game)
+      redirect_to computer_turn_non_interactive_turn_path(@game)
     end
   end
 

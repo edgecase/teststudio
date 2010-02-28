@@ -72,7 +72,7 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
       should 'given the computer a turn' do
         do_human_holds
         assert_redirected_to(
-          :controller => "noninteractive_turns",
+          :controller => "non_interactive_turns",
           :action => "computer_turn")
       end
     end

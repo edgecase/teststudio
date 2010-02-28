@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     else
       @game.computer_player = ComputerPlayer.new(:strategy => strategy_name)
       @game.save
-      redirect_to computer_turn_noninteractive_turn_path(@game)
+      redirect_to computer_turn_non_interactive_turn_path(@game)
     end
   end
 end

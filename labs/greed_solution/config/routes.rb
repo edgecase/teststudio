@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
       :assign_players => :post,
     })
 
-  map.resources(:noninteractive_turns,
+  map.resources(:non_interactive_turns,
     :member => {
       :computer_turn => :get,
       :computer_turn_results => :get,
@@ -54,6 +54,9 @@ ActionController::Routing::Routes.draw do |map|
     })
 
   map.root :controller => "games", :action => "new"
+
+  map.start_turn('start_turn/:game/:player',
+    :controller => "turns", :action => "start_turn")
 
   map.connect 'simulate/clear', :controller => "simulate_rolls", :action => "clear"
   map.connect 'simulate/:faces', :controller => "simulate_rolls", :action => "simulate"

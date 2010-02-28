@@ -168,7 +168,7 @@ class GamesControllerTest < ActionController::TestCase
       
       should 'start the computers turn' do
         do_assign_players
-        assert_redirected_to :controller => "noninteractive_turns", :action => "computer_turn", :id => @game.id
+        assert_redirected_to :controller => "non_interactive_turns", :action => "computer_turn", :id => @game.id
       end
     end
   end

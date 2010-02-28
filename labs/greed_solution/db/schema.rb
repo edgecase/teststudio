@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20090501194952) do
   end
 
   create_table "games", :force => true do |t|
+    t.integer  "current_player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

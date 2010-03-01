@@ -47,16 +47,19 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources(:interactive_turns,
     :member => {
-      :human_start_turn => :get,
-      :human_rolls => :get,
-      :human_holds => :get,
-      :human_turn => :get,
+      :roll => :get,
+      :hold => :get,
+      :bust => :get,
+      :decide => :get,
     })
 
   map.root :controller => "games", :action => "new"
 
   map.start_turn('start_turn/:game',
     :controller => "turns", :action => "start_turn")
+
+  map.game_over('game_over/:game',
+    :controller => "turns", :action => "game_over")
 
   map.connect 'simulate/clear', :controller => "simulate_rolls", :action => "clear"
   map.connect 'simulate/:faces', :controller => "simulate_rolls", :action => "simulate"

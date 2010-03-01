@@ -13,7 +13,7 @@ class NonInteractiveTurnsController < ApplicationController
     setup_page_data
     if @game.current_player.score >= 3000
       @winner = @game.current_player.name
-      render :template => "common/game_over"
+      redirect_to game_over_path(@game)
     else
       @most_recent_turn = [@game.current_player.turns.last]
     end

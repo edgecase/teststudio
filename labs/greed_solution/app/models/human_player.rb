@@ -27,6 +27,8 @@ class HumanPlayer < Player
     turns.last.rolls << roll
     if roller.points == 0
       turns.last.rolls.last.action = :bust
+    else
+      :ok
     end
   end
 

@@ -3,127 +3,107 @@ require 'test_helper'
 class InteractiveTurnsControllerTest < ActionController::TestCase
   def setup
     super
-    @params = {}
+    @game = Factory.build :two_player_game
+    flexmock(@game, :id => 12345)
+    should_find(Game, @game).once
+    @human = human_player_in(@game)
+    @computer = computer_player_in(@game)
+    @game.current_player = @human
+    @params = { :id => @game.id.to_s }
   end
   
   # ==================================================================
 
-  def do_human_start_turn
-    get :human_start_turn, @params
+  def do_roll
+    get :roll, @params
   end
 
-  context 'The human_start_turn action' do
+  context 'The roll action' do
     setup do
-      @game = Factory(:two_player_game)
-      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
-      @game.current_player = @human
-      should_find(Game, @game).once
-      @params = { :id => @game.id.to_s }
-    end
-    
-    should 'start the humans turn' do
-      flexmock(@human).should_receive(:start_turn).once
-      flexmock(@human).should_receive(:roll_dice).once
       flexmock(@human).should_receive(:save!).once
-      do_human_start_turn
+    end
+    context 'when the roll was a bust' do
+      setup do
+        flexmock(@human).should_receive(:roll_dice).once.and_return(:bust)
+      end
+      should 'redirect to the bust action' do
+        do_roll
+        assert_redirected_to bust_interactive_turn_path(@game)
+      end
+    end
+    context 'when the roll was not a bust' do
+      setup do
+        flexmock(@human).should_receive(:roll_dice).once.and_return(:ok)
+      end
+      should 'redirect to the bust action' do
+        do_roll
+        assert_redirected_to decide_interactive_turn_path(@game)
+      end
     end
   end
   
   # ==================================================================
 
-  def do_human_holds
-    get :human_holds, @params
+  def do_bust
+    get :bust, @params
   end
 
-  context 'The human_holds action' do
+  context 'The bust action' do
+    should 'assign the game for the view' do
+      do_bust
+      assert_equal @game, assigns(:game)      
+    end
+  end
+  
+  # ==================================================================
+
+  def do_decide
+    get :decide, @params
+  end
+
+  context 'The decide action' do
+    should 'assigns game for view' do
+      do_decide
+      assert_equal @game, assigns(:game)      
+    end
+    should 'assigns rolls for view' do
+      do_decide
+      assert_equal @game.current_player.turns.last.rolls, assigns(:rolls)
+    end
+  end
+
+  # ==================================================================
+
+  def do_holds
+    get :hold, @params
+  end
+
+  context 'The holds action' do
     setup do
-      @game = Factory(:two_player_game)
-      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
-      @game.current_player = @human
-      should_find(Game, @game).once
-      @params = { :id => @game.id.to_s }
       flexmock(@human).should_receive(:holds).by_default
       flexmock(@human).should_receive(:save!).by_default
     end
-    
-    should 'hold the human' do
+
+    should 'hold the player' do
       flexmock(@human).should_receive(:holds).once
-      flexmock(@human).should_receive(:save!).once.and_return(true)
-      do_human_holds
-    end
-    
-    context 'when the human wins' do
-      setup do
-        flexmock(@human).should_receive(:score).and_return(3000)
-      end
-      should 'assign a winner' do
-        do_human_holds
-        assert_equal @human.name, assigns(:winner)
-      end
-      should 'show the game over page' do
-        do_human_holds
-        assert_template "game_over"
-      end
+      flexmock(@human).should_receive(:save!).once
+      do_holds
     end
 
-    context 'when there is no winner' do
-      setup do
-        flexmock(@human).should_receive(:score).and_return(100)
-      end
-
-      should 'given the computer a turn' do
-        do_human_holds
+    context 'when no winner' do
+      should 'redirect to the start turn' do
+        do_holds
         assert_redirected_to start_turn_path(@game)
       end
     end
-  end
-    
-  # ==================================================================
-
-  def do_human_rolls
-    get :human_rolls, @params
-  end
-
-  context 'The human_rolls action' do
-    setup do
-      @game = Factory(:two_player_game)
-      @human = Factory.build(:human_player)
-      @game.current_player = @human
-      should_find(Game, @game).once
-      @params = { :id => @game.id.to_s }
-      flexmock(@human).should_receive(:save!).by_default
-    end
-
-    should 'tell the human to roll again' do
-      flexmock(@human).should_receive(:rolls_again).once
-      flexmock(@human).should_receive(:save!).once
-      do_human_rolls
-    end
-
-    should 'display the human turn page' do
-      do_human_rolls
-      assert_redirected_to :action => "human_turn"
-    end
-  end
-
-  # ==================================================================
-
-  def do_human_turn
-    get :human_turn, @params
-  end
-
-  context 'The human_turn action' do
-    setup do
-      @game = Factory(:two_player_game)
-      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
-      @game.current_player = @human
-      should_find(Game, @game).once
-      @params = { :id => @game.id.to_s }
-    end
-
-    should 'set the human rolls' do
-      do_human_turn
-      assert_equal @human.turns.last.rolls, assigns(:rolls)
+    context 'when winner' do
+      setup do
+        @game.current_player.score = 3000
+      end
+      should 'redirect to the game over url' do
+        do_holds
+        assert_redirected_to game_over_path(@game)
+      end
     end
   end
 end

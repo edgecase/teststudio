@@ -29,7 +29,7 @@ class HumanPlayerTest < ActiveSupport::TestCase
       context 'and rolling the dice' do
         setup do
           @data << [1,2,3,4,5]
-          @player.roll_dice
+          @action = @player.roll_dice
         end
 
         should 'have one roll on the last turn' do
@@ -38,6 +38,10 @@ class HumanPlayerTest < ActiveSupport::TestCase
 
         should 'have a turn score matching the roll' do
           assert_equal 150, @player.turns.last.score
+        end
+        
+        should 'be ok' do
+          assert_equal :ok, @action
         end
 
         context 'and holding' do
@@ -52,7 +56,7 @@ class HumanPlayerTest < ActiveSupport::TestCase
         context 'and rolls again going bust' do
           setup do
             @data << [2,2,3,3,4]
-            @player.rolls_again
+            @action = @player.rolls_again
           end
 
           should 'have 2 rolls' do
@@ -60,7 +64,7 @@ class HumanPlayerTest < ActiveSupport::TestCase
           end
 
           should 'be bust' do
-            assert_equal :bust, @player.turns.last.rolls.last.action
+            assert_equal :bust, @action
           end
         end
 

@@ -15,27 +15,27 @@ class TurnsControllerTest < ActionController::TestCase
   context 'The start_turn action' do
     setup do
       @game = Factory(:two_player_game)
+      @human = human_player_in(@game)
+      @computer = computer_player_in(@game)
       should_find(Game, @game).once
       @params = { :game => @game.id.to_s }
     end
     
     context 'with a human player' do
       setup do
-        @human = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
-        @game.current_player = @human
-        @params.merge!( :player => @human.id.to_s )
+        @game.current_player = @computer
+        flexmock(@human).should_receive(:start_turn).once
       end
       should 'redirect to the interactive controller' do
         do_start_turn
-        assert_redirected_to human_start_turn_interactive_turn_path(@game)
+        assert_redirected_to roll_interactive_turn_path(@game)
       end
     end
     
     context 'with a computer player' do
       setup do
-        @computer = @game.players.detect { |p| p.is_a?(HumanPlayer) }
-        @game.current_player = @computer
-        @params.merge!( :player => @computer.id.to_s )
+        @game.current_player = @human
+        flexmock(@computer).should_receive(:start_turn).once
       end
       should 'redirect to the non-interactive controller' do
         do_start_turn

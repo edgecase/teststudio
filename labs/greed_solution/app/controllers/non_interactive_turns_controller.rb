@@ -1,6 +1,6 @@
 class NonInteractiveTurnsController < ApplicationController
   def computer_turn
-    setup_page_data
+    @game = Game.find(params[:id])
     cp = @game.current_player
     cp.roller = roller
     turn = cp.take_turn
@@ -10,7 +10,7 @@ class NonInteractiveTurnsController < ApplicationController
   end
 
   def computer_turn_results
-    setup_page_data
+    @game = Game.find(params[:id])
     if @game.current_player.score >= 3000
       @winner = @game.current_player.name
       redirect_to game_over_path(@game)
@@ -20,10 +20,6 @@ class NonInteractiveTurnsController < ApplicationController
   end
 
   private
-
-  def setup_page_data
-    @game = Game.find(params[:id])
-  end
 
   def roller
     @roller ||= create_roller

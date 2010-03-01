@@ -74,7 +74,7 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
       end
       should 'render the game over' do
         do_computer_turn_results
-        assert_template "game_over"
+        assert_redirected_to game_over_path(@game)
       end
     end
   end

@@ -39,7 +39,7 @@ class TurnsControllerTest < ActionController::TestCase
       end
       should 'redirect to the non-interactive controller' do
         do_start_turn
-        assert_redirected_to computer_turn_non_interactive_turn_path(@game)
+        assert_redirected_to start_non_interactive_turn_path(@game)
       end
     end
   end

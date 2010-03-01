@@ -1,17 +1,17 @@
 class NonInteractiveTurnsController < ApplicationController
   include SimInjectionRoller
 
-  def computer_turn
+  def start
     @game = Game.find(params[:id])
     cp = @game.current_player
     cp.roller = roller
     turn = cp.take_turn
     cp.score += turn.score
     cp.save
-    redirect_to computer_turn_results_non_interactive_turn_path(@game)
+    redirect_to results_non_interactive_turn_path(@game)
   end
 
-  def computer_turn_results
+  def results
     @game = Game.find(params[:id])
     if @game.current_player.score >= 3000
       @winner = @game.current_player.name

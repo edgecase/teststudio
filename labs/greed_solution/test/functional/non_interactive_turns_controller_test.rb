@@ -8,16 +8,16 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
   
   # ==================================================================
 
-  def do_computer_turn
-    get :computer_turn, @params
+  def do_start
+    get :start, @params
   end
 
-  context 'The computer_turn action' do
+  context 'The start action' do
     setup do
       @game = Factory(:two_player_game)
       @turn = Factory.build(:turn, :player => @computer)
       flexmock(@turn, :score => 100)
-      @computer = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
+      @computer = computer_player_in(@game)
       @computer.score = 50
       @game.current_player = @computer
       should_find(Game, @game).once
@@ -27,18 +27,18 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
     should 'allow the computer to have a turn' do
       flexmock(@computer).should_receive(:take_turn).and_return(@turn).once
       flexmock(@computer).should_receive(:save).once.and_return(true)
-      do_computer_turn
+      do_start
       assert_equal 150, @computer.score
     end
   end
 
   # ==================================================================
 
-  def do_computer_turn_results
-    post :computer_turn_results, @params
+  def do_results
+    post :results, @params
   end
 
-  context 'The computer_turn_results action' do
+  context 'The results action' do
     setup do
       @game = Factory(:two_player_game)
       @computer = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
@@ -55,12 +55,12 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
         @computer.score = 100
       end
       should 'display turn histories' do
-        do_computer_turn_results
+        do_results
         assert_not_nil assigns(:most_recent_turn)
       end
       should 'render the computer turn page' do
-        do_computer_turn_results
-        assert_template "computer_turn_results"
+        do_results
+        assert_template "results"
       end
     end
 
@@ -69,11 +69,11 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
         @computer.score = 3000
       end
       should 'assign the winner' do
-        do_computer_turn_results
+        do_results
         assert_not_nil assigns(:winner)
       end
       should 'render the game over' do
-        do_computer_turn_results
+        do_results
         assert_redirected_to game_over_path(@game)
       end
     end

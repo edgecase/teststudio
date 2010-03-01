@@ -9,7 +9,7 @@ class TurnsController < ApplicationController
       game.current_player.save!
       redirect_to roll_interactive_turn_path(game.id)
     when :automatic
-      redirect_to computer_turn_non_interactive_turn_path(game.id)
+      redirect_to start_non_interactive_turn_path(game.id)
     end
   end
 

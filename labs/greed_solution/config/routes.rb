@@ -41,8 +41,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources(:non_interactive_turns,
     :member => {
-      :computer_turn => :get,
-      :computer_turn_results => :get,
+      :start => :get,
+      :results => :get,
     })
 
   map.resources(:interactive_turns,

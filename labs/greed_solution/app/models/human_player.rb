@@ -37,24 +37,21 @@ class HumanPlayer < Player
   end
 
   def rolls_again
-    turns.last.rolls.last.action = :roll
+    last_roll.action = :roll
   end
 
   private
   
   def last_roll
-    turns.last.rolls.last
+    turns.try(:last).try(:rolls).try(:last)
+  end
+
+  def last_unused
+    last_roll.try(:unused) || 5
   end
 
   def number_of_dice_to_roll
-    count = turns.try(:last).try(:rolls).try(:last).try(:unused)
-    case count
-    when nil
-      5
-    when 0
-      5
-    else
-      count
-    end
+    count = last_unused
+    (count == 0) ? 5 : count
   end
 end

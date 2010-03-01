@@ -47,11 +47,10 @@ class HumanPlayer < Player
   end
 
   def last_unused
-    last_roll.try(:unused) || 5
+    last_roll.try(:unused) || 0
   end
 
   def number_of_dice_to_roll
-    count = last_unused
-    (count == 0) ? 5 : count
+    last_unused.nonzero? || 5
   end
 end

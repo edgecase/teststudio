@@ -1,4 +1,6 @@
 class NonInteractiveTurnsController < ApplicationController
+  include SimInjectionRoller
+
   def computer_turn
     @game = Game.find(params[:id])
     cp = @game.current_player
@@ -17,22 +19,5 @@ class NonInteractiveTurnsController < ApplicationController
     else
       @most_recent_turn = [@game.current_player.turns.last]
     end
-  end
-
-  private
-
-  def roller
-    @roller ||= create_roller
-  end
-
-  def create_roller
-    simulated_source = SimulatedData.new(sim_data)
-    random_source = RandomSource.new
-    source = PriorityDataSource.new(simulated_source, random_source)
-    Roller.new(source)
-  end
-
-  def sim_data
-    session[:simulation] ||= []
   end
 end

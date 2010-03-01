@@ -1,4 +1,6 @@
 class InteractiveTurnsController < ApplicationController
+  include SimInjectionRoller
+
   def roll
     @game = Game.find(params[:id])
     @game.current_player.roller = roller
@@ -31,22 +33,5 @@ class InteractiveTurnsController < ApplicationController
     else
       redirect_to start_turn_path(@game)
     end
-  end
-
-  private
-
-  def roller
-    @roller ||= create_roller
-  end
-
-  def create_roller
-    simulated_source = SimulatedData.new(sim_data)
-    random_source = RandomSource.new
-    source = PriorityDataSource.new(simulated_source, random_source)
-    Roller.new(source)
-  end
-
-  def sim_data
-    session[:simulation] ||= []
   end
 end

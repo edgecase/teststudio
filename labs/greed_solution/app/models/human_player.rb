@@ -15,8 +15,8 @@ class HumanPlayer < Player
     turns << turn
   end
 
-  def roll_dice(dice_count=5)
-    roller.roll(dice_count)
+  def roll_dice
+    roller.roll(number_of_dice_to_roll)
     accumulated_score = roller.points
     accumulated_score += turns.last.rolls.last.accumulated_score unless turns.last.rolls.empty?
     roll = Roll.new(
@@ -38,13 +38,23 @@ class HumanPlayer < Player
 
   def rolls_again
     turns.last.rolls.last.action = :roll
-    roll_dice(number_of_dice_to_roll)
   end
 
   private
+  
+  def last_roll
+    turns.last.rolls.last
+  end
 
   def number_of_dice_to_roll
-    count = turns.last.rolls.last.unused
-    (count == 0) ? 5 : count
+    count = turns.try(:last).try(:rolls).try(:last).try(:unused)
+    case count
+    when nil
+      5
+    when 0
+      5
+    else
+      count
+    end
   end
 end

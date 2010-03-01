@@ -17,6 +17,41 @@ class HumanPlayerTest < ActiveSupport::TestCase
       assert_equal "Human", @player.description
     end
 
+    context 'when rolling the dice' do
+      setup do
+        @data << [1,2,3,4,5]
+        @player.start_turn
+      end
+      context 'on the first roll' do
+        should 'roll 5 dice' do
+          @player.roll_dice
+          assert_equal 5, @player.turns.last.rolls.last.faces.size
+        end
+      end
+      context 'on the second roll' do
+        setup do
+          @player.roll_dice
+          @data << [1,2,3,4,5]
+        end
+        should 'roll 3 dice' do
+          @player.roll_dice
+          assert_equal 3, @player.turns.last.rolls.last.faces.size
+        end
+      end
+      context 'on the roll after all dice have scored' do
+        setup do
+          @player.roll_dice
+          @data << [1,1,1,1,1]
+          @player.roll_dice
+          @data << [1,2,3,4,5]
+        end
+        should 'roll 5 dice' do
+          @player.roll_dice
+          assert_equal 5, @player.turns.last.rolls.last.faces.size
+        end
+      end
+    end
+
     context 'when taking a turn' do
       setup do
         @player.start_turn
@@ -56,7 +91,8 @@ class HumanPlayerTest < ActiveSupport::TestCase
         context 'and rolls again going bust' do
           setup do
             @data << [2,2,3,3,4]
-            @action = @player.rolls_again
+            @player.rolls_again
+            @action = @player.roll_dice
           end
 
           should 'have 2 rolls' do
@@ -72,6 +108,7 @@ class HumanPlayerTest < ActiveSupport::TestCase
           setup do
             @data << [1,1,1,1,1]
             @player.rolls_again
+            @player.roll_dice
           end
 
           should 'have 2 rolls' do
@@ -94,6 +131,7 @@ class HumanPlayerTest < ActiveSupport::TestCase
             setup do
               @data << [1,2,3,4,5]
               @player.rolls_again
+              @player.roll_dice
             end
             should 'roll all 5 dice' do
               assert_equal 5, @player.turns.last.rolls.last.face_values.size

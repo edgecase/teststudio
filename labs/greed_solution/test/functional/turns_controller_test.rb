@@ -14,16 +14,15 @@ class TurnsControllerTest < ActionController::TestCase
   
   context 'The start_turn action' do
     setup do
-      @game = Factory(:game)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game = Factory(:two_player_game)
+      should_find(Game, @game).once
       @params = { :game => @game.id.to_s }
     end
     
     context 'with a human player' do
       setup do
-        @human = Factory.build(:human_player)
-        @game.human_player = @human
-        flexmock(Player).should_receive(:find => @human).with(@human.id.to_s).once
+        @human = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
+        @game.current_player = @human
         @params.merge!( :player => @human.id.to_s )
       end
       should 'redirect to the interactive controller' do
@@ -34,9 +33,8 @@ class TurnsControllerTest < ActionController::TestCase
     
     context 'with a computer player' do
       setup do
-        @computer = Factory.build(:computer_player)
-        @game.computer_player = @computer
-        flexmock(Player).should_receive(:find => @computer).with(@computer.id.to_s).once
+        @computer = @game.players.detect { |p| p.is_a?(HumanPlayer) }
+        @game.current_player = @computer
         @params.merge!( :player => @computer.id.to_s )
       end
       should 'redirect to the non-interactive controller' do

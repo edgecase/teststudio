@@ -55,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "games", :action => "new"
 
-  map.start_turn('start_turn/:game/:player',
+  map.start_turn('start_turn/:game',
     :controller => "turns", :action => "start_turn")
 
   map.connect 'simulate/clear', :controller => "simulate_rolls", :action => "clear"

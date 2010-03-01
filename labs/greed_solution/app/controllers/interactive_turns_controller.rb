@@ -1,36 +1,36 @@
 class InteractiveTurnsController < ApplicationController
   def human_start_turn
     setup_page_data
-    @game.human_player.roller = roller
-    @game.human_player.start_turn
-    @game.human_player.roll_dice
-    @game.human_player.save!
+    @game.current_player.roller = roller
+    @game.current_player.start_turn
+    @game.current_player.roll_dice
+    @game.current_player.save!
     redirect_to human_turn_interactive_turn_path(@game)
   end
 
   def human_holds
     setup_page_data
-    @game.human_player.holds
-    @game.human_player.save!
-    if @game.human_player.score >= 3000
-      @winner = @game.human_player.name
+    @game.current_player.holds
+    @game.current_player.save!
+    if @game.current_player.score >= 3000
+      @winner = @game.current_player.name
       render :template => "common/game_over"
     else
-      redirect_to start_turn_path(@game, @game.computer_player)
+      redirect_to start_turn_path(@game)
     end
   end
 
   def human_rolls
     setup_page_data
-    @game.human_player.roller = roller
-    @game.human_player.rolls_again
-    @game.human_player.save!
+    @game.current_player.roller = roller
+    @game.current_player.rolls_again
+    @game.current_player.save!
     redirect_to human_turn_interactive_turn_path(@game)
   end
 
   def human_turn
     setup_page_data
-    @rolls = @game.human_player.turns.last.rolls
+    @rolls = @game.current_player.turns.last.rolls
   end
 
   private

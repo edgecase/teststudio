@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20090501194952) do
     t.integer  "game_id"
     t.integer  "score",      :default => 0
     t.string   "strategy"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

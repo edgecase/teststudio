@@ -14,12 +14,13 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The computer_turn action' do
     setup do
-      @game = Factory(:game)
+      @game = Factory(:two_player_game)
       @turn = Factory.build(:turn, :player => @computer)
-      flexmock(@turn).should_receive(:score => 100)
-      @computer = ComputerPlayer.new(:strategy => "Connie", :score => 50)
-      @game.computer_player = @computer
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      flexmock(@turn, :score => 100)
+      @computer = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
+      @computer.score = 50
+      @game.current_player = @computer
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
     end
     
@@ -39,12 +40,13 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The computer_turn_results action' do
     setup do
-      @game = Factory(:game)
-      @computer = Factory.build(:computer_player, :score => 50)
+      @game = Factory(:two_player_game)
+      @computer = @game.players.detect { |p| p.is_a?(ComputerPlayer) }
+      @game.current_player = @computer
+      @computer.score = 50
       turn = Factory(:turn, :player => @computer)
       @computer.turns << turn
-      @game.computer_player = @computer
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
     end
     

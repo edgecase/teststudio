@@ -1,5 +1,6 @@
 class HumanPlayer < Player
   validates_length_of :name, :within => 1..32
+  acts_as_list :scope => :game
 
   def description
     "Human"

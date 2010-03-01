@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  has_many :players
+  has_many :players, :order => "position ASC"
   belongs_to :current_player, :class_name => "Player"
   
   def start_game

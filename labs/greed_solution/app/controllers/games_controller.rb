@@ -3,14 +3,15 @@ class GamesController < ApplicationController
   end
 
   def create
-    @human_player = HumanPlayer.new(params[:game])
-    @game = Game.new(:human_player => @human_player)
-    if @game.human_player.save && @game.save
+    @game = Game.new
+    human_player = HumanPlayer.new(params[:game])
+    @game.players << human_player
+    if @game.save
       session[:game] = @game.id
       redirect_to choose_players_game_path(@game)
     else
       flash[:error] = "Can not create game\n"
-      flash[:error] << @human_player.errors.full_messages.join(', ')
+      flash[:error] << human_player.errors.full_messages.join(', ')
       redirect_to new_game_path
     end
   end
@@ -27,9 +28,11 @@ class GamesController < ApplicationController
       flash[:error] = "Please select at least one computer player"
       redirect_to choose_players_game_path(@game)
     else
-      @game.computer_player = ComputerPlayer.new(:strategy => strategy_name)
+      cp = ComputerPlayer.new(:strategy => strategy_name, :position => 1)
+      @game.players << cp
+      @game.current_player = @game.players.first
       @game.save
-      redirect_to computer_turn_non_interactive_turn_path(@game)
+      redirect_to start_turn_path(@game)
     end
   end
 end

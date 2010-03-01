@@ -14,9 +14,10 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The human_start_turn action' do
     setup do
-      @human = Factory.build(:human_player)
-      @game = Factory(:game, :human_player => @human)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game = Factory(:two_player_game)
+      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
+      @game.current_player = @human
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
     end
     
@@ -36,9 +37,10 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The human_holds action' do
     setup do
-      @human = Factory.build(:human_player)
-      @game = Factory(:game, :human_player => @human)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game = Factory(:two_player_game)
+      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
+      @game.current_player = @human
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
       flexmock(@human).should_receive(:holds).by_default
       flexmock(@human).should_receive(:save!).by_default
@@ -71,7 +73,7 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
       should 'given the computer a turn' do
         do_human_holds
-        assert_redirected_to start_turn_path(@game, @game.computer_player)
+        assert_redirected_to start_turn_path(@game)
       end
     end
   end
@@ -84,11 +86,11 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The human_rolls action' do
     setup do
+      @game = Factory(:two_player_game)
       @human = Factory.build(:human_player)
-      @game = Factory(:game, :human_player => @human)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game.current_player = @human
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
-      flexmock(@human).should_receive(:holds).by_default
       flexmock(@human).should_receive(:save!).by_default
     end
 
@@ -112,12 +114,11 @@ class InteractiveTurnsControllerTest < ActionController::TestCase
 
   context 'The human_turn action' do
     setup do
-      @human = Factory.build(:human_player)
-      @game = Factory(:game, :human_player => @human)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game = Factory(:two_player_game)
+      @human = @game.players.detect { |p| p.is_a?(HumanPlayer) }
+      @game.current_player = @human
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
-      flexmock(@human).should_receive(:holds).by_default
-      flexmock(@human).should_receive(:save!).by_default
     end
 
     should 'set the human rolls' do

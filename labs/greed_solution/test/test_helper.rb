@@ -37,6 +37,10 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def should_find(klass, model)
+    flexmock(klass).should_receive(:find => model).with(model.id.to_s)
+  end
 end
 
 def pending_context(*args, &block)

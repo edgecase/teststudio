@@ -1,7 +1,7 @@
 class NonInteractiveTurnsController < ApplicationController
   def computer_turn
     setup_page_data
-    cp = @game.computer_player
+    cp = @game.current_player
     cp.roller = roller
     turn = cp.take_turn
     cp.score += turn.score
@@ -11,11 +11,11 @@ class NonInteractiveTurnsController < ApplicationController
 
   def computer_turn_results
     setup_page_data
-    if @game.computer_player.score >= 3000
-      @winner = @game.computer_player.name
+    if @game.current_player.score >= 3000
+      @winner = @game.current_player.name
       render :template => "common/game_over"
     else
-      @most_recent_turn = [@game.computer_player.turns.last]
+      @most_recent_turn = [@game.current_player.turns.last]
     end
   end
 

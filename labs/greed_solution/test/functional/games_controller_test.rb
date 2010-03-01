@@ -31,8 +31,8 @@ class GamesControllerTest < ActionController::TestCase
 
   context 'The create action' do
     setup do
-      @game = Factory(:game)
-      @human = @game.human_player
+      @game = Factory(:empty_game)
+      @human = Factory.build(:human_player)
 
       flexmock(HumanPlayer, :new => @human)
       flexmock(Game, :new => @game)
@@ -41,42 +41,35 @@ class GamesControllerTest < ActionController::TestCase
       flexmock(@controller).should_receive(:render).with().by_default
     end
 
+    should 'include the human player in the game' do
+      do_create
+      assert @game.players.include?(@human), "Human should be part of game"
+    end
+
     context 'when save succeeds' do
       setup do
-        flexmock(@game)
-        @game.should_receive(:save).and_return(true).once
-        # HACK: Unable to mock for some reason
-        def @human.save; true; end
+        flexmock(@game, :save => true)
       end
 
       should 'save the game id in a session' do
         do_create
-
         assert_equal @game.id, session[:game]
       end
 
       should 'redirect to the choose a player option' do
         do_create
-
         assert_redirected_to :controller => "games", :action => "choose_players", :id => @game.id
       end
     
-      should 'assign human player for the view' do
-        do_create
-        assert_equal @human, assigns(:human_player)
-      end
-
       should 'assign a game for the view' do
         do_create
         assert_equal @game, assigns(:game)
       end
     end
 
-    context 'when save on human fails' do
+    context 'when save fails' do
       setup do
         @human.name = nil
-        flexmock(@game).should_receive(:save).never
-        flexmock(@game, :id => 123)
       end
 
       should 'redirect to new game' do
@@ -99,7 +92,7 @@ class GamesControllerTest < ActionController::TestCase
   
   context 'The choose_players action' do
     setup do
-      @game = Factory(:game)
+      @game = Factory(:empty_game)
       flexmock(@game, :id => 123)
       flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
       @params = { :id => @game.id }
@@ -124,8 +117,9 @@ class GamesControllerTest < ActionController::TestCase
   
   context 'The assign_players action' do
     setup do
-      @game = Factory(:game)
-      flexmock(Game).should_receive(:find => @game).with(@game.id.to_s).once
+      @game = Factory(:empty_game)
+      @game.players << Factory.build(:human_player, :position => 2)
+      should_find(Game, @game).once
       @params = { :id => @game.id.to_s }
     end
     
@@ -151,14 +145,14 @@ class GamesControllerTest < ActionController::TestCase
       end
     end
 
-    context 'when the strategy name is blank' do
+    context 'when the strategy name is given' do
       setup do
         @params.merge!( :player => "randy" )
       end
       
-      should 'add the named strategy to the ocmputer player' do
+      should 'add the named strategy to the computer player' do
         do_assign_players
-        assert_equal "randy", assigns(:game).computer_player.strategy
+        assert_equal "randy", assigns(:game).players.last.strategy
       end
 
       should 'save the game' do
@@ -168,7 +162,7 @@ class GamesControllerTest < ActionController::TestCase
       
       should 'start the computers turn' do
         do_assign_players
-        assert_redirected_to :controller => "non_interactive_turns", :action => "computer_turn", :id => @game.id
+        assert_redirected_to start_turn_path(@game)
       end
     end
   end

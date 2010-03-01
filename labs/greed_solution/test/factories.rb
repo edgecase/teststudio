@@ -19,11 +19,6 @@ Factory.define :computer_player do |cp|
   cp.strategy "Connie"
 end
 
-Factory.define :game do |g|
-  g.human_player Factory.build(:human_player)
-  g.computer_player Factory.build(:computer_player)
-end
-
 Factory.define :two_player_game, :class => Game do |g|
   g.players { [Factory.build(:human_player), Factory.build(:computer_player)] }
 end

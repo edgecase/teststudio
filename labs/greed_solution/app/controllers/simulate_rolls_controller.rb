@@ -9,7 +9,7 @@ class SimulateRollsController < ApplicationController
   end
 
   def simulate
-    roll = params[:faces].split('-').map { |s| s.to_i }
+    roll = params[:faces].split(/[ :_,-]+/).map { |s| s.to_i }
     sim_data.push(roll)
     redirect_to :action => :index
   end

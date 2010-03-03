@@ -26,10 +26,14 @@ class HumanPlayer < Player
       :accumulated_score => accumulated_score)
     turns.last.rolls << roll
     if roller.points == 0
-      turns.last.rolls.last.action = :bust
+      most_recent_roll.action = :bust
     else
       :ok
     end
+  end
+  
+  def most_recent_roll
+    last_roll
   end
 
   def holds

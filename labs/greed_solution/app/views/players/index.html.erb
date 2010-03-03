@@ -1,7 +1,7 @@
 <% if flash[:error] -%>
   <div class="error_message"><%= flash[:error] %></div>
 <% end -%>
-<% form_for :game, :url => assign_players_game_path(@game), :html => {:id => 'select_players'} do |f| %>
+<% form_for :game, :url => game_players_path(@game), :html => {:id => 'select_players'} do |f| %>
   <h1>Select Your Opponent</h1>
   <%= f.error_messages %>
     <% @players.each do |player| -%>

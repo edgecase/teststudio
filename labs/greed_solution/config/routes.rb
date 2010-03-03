@@ -33,12 +33,10 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
 
-  map.resources(:games,
-    :member => {
-      :choose_players => :get,
-      :assign_players => :post,
-    })
-
+  map.resources(:games) do |games|
+    games.resources(:players)
+  end
+    
   map.resources(:non_interactive_turns,
     :member => {
       :start => :get,

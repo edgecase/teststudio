@@ -21,7 +21,11 @@ class Roller
   end
   
   def new_score(previous_score)
-    (points == 0) ? 0 : previous_score + points
+    bust? ? 0 : previous_score + points
+  end
+
+  def bust?
+    points == 0
   end
   
   private

@@ -20,7 +20,7 @@ class ComputerPlayer < Player
     begin
       roller.roll(dice_to_roll)
       turn_score = roller.new_score(turn_score)
-      if roller.points == 0
+      if roller.bust?
         action = :bust
       elsif ! roll_again?
         action = :host

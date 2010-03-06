@@ -28,6 +28,7 @@ class RollerTest < Test::Unit::TestCase
         assert_equal 150, @roller.points
         assert_equal 3, @roller.unused
         assert_equal 200, @roller.new_score(50)
+        assert ! @roller.bust?, "should not be bust"
       end
     end
 
@@ -41,6 +42,7 @@ class RollerTest < Test::Unit::TestCase
         assert_equal 0, @roller.points
         assert_equal 5, @roller.unused
         assert_equal 0, @roller.new_score(50)
+        assert @roller.bust?, "should be bust"
       end
     end
   end

@@ -20,6 +20,10 @@ class Roller
     @scorer.unused
   end
   
+  def new_score(previous_score)
+    (points == 0) ? 0 : previous_score + points
+  end
+  
   private
 
   def random_faces(n)

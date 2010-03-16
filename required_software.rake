@@ -22,29 +22,32 @@
 # For example, to install the 'cucumber' gem, just type the following
 # at the command line:
 #
-#    gem install cucumber
+#    gem install cucumber --version=0.6.3
 #
 # OK, here are the required gems:
 #
+REDCLOTH_OPTS = Rake.application.windows? ? '-platform=x86-mswin32-60' : nil
+
 REQUIRED_GEMS = [
-  'cucumber',
-  'cucumber-rails',
-  'diff-lcs',
-  'flexmock',
-  'heckle',
-  'context',
-  'nokogiri',
-  'rcov',
-  'rspec',
-  'rspec-rails',
-  'Selenium',
-  'RedCloth',
-  'term-ansicolor',
-  'treetop',
-  'shoulda',
-  'webrat',
-  'factory_girl',
-  'faker',
+  ['cucumber', '0.6.3'],
+  ['cucumber-rails', '0.3.0'],
+  ['diff-lcs', '1.1.2'],
+  ['flexmock', '0.8.6'],
+  ['heckle', '1.4.3'],
+  ['context', '0.0.16'],
+  ['nokogiri', '1.4.1'],
+  ['rcov', '0.9.8'],
+  ['rspec', '1.3.0'],
+  ['rspec-rails', '1.3.2'],
+  ['Selenium', '1.1.14'],
+  ['selenium-rails', '0.0.3'],
+  ['RedCloth', '4.2.3', REDCLOTH_OPTS],
+  ['term-ansicolor', '1.0.5'],
+  ['treetop', '1.4.4'],
+  ['shoulda', '2.10.3'],
+  ['webrat', '0.7.0'],
+  ['factory_girl', '1.2.3'],
+  ['faker', '0.3.1'],
 ]
 
 # Using Rvm (optional)
@@ -76,22 +79,55 @@ REQUIRED_GEMS = [
 # ====================================================================
 
 RAILS_GEMS = [
-  'rails',
-  'sqlite3-ruby',
+  ['rails', '2.3.5'],
+  ['sqlite3-ruby', '1.2.5'],
 ]
 
 module Install
   def self.gems(*gem_list)
     puts
     gem_list.each do |gem|
+      name, version, options = gem
       puts
-      puts "** Installing #{gem} **"
-      sh "gem install #{gem} --no-ri --no-rdoc"
+      puts "** Installing #{name} #{version} **"
+      if version
+        sh "gem install #{name} --version=#{version} --no-ri --no-rdoc #{options}"
+      else
+        sh "gem install #{name} --no-ri --no-rdoc"
+      end
+    end
+  end
+
+  def self.describe(*gem_list)
+    gem_list.each do |gem|
+      name, version = gem
+      if version
+        puts "gem install #{name} --version=#{version}"
+      else
+        puts "gem install #{name}"
+      end
     end
   end
 end
 
 task :default => :help
+
+desc "List the required gems"
+task :list do
+  Install.describe(*REQUIRED_GEMS)
+end
+
+task :list_versions do
+  REQUIRED_GEMS.each do |gem|
+    name, version = gem
+    output = `gem list -l '^#{name}$'`
+    if output =~ /\(([\d.]+)\)/
+      puts "['#{name}', '#{$1}'],"
+    else
+      puts "['#{name}', nil],"
+    end
+  end
+end
 
 task :help do
   puts

@@ -46,7 +46,7 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
       @computer.score = 50
       turn = Factory(:turn, :player => @computer)
       @computer.turns << turn
-      should_find(Game, @game).once
+      should_find(Game, @game)
       @params = { :id => @game.id.to_s }
     end
     
@@ -55,7 +55,7 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
         @computer.score = 100
       end
       should 'display turn histories' do
-        # WRITE THIS TESTS
+        # WRITE THIS TEST
       end
       should 'render the computer turn page' do
         # WRITE THIS TEST
@@ -67,10 +67,12 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
         @computer.score = 3000
       end
       should 'assign the winner' do
-        # WRITE THIS TESTS
+        do_results
+        assert_not_nil assigns(:winner)
       end
       should 'render the game over' do
-        # WRITE THIS TESTS
+        do_results
+        assert_redirected_to game_over_path(@game)
       end
     end
   end

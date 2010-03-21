@@ -1,11 +1,28 @@
-Factory.define :player do |p|
-  p.name { Faker::Name.name }
-  p.score 10
-  p.strategy "Agressive"
+Factory.define :face do |f|
+  f.value 1
 end
 
-Factory.define :face do |f|
-  f.value { rand(6) + 1 }
-  f.position 5
+Factory.define :roll do |r|
+  r.faces( (1..5).map { Factory.build(:face) } )
 end
- 
+
+Factory.define :turn do |t|
+  t.rolls [Factory.build(:roll)]
+end
+    
+Factory.define :human_player do |hp| 
+  hp.name Faker::Name.first_name
+  hp.turns [Factory.build(:turn)]
+end
+
+Factory.define :computer_player do |cp|
+  cp.strategy "Connie"
+end
+
+Factory.define :two_player_game, :class => Game do |g|
+  g.players { [Factory.build(:human_player), Factory.build(:computer_player)] }
+end
+
+Factory.define :empty_game, :class => Game do |g|
+  g.players []
+end

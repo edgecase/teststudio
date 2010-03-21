@@ -2,8 +2,8 @@
 
 one:
   value: 1
-  position: 1
+  roll_id: 1
 
 two:
   value: 1
-  position: 1
+  roll_id: 1

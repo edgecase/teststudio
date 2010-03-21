@@ -1,5 +1,4 @@
-LAB 5: Controller Testing
--------------------------
+LAB 7: Controller Testing
 
 The GameController is partially testing (using Test::Unit and
 Shoulda).  Complete the test for the games controller.  See files:

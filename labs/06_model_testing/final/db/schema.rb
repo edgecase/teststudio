@@ -9,16 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100225063436) do
+ActiveRecord::Schema.define(:version => 20090501194952) do
 
   create_table "faces", :force => true do |t|
     t.integer  "value"
+    t.integer  "roll_id"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "games", :force => true do |t|
+    t.integer  "current_player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,6 +31,25 @@ ActiveRecord::Schema.define(:version => 20100225063436) do
     t.integer  "game_id"
     t.integer  "score",      :default => 0
     t.string   "strategy"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rolls", :force => true do |t|
+    t.integer  "score",             :default => 0, :null => false
+    t.integer  "accumulated_score", :default => 0, :null => false
+    t.integer  "unused",            :default => 0, :null => false
+    t.string   "action_name"
+    t.integer  "turn_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "turns", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

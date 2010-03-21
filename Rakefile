@@ -40,8 +40,11 @@ task :cleanse_labs do
   rm FileList[
     'labs/**/*.log',
     'labs/**/*.sqlite3',
-    'labs/**/*.sqlite3-journal'
+    'labs/**/*.sqlite3-journal',
   ]
+  FileList['labs/**/coverage'].each do |fn|
+    rm_r fn
+  end
 end
 
 desc "Create the daily packages"

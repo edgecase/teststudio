@@ -50,8 +50,18 @@ class RollTest < ActiveSupport::TestCase
           assert_equal :roll, @roll.action
         end
       end
-    end
 
+      context "when it is busted" do
+        setup do
+          @roll.action = :bust
+        end
+        
+        should 'set the accumulated score to zero' do
+          assert_equal 0, @roll.accumulated_score
+        end
+      end
+    end
+  
     context "when saved" do
       setup do
         @roll.action = :hold
@@ -64,4 +74,5 @@ class RollTest < ActiveSupport::TestCase
       end
     end
   end
+  
 end

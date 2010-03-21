@@ -1,24 +1,18 @@
 require 'test_helper'
 
 class FaceTest < ActiveSupport::TestCase
-  
-  test "should ensure value is a number" do
-    @model = Factory.build(:face, :value => "NAN")
-    
-    assert_numericality_of :value
-  end
+  context 'A Face' do
+    setup do
+      @roll = Roll.new
+      @face = Face.new(:value => 3, :roll => @roll)
+    end
 
-  test "should ensure position is a number" do
-    @model = Factory.build(:face, :position => "NAN")
-    
-    assert_numericality_of :position
-  end
-  
-  test "should ensure value is between 1 and 6" do
-    @model = Factory.build(:face, :value => 7)
-    
-    assert_inclusion_in :value
-  end
+    should 'know what roll it belongs to' do
+      assert_equal @roll, @face.roll
+    end
 
-  
+    should 'report its face value' do
+      assert_equal 3, @face.value
+    end
+  end
 end

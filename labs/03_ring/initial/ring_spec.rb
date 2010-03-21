@@ -62,34 +62,28 @@ describe "when created with a zero max size" do
   end
 end
 
-# This before actions in this describe block will be shared amoung
-# several other startups.
-describe "when setup with an initial max size", :shared => true do
+describe "when setup with an initial max size" do
+  
   before(:each) do
     @max_size = 3
     @ring = Ring.new(@max_size)
   end
-end
-
-describe "when being created with an initial max size" do
-
-  it_should_behave_like "when setup with an initial max size"
-
-  it "should report it's max_size as the initial size"
-  it "should report it's length as zero"
-  it "should say that it is empty"
-end
-
-describe Ring, "when an item is added" do
-
-  it_should_behave_like "when setup with an initial max size"
-
-  before(:each) do
-    @ring.insert(:one)
+    
+  describe "when being created" do
+    it "should report it's max_size as the initial size"
+    it "should report it's length as zero"
+    it "should say that it is empty"
   end
 
-  it "should report it's length as one"
-  it "should report it's max size as the initial max size"
+  describe Ring, "when an item is added" do
+
+    before(:each) do
+      @ring.insert(:one)
+    end
+
+    it "should report it's length as one"
+    it "should report it's max size as the initial max size"
+  end
 end
 
 describe Ring, "when removing an item" do

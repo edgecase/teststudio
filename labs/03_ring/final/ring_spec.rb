@@ -65,45 +65,42 @@ describe "when created with a zero max size" do
   end
 end
 
-describe "when setup with an initial max size", :shared => true do
+describe "when setup with an initial max size" do
+  
   before(:each) do
     @max_size = 3
     @ring = Ring.new(@max_size)
   end
-end
+    
+  describe "when being created" do
+    it "should report it's max size as the initial size" do
+      @ring.max_size.should == @max_size
+    end
 
-describe "when being created with an initial max size" do
+    it "should report it's length as zero" do
+      @ring.length.should be_zero
+    end
 
-  it_should_behave_like "when setup with an initial max size"
-
-  it "should report it's max size as the initial size" do
-    @ring.max_size.should == @max_size
+    it "should report as empty" do
+      @ring.should be_empty
+    end
   end
+  
+  describe Ring, "when an item is added" do
 
-  it "should report it's length as zero" do
-    @ring.length.should be_zero
+    before(:each) do
+      @ring.insert(:one)
+    end
+
+    it "should report it's length as one" do
+      @ring.length.should == 1
+    end
+
+    it "should report it's max size as the initial size" do
+      @ring.max_size.should == @max_size
+    end
   end
-
-  it "should report as empty" do
-    @ring.should be_empty
-  end
-end
-
-describe Ring, "when an item is added" do
-
-  it_should_behave_like "when setup with an initial max size"
-
-  before(:each) do
-    @ring.insert(:one)
-  end
-
-  it "should report it's length as one" do
-    @ring.length.should == 1
-  end
-
-  it "should report it's max size as the initial size" do
-    @ring.max_size.should == @max_size
-  end
+  
 end
 
 describe Ring, "when removing an item" do

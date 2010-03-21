@@ -1,6 +1,6 @@
 Feature: Play a game
   As a user, 
-  I would like to play a game of Greed agains the computer
+  I would like to play a game of Greed against the computer
   So that I can have fun.
 
   Scenario: Default page 
@@ -30,7 +30,7 @@ Feature: Play a game
     When I take a turn
     Then the turn score so far is 150
 
-  Scenario: A Human Player Rolls Once
+  Scenario: A Human Player Rolls Once and Holds
     Given a fresh start
     And the dice will roll 2,3,4,6,3
     And the dice will roll 1,2,5,4,3
@@ -54,7 +54,7 @@ Feature: Play a game
     And the dice will roll 4,2,3,4,3
     And I start a game
     And I take a turn
-    When I continue    
+    When I continue
     Then it is Connie's turn
 
   Scenario: A Human Player Rolls And Rerolls
@@ -70,7 +70,20 @@ Feature: Play a game
     And 4 dice are displayed
     And the turn score so far is 200
 
-  Scenario: The Computer Player Wins
+  @wip
+  Scenario: A Human Player Rolls And Goes Bust on Second Roll
+    Given a fresh start
+    And the dice will roll 2,3,4,6,3
+    And the dice will roll 1,2,3,4,3
+    And the dice will roll 2,3,4,6
+    And I start a game
+    And I take a turn
+    When I choose to roll again
+    Then it is my turn
+    And 4 dice are displayed
+    And the turn score so far is 0
+
+ Scenario: The Computer Player Wins
     Given a fresh start
     And the dice will roll 1,1,1,2,2
     And the dice will roll 2,2,3,3,4

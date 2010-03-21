@@ -18,7 +18,7 @@ class RollerTest < Test::Unit::TestCase
       end
     end
 
-    context 'with a non-random data source' do
+    context 'with a scoring roll' do
       setup do
         @roller = Roller.new(SimulatedData.new([[1, 5, 2, 3, 2]]))
       end
@@ -27,6 +27,22 @@ class RollerTest < Test::Unit::TestCase
         @roller.roll(5)
         assert_equal 150, @roller.points
         assert_equal 3, @roller.unused
+        assert_equal 200, @roller.new_score(50)
+        assert ! @roller.bust?, "should not be bust"
+      end
+    end
+
+    context 'with a non-scoring roll' do
+      setup do
+        @roller = Roller.new(SimulatedData.new([[4, 4, 2, 3, 2]]))
+      end
+
+      should 'calculate the correct scores' do
+        @roller.roll(5)
+        assert_equal 0, @roller.points
+        assert_equal 5, @roller.unused
+        assert_equal 0, @roller.new_score(50)
+        assert @roller.bust?, "should be bust"
       end
     end
   end

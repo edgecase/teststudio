@@ -1,10 +1,10 @@
 class SimulatedData
-  def initialize(data_source)
-    @data_source = data_source
+  def initialize(queued_numbers)
+    @queued_numbers = queued_numbers
   end
 
   def random_numbers(n)
-    numbers = @data_source.shift
+    numbers = @queued_numbers.shift
     if numbers
       numbers[0...n]
     else

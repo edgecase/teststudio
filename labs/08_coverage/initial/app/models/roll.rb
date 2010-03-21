@@ -23,6 +23,7 @@ class Roll < ActiveRecord::Base
 
   def action=(act)
     self.action_name = act.to_s
+    self.accumulated_score = 0 if action_name == "bust"
     save!
   end
 

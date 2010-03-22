@@ -23,7 +23,7 @@ class RateCalculatorTest < Test::Unit::TestCase
       context 'on a weekday' do
         setup { percent_off(10) }
         should 'be discounted by 10 percent' do
-          assert_rate @discount+1, calculated_rate(Monday)
+          assert_rate @discount, calculated_rate(Monday)
         end
       end
     end
@@ -100,7 +100,7 @@ class RateCalculatorTest < Test::Unit::TestCase
   end
 
   def percent_off(percent)
-    @discount = (1 - (percent / 100.0)) * (@discount || @rack_rate)
+    @discount = (1 - (percent / 100.0)) * @rack_rate
   end
   
   def assert_rate(expected, actual)

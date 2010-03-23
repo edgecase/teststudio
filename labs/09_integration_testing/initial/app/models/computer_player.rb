@@ -23,7 +23,7 @@ class ComputerPlayer < Player
       if roller.bust?
         action = :bust
       elsif ! roll_again?
-        action = :host
+        action = :hold
       else
         action = :roll
       end

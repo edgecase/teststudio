@@ -81,6 +81,7 @@ class ComputerPlayerTest < ActiveSupport::TestCase
         assert_equal 100, roll.points
         assert_equal 4, roll.unused
         assert_equal 100, turn.score
+        assert_equal :hold, roll.action
       end
     end
     

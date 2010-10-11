@@ -31,4 +31,5 @@ group :development, :test do
   gem "rspec-rails", "2.0.0"
   gem 'webrat'
   gem 'factory_girl'
+  gem 'faker'
 end

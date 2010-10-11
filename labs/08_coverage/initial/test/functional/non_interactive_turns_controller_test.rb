@@ -53,12 +53,15 @@ class NonInteractiveTurnsControllerTest < ActionController::TestCase
     context 'when no winner' do
       setup do
         @computer.score = 100
+        flexmock(@controller).should_receive(:render).by_default
       end
       should 'display turn histories' do
-        # WRITE THIS TEST
+        do_results
+        assert_equal [@computer.turns.last], assigns(:most_recent_turn)
       end
       should 'render the computer turn page' do
-        # WRITE THIS TEST
+        flexmock(@controller).should_receive(:render).with().once
+        do_results
       end
     end
 

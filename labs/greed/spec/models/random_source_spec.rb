@@ -28,14 +28,12 @@ describe RandomSource do
       end
     end
 
+    private
+
     def count_occurrences(numbers)
       result = Hash.new { |h, k| h[k] = 0 }
       numbers.each do |n| result[n] += 1 end
       result
-    end
-
-    def be_within_percent(expected, percent)
-      be_close(expected, expected * (percent/100.0))
     end
   end
 end

@@ -3,6 +3,6 @@ class Turn < ActiveRecord::Base
   belongs_to :player
 
   def score
-    rolls.last.accumulated_score
+    rolls.last.try(:accumulated_score) || 0
   end
 end

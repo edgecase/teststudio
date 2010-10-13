@@ -26,6 +26,11 @@ Factory.define(:computer_player,
   :class => ComputerPlayer) do |player|
 end
 
+Factory.define(:human_player,
+  :parent => :player,
+  :class => HumanPlayer) do |player|
+end
+
 Factory.define :two_player_game, :parent => :game do |game|
   game.players { [Factory.build(:human_player), Factory.build(:computer_player)] }
 end

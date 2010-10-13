@@ -10,8 +10,8 @@ describe RandomSource do
     subject { random_numbers }
 
     it { should have(sample_size).numbers }
-    it { should be_all { |n| n >= 1 } }
-    it { should be_all { |n| n <= 6 } }
+    it { should all_be { |n| n >= 1 } }
+    it { should all_be { |n| n <= 6 } }
   end
 
   context "with a large sample size" do

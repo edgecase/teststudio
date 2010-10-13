@@ -21,6 +21,11 @@ Factory.define :player do |player|
   player.name { Faker::Name.first_name }
 end
 
+Factory.define(:computer_player,
+  :parent => :player,
+  :class => ComputerPlayer) do |player|
+end
+
 Factory.define :two_player_game, :parent => :game do |game|
   game.players { [Factory.build(:human_player), Factory.build(:computer_player)] }
 end

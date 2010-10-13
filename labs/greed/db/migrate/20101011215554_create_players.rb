@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.string :type
       t.string :name
       t.integer :game_id
-      t.integer :score
+      t.integer :score, :default => 0
       t.string :strategy
       t.integer :position
 

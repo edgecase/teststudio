@@ -6,11 +6,15 @@ class Roll < ActiveRecord::Base
   end
 
   def points
-    100
+    scorer = Scorer.new
+    scorer.score(face_values)
+    scorer.points
   end
 
   def unused
-    2
+    scorer = Scorer.new
+    scorer.score(face_values)
+    scorer.unused
   end
 
   def action
@@ -19,8 +23,5 @@ class Roll < ActiveRecord::Base
 
   def action=(new_action)
     self.action_name = new_action.to_s
-    if action_name == "bust"
-      self.accumulated_score = 0
-    end
   end
 end

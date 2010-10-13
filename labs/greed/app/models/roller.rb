@@ -7,7 +7,7 @@ class Roller
   end
 
   def roll(n)
-    @faces = @source.random_numbers(n)
+    @faces = random_faces(n)
     @scorer.score(@faces)
   end
 
@@ -27,4 +27,9 @@ class Roller
     @scorer.points == 0
   end
 
+  private
+
+  def random_faces(n)
+    @source.random_numbers(n)
+  end
 end

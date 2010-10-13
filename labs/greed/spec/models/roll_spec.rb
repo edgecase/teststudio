@@ -11,32 +11,33 @@ describe Roll do
       :faces => [])
   }
 
+  def set_faces(*face_values)
+    roll.faces = face_values.map { |v| Factory.build(:face, :value => v) }
+    roll
+  end
+
+  context "when an action is added" do
+    before { subject.action = "roll" }
+    it "has a symbol for the action" do
+      subject.action.should == :roll
+    end
+  end
+
   context "with faces" do
-    subject {
-      roll.faces = [
-        Factory.build(:face, :value => 2),
-        Factory.build(:face, :value => 3),
-        Factory.build(:face, :value => 5),
-        Factory.build(:face, :value => 5),
-      ]
-      roll
-    }
+    subject { set_faces(2, 3, 5, 5) }
 
     its(:face_values) { should == [2, 3, 5, 5] }
     its(:accumulated_score) { should == 300 }
     its(:points) { should == 100 }
     its(:unused) { should == 2 }
     its(:action) { should be_nil }
+  end
 
-    context "when an action is added" do
-      before { subject.action = "roll" }
-      its(:action) { should == :roll }
-    end
-
-    context 'when it is busted' do
-      before{ subject.action = :bust }
-      its(:accumulated_score) { should == 0 }
-    end
+  context "with alternate faces" do
+    subject { set_faces(2, 2, 2, 5, 3) }
+    its(:face_values) { should == [2,2,2,5,3] }
+    its(:points) { should == 250 }
+    its(:unused) { should == 1 }
   end
 
   context 'when saved' do

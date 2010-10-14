@@ -11,6 +11,12 @@ describe ComputerPlayer do
   its(:play_style) { should == :automatic }
   its(:score) { should == 0 }
 
+  context "assigning a strategy" do
+    before { player.strategy = "Connie" }
+    its(:logic) { should be_a(Connie) }
+    its(:strategy) { should == "Connie" }
+  end
+
   context "with a strategy" do
     let(:strategy) { flexmock("Strategy") }
     before { player.instance_variable_set("@logic", strategy) }

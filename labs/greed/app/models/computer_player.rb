@@ -7,6 +7,12 @@ class ComputerPlayer < Player
 
   delegate :name, :description, :roll_again?, :to => :logic
 
+  def strategy=(strategy_name)
+    write_attribute(:strategy, strategy_name)
+    cls = strategy_name.constantize
+    @logic = cls.new if cls
+  end
+
   def take_turn
     rolls_in_this_turn = []
     turn_score = 0

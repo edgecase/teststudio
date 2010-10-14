@@ -3,6 +3,8 @@ Greed::Application.routes.draw do
     resources :players
   end
 
+  match 'start_turn/:game' => 'turns#start_turn', :as => :start_turn
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

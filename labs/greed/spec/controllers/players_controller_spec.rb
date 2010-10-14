@@ -35,7 +35,7 @@ describe PlayersController do
     end
 
     context "with a good strategy" do
-      let(:params) { game_params.merge(:player => "Connie") }
+      let(:params) { game_params.merge(:player => "ConservativeStrategy") }
       before {
         flexmock(game).should_receive(:save).once.
         and_return(true)
@@ -47,7 +47,7 @@ describe PlayersController do
       it { response.should redirect_to(start_turn_path(game)) }
       its(:current_player) { should == game.players.first }
       it {
-        game.players.last.name.should == "Connie" }
+        game.players.last.name.should == "Conservative" }
     end
   end
 

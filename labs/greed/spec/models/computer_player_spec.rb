@@ -12,9 +12,9 @@ describe ComputerPlayer do
   its(:score) { should == 0 }
 
   context "assigning a strategy" do
-    before { player.strategy = "Connie" }
-    its(:logic) { should be_a(Connie) }
-    its(:strategy) { should == "Connie" }
+    before { player.strategy = "ConservativeStrategy" }
+    its(:logic) { should be_a(ConservativeStrategy) }
+    its(:strategy) { should == "ConservativeStrategy" }
   end
 
   context "with a strategy" do

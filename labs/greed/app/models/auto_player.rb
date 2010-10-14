@@ -1,5 +1,5 @@
 class AutoPlayer
   def self.players
-    [Connie]
+    [ConservativeStrategy]
   end
 end

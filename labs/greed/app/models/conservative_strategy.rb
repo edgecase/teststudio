@@ -1,6 +1,6 @@
-class Connie < GameStrategy
+class ConservativeStrategy < GameStrategy
   def name
-    "Connie"
+    "Conservative"
   end
 
   def description

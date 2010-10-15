@@ -8,7 +8,9 @@ describe TurnsController do
     context "with an interactive player" do
       before do
         game.players << Factory.build(:human_player)
-        game.current_player = game.players.first
+        game.start
+        flexmock(game.current_player).should_receive(:start_turn).once
+        flexmock(game.current_player).should_receive(:save!).once
         get :start_turn, :game_id => game.id
       end
       it "redirects to the interactive controller" do

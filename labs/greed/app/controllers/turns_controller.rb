@@ -7,6 +7,8 @@ class TurnsController < ApplicationController
     if current_player.play_style == :automatic
       redirect_to non_interactive_start_path(params[:game_id])
     else
+      current_player.start_turn
+      current_player.save!
       redirect_to interactive_start_path(params[:game_id])
     end
   end

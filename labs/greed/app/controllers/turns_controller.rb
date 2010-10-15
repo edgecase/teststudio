@@ -15,3 +15,4 @@ class TurnsController < ApplicationController
     self.winner = current_player
   end
 end
+

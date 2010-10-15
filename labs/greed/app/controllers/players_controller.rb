@@ -14,7 +14,8 @@ class PlayersController < ApplicationController
       cp.strategy = params[:player]
       game.players << cp
       game.current_player = game.players.first
-      game.save
+      game.start
+      game.save!
       redirect_to start_turn_path(game)
     end
   end

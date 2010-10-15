@@ -1,16 +1,17 @@
 class ComputerPlayer < Player
-  attr_reader :logic
+  delegate :name, :description, :roll_again?, :to => :logic
 
   def play_style
     :automatic
   end
 
-  delegate :name, :description, :roll_again?, :to => :logic
-
   def strategy=(strategy_name)
     write_attribute(:strategy, strategy_name)
-    cls = strategy_name.constantize
-    @logic = cls.new if cls
+    @logic = nil
+  end
+
+  def logic
+    @logic ||= get_logic
   end
 
   def take_turn
@@ -49,4 +50,11 @@ class ComputerPlayer < Player
       :action => action)
   end
 
+  def get_logic
+    if strategy && (strategy_class = strategy.constantize)
+      strategy_class.new
+    else
+      nil
+    end
+  end
 end

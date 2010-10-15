@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe ComputerPlayer do
-  it "has a valid factory" do
-    Factory.build(:computer_player).should be_valid
-  end
-
   let(:player) { Factory.build(:computer_player) }
   subject { player }
 
+  it "has a valid factory" do
+    player.should be_valid
+  end
+
+  it { should be_a(ComputerPlayer) }
   its(:play_style) { should == :automatic }
   its(:score) { should == 0 }
 
@@ -15,6 +16,17 @@ describe ComputerPlayer do
     before { player.strategy = "ConservativeStrategy" }
     its(:logic) { should be_a(ConservativeStrategy) }
     its(:strategy) { should == "ConservativeStrategy" }
+  end
+
+  context "after loading" do
+    before do
+      player.strategy = "ConservativeStrategy"
+      player.save
+      player.reload
+    end
+    it "has a valid logic set according to its strategy" do
+      player.logic.should be_a(ConservativeStrategy)
+    end
   end
 
   context "with a strategy" do

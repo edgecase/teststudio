@@ -1,5 +1,6 @@
 class Roll < ActiveRecord::Base
   has_many :faces
+  belongs_to :turn
 
   def face_values
     faces.map { |f| f.value }

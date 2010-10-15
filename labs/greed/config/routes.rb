@@ -1,9 +1,22 @@
 Greed::Application.routes.draw do
+
   resources :games do |games|
     resources :players
   end
 
-  match 'start_turn/:game' => 'turns#start_turn', :as => :start_turn
+  match 'start_turn/:game_id' => 'turns#start_turn', :as => :start_turn
+  match 'game_over/:game_id'  => 'turns#game_over',  :as => :game_over
+
+  match 'non_interactive/:game_id/start' => 'non_interactive_turns#start', :as => :non_interactive_start
+  match 'non_interactive/:game_id/results' => 'non_interactive_turns#results', :as => :non_interactive_results
+
+  match 'interactive/:game_id/start'  => 'interactive_turns#roll',   :as => :interactive_start
+  match 'interactive/:game_id/roll'   => 'interactive_turns#roll',   :as => :interactive_roll
+  match 'interactive/:game_id/bust'   => 'interactive_turns#bust',   :as => :interactive_bust
+  match 'interactive/:game_id/decide' => 'interactive_turns#decide', :as => :interactive_decide
+  match 'interactive/:game_id/hold'   => 'interactive_turns#hold',   :as => :interactive_hold
+
+  root :to => "games#new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

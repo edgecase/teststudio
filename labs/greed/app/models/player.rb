@@ -6,4 +6,8 @@ class Player < ActiveRecord::Base
   def roller
     @roller ||= Roller.new
   end
+
+  def last_action
+    turns.last.try(:rolls).try(:last).try(:action)
+  end
 end

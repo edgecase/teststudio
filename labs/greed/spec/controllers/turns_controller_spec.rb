@@ -35,7 +35,7 @@ describe TurnsController do
       get :game_over, :game_id => game.id
     end
     it "sets the winner" do
-      assigns[:winner].should == game.current_player
+      @controller.winner.should == game.current_player
     end
     it { response.should render_template "game_over" }
   end

@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
+  assume(:game) { Game.find(params[:game_id]) }
+  assume(:players) { AutoPlayer.players }
+
   def index
-    @players = AutoPlayer.players
   end
 
   def create
@@ -15,9 +17,5 @@ class PlayersController < ApplicationController
       game.save
       redirect_to start_turn_path(game)
     end
-  end
-
-  def game
-    @game ||= Game.find(params[:game_id])
   end
 end

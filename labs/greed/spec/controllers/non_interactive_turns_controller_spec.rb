@@ -33,7 +33,7 @@ describe NonInteractiveTurnsController do
       end
 
       it "sets the most recent turn" do
-        assigns[:most_recent_turn].should == [player.turns.last]
+        @controller.most_recent_turn.should == [player.turns.last]
       end
     end
 

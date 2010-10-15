@@ -9,11 +9,11 @@ describe PlayersController do
     }
 
     it "finds the game" do
-      @controller.send(:game).should == game
+      @controller.game.should == game
     end
     it "gets a list of auto players" do
-      assigns[:players].should be_a Array
-      assigns[:players].should all_be_respond_to(:name)
+      @controller.players.should be_a Array
+      @controller.players.should all_be_respond_to(:name)
     end
   end
 

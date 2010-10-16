@@ -19,15 +19,16 @@ class HumanPlayer < Player
     turns.last.rolls.last.action = :bust
   end
 
-  def holds
+  def decides_to_hold
     turns.last.rolls.last.action = :hold
     self.score += turns.last.rolls.last.accumulated_score
   end
 
-  def rolls_again
+  def decides_to_roll_again
     turns.last.rolls.last.action = :roll
   end
 
+  # True if the last roll of the last turn does not have an action.
   def pending?
     turns.last && turns.last.pending?
   end

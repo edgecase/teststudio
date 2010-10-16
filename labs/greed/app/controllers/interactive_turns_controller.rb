@@ -5,7 +5,7 @@ class InteractiveTurnsController < ApplicationController
 
   def roll
     if current_player.pending?
-      current_player.rolls_again
+      current_player.decides_to_roll_again
     end
     roll_result = current_player.roll_dice
     current_player.save!
@@ -25,7 +25,7 @@ class InteractiveTurnsController < ApplicationController
   end
 
   def hold
-    current_player.holds
+    current_player.decides_to_hold
     current_player.save!
     if current_player.score >= 3000
       redirect_to game_over_path(game)

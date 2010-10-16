@@ -16,14 +16,14 @@ describe InteractiveTurnsController do
       flexmock(current_player).should_receive(:save!).once
       flexmock(current_player).should_receive(:pending?).
         and_return(false).by_default
-      flexmock(current_player).should_receive(:rolls_again).
+      flexmock(current_player).should_receive(:decides_to_roll_again).
         never.by_default
     end
 
     context "with a pending on the current roll" do
       before do
         flexmock(current_player, :pending? => true)
-        flexmock(current_player).should_receive(:rolls_again).once
+        flexmock(current_player).should_receive(:decides_to_roll_again).once
         get :roll, :game_id => game.id
       end
       it "marks the pending roll with :roll" do
@@ -90,7 +90,8 @@ describe InteractiveTurnsController do
 
   describe "GET hold" do
     before do
-      flexmock(current_player).should_receive(:holds).once
+      current_player.roll_dice
+      flexmock(current_player).should_receive(:decides_to_hold).once
       flexmock(current_player).should_receive(:save!).once.
         and_return(true)
     end

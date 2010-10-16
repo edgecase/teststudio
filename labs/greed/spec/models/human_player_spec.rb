@@ -35,7 +35,7 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.rolls_again
+        player.decides_to_roll_again
       end
       it { should_not be_pending }
     end
@@ -107,7 +107,7 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.holds
+        player.decides_to_hold
       end
 
       subject { player.turns.last }
@@ -119,7 +119,7 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.rolls_again
+        player.decides_to_roll_again
         @action = player.roll_dice
       end
 
@@ -143,9 +143,9 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.rolls_again
+        player.decides_to_roll_again
         player.roll_dice
-        player.holds
+        player.decides_to_hold
       end
 
       subject { player.turns.last }
@@ -171,11 +171,11 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.rolls_again
+        player.decides_to_roll_again
         player.roll_dice
-        player.rolls_again
+        player.decides_to_roll_again
         player.roll_dice
-        player.holds
+        player.decides_to_hold
       end
 
       subject { player.turns.last }
@@ -192,11 +192,11 @@ describe HumanPlayer do
       before do
         player.start_turn
         player.roll_dice
-        player.holds
+        player.decides_to_hold
 
         player.start_turn
         player.roll_dice
-        player.holds
+        player.decides_to_hold
       end
 
       it "accumulates the player's score" do

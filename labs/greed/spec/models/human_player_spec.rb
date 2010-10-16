@@ -125,8 +125,17 @@ describe HumanPlayer do
 
       subject { player.turns.last }
       it { should have(2).rolls }
+      it { should be_pending }
       its(:score) { should == 0 }
       it { @action.should == :bust }
+
+      context "and then going bust" do
+        before { player.goes_bust }
+        it { should_not be_pending }
+        it "should record being bust" do
+          subject.rolls.last.action.should be :bust
+        end
+      end
     end
 
     context "after rolling, continuing, then holding (no bust)" do

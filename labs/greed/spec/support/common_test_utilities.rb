@@ -1,9 +1,14 @@
 module CommonTestUtilities
-  def make_invalid(model, message="so bad")
+
+  # Make an active record module arbitrarily invalid.  An option error
+  # message my be supplied.
+  def make_invalid(model, message="arbitrarily invalid")
     flexmock(model, :valid? => false)
     flexmock(model, "errors.full_messages" => [message])
   end
 
+  # Construct an active record object that is findable.  Use the same
+  # argument list you would give to a factory girl factory.
   def make_findable(*args)
     obj = Factory.build(*args)
     flexmock(obj, :id => next_id)

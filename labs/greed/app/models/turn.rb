@@ -13,4 +13,21 @@ class Turn < ActiveRecord::Base
       rolls.last.action.blank?
     end
   end
+
+  def roll_dice(roller)
+    roller.roll(number_of_dice_to_roll)
+    rolls << Roll.new_from_roller(roller, score)
+    roller.bust? ? :bust : :ok
+  end
+
+  private
+
+  def number_of_dice_to_roll
+    if rolls.empty?
+      result = 5
+    else
+      result = rolls.last.unused
+    end
+    result.nonzero? || 5
+  end
 end

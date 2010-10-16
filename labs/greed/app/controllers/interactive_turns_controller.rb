@@ -7,9 +7,9 @@ class InteractiveTurnsController < ApplicationController
     if current_player.pending?
       current_player.rolls_again
     end
-    current_player.roll_dice
+    roll_result = current_player.roll_dice
     current_player.save!
-    if current_player.last_action == :bust
+    if roll_result == :bust
       redirect_to interactive_bust_path(game)
     else
       redirect_to interactive_decide_path(game)
@@ -17,6 +17,8 @@ class InteractiveTurnsController < ApplicationController
   end
 
   def bust
+    current_player.goes_bust
+    current_player.save!
   end
 
   def decide

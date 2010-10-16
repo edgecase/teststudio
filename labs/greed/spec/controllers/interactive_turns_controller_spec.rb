@@ -5,13 +5,14 @@ describe InteractiveTurnsController do
     g = make_findable(:game)
     g.players << Factory.build(:human_player)
     g.current_player = g.players.first
+    g.current_player.start_turn
     g
   }
   let(:current_player) { game.current_player }
 
   describe "GET roll" do
     before do
-      flexmock(current_player).should_receive(:roll_dice).once
+      flexmock(current_player).should_receive(:roll_dice).once.by_default
       flexmock(current_player).should_receive(:save!).once
       flexmock(current_player).should_receive(:pending?).
         and_return(false).by_default
@@ -26,13 +27,14 @@ describe InteractiveTurnsController do
         get :roll, :game_id => game.id
       end
       it "marks the pending roll with :roll" do
-        # see mock
+        # spec'ed in the mocks
       end
     end
 
     context "with a good score" do
       before do
-        flexmock(current_player, :last_action => :hold)
+        flexmock(current_player).should_receive(:roll_dice).
+            and_return(:ok).once
         get :roll, :game_id => game.id
       end
       it { response.should redirect_to(interactive_decide_path(game.id)) }
@@ -40,7 +42,8 @@ describe InteractiveTurnsController do
 
     context "with a bust score" do
       before do
-        flexmock(current_player, :last_action => :bust)
+        flexmock(current_player).should_receive(:roll_dice).
+            and_return(:bust).once
         get :roll, :game_id => game.id
       end
       it { response.should redirect_to(interactive_bust_path(game.id)) }
@@ -49,6 +52,8 @@ describe InteractiveTurnsController do
 
   describe "GET bust" do
     before do
+      current_player.roll_dice
+      flexmock(current_player).should_receive(:goes_bust).once
       flexmock(current_player).
         should_receive("turns.last.rolls").
         and_return(:rolls_result)

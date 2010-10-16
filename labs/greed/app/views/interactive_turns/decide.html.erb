@@ -13,7 +13,6 @@
     <div class="turn">
       <h1>Your Turn</h1>
       <% last_rolls.each do |roll| -%>
-        DBG: Roll='<%= roll.inspect %>'<br />
         <%= render :partial => "common/rolls",
               :locals => { :player => game.current_player, :roll => roll } -%>
       <% end -%>

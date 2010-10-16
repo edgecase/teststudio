@@ -12,20 +12,11 @@ class HumanPlayer < Player
   end
 
   def roll_dice
-    current_turn = turns.last
-    last_roll = current_turn.try(:rolls).try(:last)
-    n = last_roll.try(:unused) || 5
-    n = n.nonzero? || 5
-    roller.roll(n)
-    turn_score = roller.new_score(current_turn.score)
-    roll = Roll.new(
-      :faces => roller.faces.map { |n| Face.new(:value => n) },
-      :score => roller.points,
-      :unused => roller.unused,
-      :accumulated_score => turn_score,
-      :action => nil)
-    turns.last.rolls << roll
-    roller.bust? ? :bust : :ok
+    turns.last.roll_dice(roller)
+  end
+
+  def goes_bust
+    turns.last.rolls.last.action = :bust
   end
 
   def holds

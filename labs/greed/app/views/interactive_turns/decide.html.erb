@@ -1,7 +1,7 @@
 <div id="sidebar">
   <h1><span>total points</span></h1>
   <ul>
-    <% @game.players.each do |player| -%>
+    <% game.players.each do |player| -%>
       <%= render :partial => "common/player",
             :locals => { :player => player, :current => false } -%>
     <% end -%>
@@ -12,14 +12,15 @@
   <div id="rolls">
     <div class="turn">
       <h1>Your Turn</h1>
-      <% @rolls.each do |roll| -%>
+      <% last_rolls.each do |roll| -%>
+        DBG: Roll='<%= roll.inspect %>'<br />
         <%= render :partial => "common/rolls",
-              :locals => { :player => @game.current_player, :roll => roll } -%>
+              :locals => { :player => game.current_player, :roll => roll } -%>
       <% end -%>
     </div>
   </div>
   <p>
-    <%= link_to "Roll again", roll_interactive_turn_path(@game), :class => 'button' %>
-    <%= link_to "Hold", hold_interactive_turn_path(@game), :class => 'button' %>
+    <%= link_to "Roll again", interactive_roll_path(game), :class => 'button' %>
+    <%= link_to "Hold", interactive_hold_path(game), :class => 'button' %>
  </p>
 </div>

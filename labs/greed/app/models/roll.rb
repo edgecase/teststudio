@@ -19,7 +19,7 @@ class Roll < ActiveRecord::Base
   end
 
   def action
-    action_name.try(:to_sym)
+    action_name.blank? ? nil : action_name.try(:to_sym)
   end
 
   def action=(new_action)

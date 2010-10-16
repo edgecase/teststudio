@@ -4,6 +4,9 @@ class InteractiveTurnsController < ApplicationController
   assume(:last_rolls) { current_player.turns.last.rolls }
 
   def roll
+    if current_player.pending?
+      current_player.rolls_again
+    end
     current_player.roll_dice
     current_player.save!
     if current_player.last_action == :bust
@@ -16,11 +19,11 @@ class InteractiveTurnsController < ApplicationController
   def bust
   end
 
-  def rolls
+  def decide
   end
 
   def hold
-    current_player.hold
+    current_player.holds
     current_player.save!
     if current_player.score >= 3000
       redirect_to game_over_path(game)

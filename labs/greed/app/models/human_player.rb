@@ -37,5 +37,8 @@ class HumanPlayer < Player
     turns.last.rolls.last.action = :roll
   end
 
+  def pending?
+    turns.last && turns.last.pending?
+  end
 end
 

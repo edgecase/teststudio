@@ -16,10 +16,16 @@ describe Roll do
     roll
   end
 
-  context "when an action is added" do
-    before { subject.action = "roll" }
-    it "has a symbol for the action" do
-      subject.action.should == :roll
+  describe "#action" do
+    context "with no action" do
+      before { subject.action_name = "" }
+      its(:action) { should be_nil }
+    end
+    context "when an action is set as a string" do
+      before { subject.action = "roll" }
+      it "has a symbol for the action" do
+        subject.action.should == :roll
+      end
     end
   end
 

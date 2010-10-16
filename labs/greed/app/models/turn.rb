@@ -5,4 +5,12 @@ class Turn < ActiveRecord::Base
   def score
     rolls.last.try(:accumulated_score) || 0
   end
+
+  def pending?
+    if rolls.nil? || rolls.empty?
+      false
+    else
+      rolls.last.action.blank?
+    end
+  end
 end

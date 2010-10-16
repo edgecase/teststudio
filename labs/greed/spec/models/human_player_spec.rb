@@ -16,6 +16,32 @@ describe HumanPlayer do
   its(:play_style) { should == :interactive }
   its(:description) { should == "Human" }
 
+  describe "#pending?" do
+    let(:data) { [[1,2,3,4,5]] }
+
+    context "no turns" do
+      it { should_not be_pending }
+    end
+
+    context "with a pending turn" do
+      before do
+        player.start_turn
+        player.roll_dice
+      end
+      it { should be_pending }
+    end
+
+    context "with a non-pending turn" do
+      before do
+        player.start_turn
+        player.roll_dice
+        player.rolls_again
+      end
+      it { should_not be_pending }
+    end
+
+  end
+
   context "when rolling dice" do
     context "on the first roll" do
       let(:data) { [[1,2,3,4,5]] }

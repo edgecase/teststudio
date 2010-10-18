@@ -30,7 +30,6 @@ class HumanPlayer < Player
 
   # True if the last roll of the last turn does not have an action.
   def pending?
-    puts "DBG: turns.last=#{turns.last.inspect}"
     turns.last && turns.last.pending?
   end
 end

@@ -10,10 +10,8 @@ class Turn < ActiveRecord::Base
 
   def pending?
     if rolls.nil? || rolls.empty?
-      puts "DBG: Turn#pending direct false"
       false
     else
-      puts "DBG: rolls.last.action=#{rolls.last.action.inspect}"
       rolls.last.action.blank?
     end
   end

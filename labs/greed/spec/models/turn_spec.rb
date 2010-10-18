@@ -61,6 +61,16 @@ describe Turn do
     end
   end
 
+  describe "#score_up_to" do
+    context "with several rolls" do
+      let(:turn) { turn_with_rolls([1,5,2,3,4], [1], [1,1,1]) }
+      let(:second_roll) { turn.rolls[1] }
+      it "adds score up thru the indicated roll" do
+        turn.score_up_to(second_roll).should == 250
+      end
+    end
+  end
+
   describe "#pending?" do
     context "with no rolls" do
       let(:turn) { Factory.build(:turn) }
@@ -91,6 +101,14 @@ describe Turn do
     turn = Factory.build(:turn)
     turn.rolls << Factory.build(:roll, :faces => faces(1,2,3,2,3), :action => :roll)
     turn.rolls << Factory.build(:roll, :faces => faces(2,3,4,3,4), :action => :bust)
+    turn
+  end
+
+  def turn_with_rolls(*face_list)
+    turn = Factory.build(:turn)
+    face_list.each { |face_values|
+      turn.rolls << Factory.build(:roll, :faces => faces(*face_values), :action => :roll)
+    }
     turn
   end
 

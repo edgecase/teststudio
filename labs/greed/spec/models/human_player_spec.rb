@@ -16,28 +16,28 @@ describe HumanPlayer do
   its(:play_style) { should == :interactive }
   its(:description) { should == "Human" }
 
-  describe "#pending?" do
+  describe "#undecided?" do
     let(:data) { [[1,2,3,4,5]] }
 
     context "no turns" do
-      it { should_not be_pending }
+      it { should_not be_undecided }
     end
 
-    context "with a pending turn" do
+    context "with undecided turn" do
       before do
         player.start_turn
         player.roll_dice
       end
-      it { should be_pending }
+      it { should be_undecided }
     end
 
-    context "with a non-pending turn" do
+    context "with a non-undecided turn" do
       before do
         player.start_turn
         player.roll_dice
         player.decides_to_roll_again
       end
-      it { should_not be_pending }
+      it { should_not be_undecided }
     end
 
   end
@@ -126,13 +126,13 @@ describe HumanPlayer do
 
       subject { player.turns.last }
       it { should have(2).rolls }
-      it { should_not be_pending }
+      it { should_not be_undecided }
       its(:score) { should == 0 }
       it { @action.should == :bust }
 
       context "and then going bust" do
         before { player.goes_bust }
-        it { should_not be_pending }
+        it { should_not be_undecided }
         it "should record being bust" do
           subject.rolls.last.action.should be :bust
         end

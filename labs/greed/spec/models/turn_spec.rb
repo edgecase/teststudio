@@ -71,20 +71,20 @@ describe Turn do
     end
   end
 
-  describe "#pending?" do
+  describe "#undecided?" do
     context "with no rolls" do
       let(:turn) { Factory.build(:turn) }
-      its(:pending?) { should be_false }
+      its(:undecided?) { should be_false }
     end
 
     context "when the last action of the last roll is unknown" do
       let(:turn) { turn_with_several_rolls(nil) }
-      its(:pending?) { should be_true }
+      its(:undecided?) { should be_true }
     end
 
     context "when the last action of the last roll is known" do
       let(:turn) { turn_with_several_rolls(:hold) }
-      its(:pending?) { should be_false }
+      its(:undecided?) { should be_false }
     end
   end
 

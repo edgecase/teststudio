@@ -29,8 +29,8 @@ class HumanPlayer < Player
   end
 
   # True if the last roll of the last turn does not have an action.
-  def pending?
-    last_turn && last_turn.pending?
+  def undecided?
+    last_turn && last_turn.undecided?
   end
 
   def last_turn

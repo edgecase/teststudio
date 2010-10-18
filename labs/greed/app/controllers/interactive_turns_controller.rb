@@ -4,7 +4,7 @@ class InteractiveTurnsController < ApplicationController
   assume(:last_rolls) { current_player.turns.last.rolls }
 
   def roll
-    if current_player.pending?
+    if current_player.undecided?
       current_player.decides_to_roll_again
     end
     roll_result = current_player.roll_dice

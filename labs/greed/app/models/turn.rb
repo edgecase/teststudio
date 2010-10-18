@@ -20,7 +20,7 @@ class Turn < ActiveRecord::Base
     sum
   end
 
-  def pending?
+  def undecided?
     if rolls.nil? || rolls.empty?
       false
     else

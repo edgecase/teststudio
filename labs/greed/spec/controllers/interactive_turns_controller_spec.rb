@@ -14,19 +14,19 @@ describe InteractiveTurnsController do
     before do
       flexmock(current_player).should_receive(:roll_dice).once.by_default
       flexmock(current_player).should_receive(:save_roll!).once
-      flexmock(current_player).should_receive(:pending?).
+      flexmock(current_player).should_receive(:undecided?).
         and_return(false).by_default
       flexmock(current_player).should_receive(:decides_to_roll_again).
         never.by_default
     end
 
-    context "with a pending on the current roll" do
+    context "with a undecided on the current roll" do
       before do
-        flexmock(current_player, :pending? => true)
+        flexmock(current_player, :undecided? => true)
         flexmock(current_player).should_receive(:decides_to_roll_again).once
         get :roll, :game_id => game.id
       end
-      it "marks the pending roll with :roll" do
+      it "marks the undecided roll with :roll" do
         # spec'ed in the mocks
       end
     end

@@ -1,6 +1,8 @@
 class Turn < ActiveRecord::Base
-  has_many :rolls, :order => :position
+  has_many :rolls, :order => "position"
   belongs_to :player
+
+  acts_as_list :scope => :player
 
   def score
     rolls.inject(0) { |sum, roll|

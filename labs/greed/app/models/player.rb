@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
   attr_writer :roller
 
-  has_many :turns
+  has_many :turns, :order => "position"
 
   def roller
     @roller ||= Roller.new

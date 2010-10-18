@@ -2,6 +2,8 @@ class Roll < ActiveRecord::Base
   has_many :faces
   belongs_to :turn
 
+  acts_as_list :scope => :turn
+
   def self.new_from_roller(roller, _unused_)
     new(
       :faces => roller.faces.map { |n| Face.new(:value => n) },
@@ -24,6 +26,10 @@ class Roll < ActiveRecord::Base
     scorer = Scorer.new
     scorer.score(face_values)
     scorer.unused
+  end
+
+  def dice_to_roll
+    unused.nonzero? || 5
   end
 
   def action

@@ -1,7 +1,7 @@
 class TurnsController < ApplicationController
   assume(:game) { Game.find(params[:game_id]) }
   assume(:current_player) { game.current_player }
-  assume(:winner) { }
+  assume(:winner_name) { }
 
   def start_turn
     if current_player.play_style == :automatic
@@ -14,7 +14,7 @@ class TurnsController < ApplicationController
   end
 
   def game_over
-    self.winner = current_player
+    self.winner_name = current_player.name
   end
 end
 

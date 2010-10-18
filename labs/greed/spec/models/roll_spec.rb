@@ -58,6 +58,26 @@ describe Roll do
     end
   end
 
+  describe "#dice_to_roll" do
+    let(:roll) { Roll.new_from_roller(roller, 200) }
+    subject { roll }
+
+    context "no scoring dice" do
+      let(:roller) { roller_that_rolled(5, [2,2,3,3,4]) }
+      its(:dice_to_roll) { should == 5 }
+    end
+
+    context "some scoring dice" do
+      let(:roller) { roller_that_rolled(5, [1,2,3,4,5]) }
+      its(:dice_to_roll) { should == 3 }
+    end
+
+    context "all scoring dice" do
+      let(:roller) { roller_that_rolled(5, [1,1,1,1,1]) }
+      its(:dice_to_roll) { should == 5 }
+    end
+  end
+
   describe "Roll.new_from_roller" do
     let(:roller) { roller_that_rolled(5, [1,2,3,4,5]) }
     let(:roll) { Roll.new_from_roller(roller, 200) }

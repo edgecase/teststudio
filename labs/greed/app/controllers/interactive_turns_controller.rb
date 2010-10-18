@@ -8,7 +8,7 @@ class InteractiveTurnsController < ApplicationController
       current_player.decides_to_roll_again
     end
     roll_result = current_player.roll_dice
-    current_player.save!
+    current_player.save_roll!
     if roll_result == :bust
       redirect_to interactive_bust_path(game)
     else
@@ -18,7 +18,7 @@ class InteractiveTurnsController < ApplicationController
 
   def bust
     current_player.goes_bust
-    current_player.save!
+    current_player.save_roll!
   end
 
   def decide
@@ -26,7 +26,7 @@ class InteractiveTurnsController < ApplicationController
 
   def hold
     current_player.decides_to_hold
-    current_player.save!
+    current_player.save_roll!
     if current_player.score >= 3000
       redirect_to game_over_path(game)
     else

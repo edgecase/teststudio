@@ -203,4 +203,48 @@ describe HumanPlayer do
       end
     end
   end
+
+  describe "saving turn state" do
+    let(:data) { [[1,2,3,4,5]] }
+    before do
+      player.start_turn
+      player.roll_dice
+      player.save_roll!
+
+      player.reload
+      player.decides_to_hold
+      player.save_roll!
+    end
+
+    subject { Player.find(player.id) }
+
+    it "has the new action in the reloaded player" do
+      subject.last_roll.action.should == :hold
+    end
+  end
+
+  describe "#last_turn" do
+    let(:player) {
+      Factory.create(:human_player,
+        :turns => [Factory.create(:turn)])
+    }
+
+    it "returns the same object for all calls" do
+      player.reload
+      player.last_turn.should be player.last_turn
+    end
+  end
+
+  describe "#last_roll" do
+    let(:player) {
+      Factory.create(:human_player,
+        :turns => [Factory.create(:turn, :rolls => [Factory.create(:roll)])])
+    }
+
+    it "returns the same object for all calls" do
+      player.reload
+      player.last_roll.should be player.last_roll
+    end
+  end
+
 end

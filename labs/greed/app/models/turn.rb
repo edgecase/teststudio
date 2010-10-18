@@ -38,8 +38,8 @@ class Turn < ActiveRecord::Base
     if rolls.empty?
       result = 5
     else
-      result = rolls.last.unused
+      result = rolls.last.dice_to_roll
     end
-    result.nonzero? || 5
+    result
   end
 end

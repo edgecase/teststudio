@@ -2,7 +2,6 @@ class CreateRolls < ActiveRecord::Migration
   def self.up
     create_table :rolls do |t|
       t.integer :score
-      t.integer :accumulated_score
       t.integer :unused
       t.string :action_name
       t.integer :turn_id

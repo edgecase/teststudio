@@ -20,7 +20,7 @@ describe TurnsController do
 
     context "with a non-interactive player" do
       before do
-        game.players << Factory.build(:computer_player)
+        game.players << Factory.build(:computer_player, :strategy => "ConservativeStrategy")
         game.current_player = game.players.first
         get :start_turn, :game_id => game.id
       end

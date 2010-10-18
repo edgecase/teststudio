@@ -10,7 +10,7 @@
 
 <div id="main">
   <div id="rolls">
-    <% @most_recent_turn.each do |turn| -%>
+    <% most_recent_turn.each do |turn| -%>
       <div class="turn">
         <h1><%= turn.player.name %>'s Turn</h1>
         <% turn.rolls.each do |roll| -%>

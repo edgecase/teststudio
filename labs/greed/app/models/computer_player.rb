@@ -31,7 +31,9 @@ class ComputerPlayer < Player
       rolls_in_this_turn << new_roll(turn_score, action)
       dice_to_roll = number_of_dice_to_roll(roller.unused)
     end while action == :roll
-    turns << Turn.new(:rolls => rolls_in_this_turn)
+    turn = Turn.new(:rolls => rolls_in_this_turn)
+    turns << turn
+    self.score += turn.score
     turns.last
   end
 

@@ -4,6 +4,8 @@ class TurnsController < ApplicationController
   assume(:winner_name) { }
 
   def start_turn
+    game.update_attributes(:current_player => game.next_player)
+
     if current_player.play_style == :automatic
       redirect_to non_interactive_start_path(params[:game_id])
     else

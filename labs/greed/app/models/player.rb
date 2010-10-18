@@ -8,6 +8,19 @@ class Player < ActiveRecord::Base
   end
 
   def last_action
-    turns.last.try(:rolls).try(:last).try(:action)
+    last_roll.try(:action)
+  end
+
+  def last_turn
+    turns.to_a.last
+  end
+
+  def last_roll
+    last_turn.try(:rolls).to_a.last
+  end
+
+  def save_roll!
+    last_turn.rolls.each do |r| r.save! end
+    save!
   end
 end

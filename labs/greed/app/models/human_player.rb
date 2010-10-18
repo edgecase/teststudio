@@ -33,17 +33,5 @@ class HumanPlayer < Player
     last_turn && last_turn.undecided?
   end
 
-  def last_turn
-    turns.to_a.last
-  end
-
-  def last_roll
-    last_turn.rolls.to_a.last
-  end
-
-  def save_roll!
-    last_turn.rolls.each do |r| r.save! end
-    save!
-  end
 end
 

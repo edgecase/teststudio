@@ -36,8 +36,8 @@ describe TurnsController do
       game.current_player = game.players.first
       get :game_over, :game_id => game.id
     end
-    it "sets the winner" do
-      @controller.winner.should == game.current_player
+    it "sets the winner name" do
+      @controller.winner_name.should == game.current_player.name
     end
     it { response.should render_template "game_over" }
   end

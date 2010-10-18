@@ -14,7 +14,11 @@ class Turn < ActiveRecord::Base
   def score_up_to(current_roll)
     sum = 0
     rolls.each do |roll|
-      sum += roll.points
+      if roll.action == :bust
+        sum = 0
+      else
+        sum += roll.points
+      end
       break if roll == current_roll
     end
     sum

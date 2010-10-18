@@ -69,6 +69,14 @@ describe Turn do
         turn.score_up_to(second_roll).should == 250
       end
     end
+
+    context "with several rolls ending in a bust" do
+      let(:turn) { turn_with_rolls([1,5,2,3,4], [1], [2]) }
+      let(:third_roll) { turn.rolls[2] }
+      it "adds score up thru the indicated roll" do
+        turn.score_up_to(third_roll).should == 0
+      end
+    end
   end
 
   describe "#undecided?" do
@@ -107,8 +115,11 @@ describe Turn do
   def turn_with_rolls(*face_list)
     turn = Factory.build(:turn)
     face_list.each { |face_values|
-      turn.rolls << Factory.build(:roll, :faces => faces(*face_values), :action => :roll)
+      turn.rolls << Factory.build(:roll,
+        :faces => faces(*face_values),
+        :action => :roll)
     }
+    turn.rolls.last.action = :bust
     turn
   end
 

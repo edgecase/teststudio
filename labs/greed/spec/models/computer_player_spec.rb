@@ -95,7 +95,7 @@ describe ComputerPlayer do
         inject_roll(5, [2,2,3,3,4])
       end
 
-      it "has the proper accumulated points" do
+      it "has the proper points" do
         turn.rolls[0].points.should == 1200
         turn.rolls[0].action.should == :roll
 
@@ -114,13 +114,11 @@ describe ComputerPlayer do
         player_rolls.once.and_return(false)
       end
 
-      it "has the proper accumulated points" do
+      it "has the proper points" do
         turn.rolls[0].points.should == 100
         turn.rolls[0].action.should == :roll
-        turn.rolls[0].accumulated_score.should == 100
 
         turn.rolls[1].points.should == 50
-        turn.rolls[1].accumulated_score.should == 150
         turn.rolls[1].action.should == :hold
 
         turn.score.should == 150
@@ -135,13 +133,11 @@ describe ComputerPlayer do
         player_rolls.once.and_return(false)
       end
 
-      it "has the proper accumulated points" do
+      it "has the proper points" do
         turn.rolls[0].points.should == 1100
         turn.rolls[0].action.should == :roll
-        turn.rolls[0].accumulated_score.should == 1100
 
         turn.rolls[1].points.should == 100
-        turn.rolls[1].accumulated_score.should == 1200
         turn.rolls[1].action.should == :hold
 
         turn.score.should == 1200

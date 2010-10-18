@@ -12,15 +12,6 @@ describe Turn do
 
   its(:player) { should == player }
 
-  context "with several rolls" do
-    let(:r1) { Factory.build(:roll, :accumulated_score => 100, :position => 1) }
-    let(:r2) { Factory.build(:roll, :accumulated_score => 250, :position => 2) }
-    before { subject.rolls = [r1, r2] }
-
-    its(:rolls) { should == [r1, r2] }
-    its(:score) { should == r2.accumulated_score }
-  end
-
   describe "#roll_dice" do
     context "with any roll" do
       let!(:original_roll_count) { turn.rolls.size }
@@ -54,6 +45,22 @@ describe Turn do
     end
   end
 
+  describe "#score" do
+    context "with no rolls" do
+      its(:score) { should be_zero }
+    end
+
+    context "with several rolls" do
+      let(:turn) { turn_with_several_rolls }
+      its(:score) { should == 250 }
+    end
+
+    context "with several rolls ending with a bust" do
+      let(:turn) { turn_with_a_bust }
+      its(:score) { should == 0 }
+    end
+  end
+
   describe "#pending?" do
     context "with no rolls" do
       let(:turn) { Factory.build(:turn) }
@@ -69,14 +76,25 @@ describe Turn do
       let(:turn) { turn_with_several_rolls(:hold) }
       its(:pending?) { should be_false }
     end
+  end
 
-    private
+  private
 
-    def turn_with_several_rolls(last_action=nil)
-      turn = Factory.build(:turn)
-      turn.rolls << Factory.build(:roll, :accumulated_score => 100)
-      turn.rolls << Factory.build(:roll, :accumulated_score => 250, :action => last_action)
-      turn
-    end
+  def turn_with_several_rolls(last_action=:hold)
+    turn = Factory.build(:turn)
+    turn.rolls << Factory.build(:roll, :faces => faces(1,2,3,2,3), :action => :roll)
+    turn.rolls << Factory.build(:roll, :faces => faces(1,5,3,2,3), :action => last_action)
+    turn
+  end
+
+  def turn_with_a_bust(last_action=:hold)
+    turn = Factory.build(:turn)
+    turn.rolls << Factory.build(:roll, :faces => faces(1,2,3,2,3), :action => :roll)
+    turn.rolls << Factory.build(:roll, :faces => faces(2,3,4,3,4), :action => :bust)
+    turn
+  end
+
+  def faces(*face_values)
+    face_values.map { |f| Face.new(:value => f) }
   end
 end

@@ -3,13 +3,17 @@ class Turn < ActiveRecord::Base
   belongs_to :player
 
   def score
-    rolls.last.try(:accumulated_score) || 0
+    rolls.inject(0) { |sum, roll|
+      (roll.action == :bust) ? 0 : sum + roll.points
+    }
   end
 
   def pending?
     if rolls.nil? || rolls.empty?
+      puts "DBG: Turn#pending direct false"
       false
     else
+      puts "DBG: rolls.last.action=#{rolls.last.action.inspect}"
       rolls.last.action.blank?
     end
   end

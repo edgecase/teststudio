@@ -2,12 +2,11 @@ class Roll < ActiveRecord::Base
   has_many :faces
   belongs_to :turn
 
-  def self.new_from_roller(roller, turn_score)
+  def self.new_from_roller(roller, _unused_)
     new(
       :faces => roller.faces.map { |n| Face.new(:value => n) },
       :score => roller.points,
       :unused => roller.unused,
-      :accumulated_score => roller.new_score(turn_score),
       :action => nil)
   end
 

@@ -6,9 +6,7 @@ describe Roll do
   end
 
   let(:roll) {
-    Factory.build(:roll,
-      :accumulated_score => 300,
-      :faces => [])
+    Factory.build(:roll, :faces => [])
   }
 
   def set_faces(*face_values)
@@ -21,7 +19,6 @@ describe Roll do
       subject { set_faces(2, 3, 5, 5) }
 
       its(:face_values) { should == [2, 3, 5, 5] }
-      its(:accumulated_score) { should == 300 }
       its(:points) { should == 100 }
       its(:unused) { should == 2 }
       its(:action) { should be_nil }
@@ -69,7 +66,6 @@ describe Roll do
 
     its(:score) { should == roller.points }
     its(:unused) { should == roller.unused }
-    its(:accumulated_score) { should == 200 + 150 }
     it "should match the faces" do
       roll.faces.map(&:value).should == roller.faces
     end

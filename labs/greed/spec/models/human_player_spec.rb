@@ -121,11 +121,12 @@ describe HumanPlayer do
         player.roll_dice
         player.decides_to_roll_again
         @action = player.roll_dice
+        player.goes_bust
       end
 
       subject { player.turns.last }
       it { should have(2).rolls }
-      it { should be_pending }
+      it { should_not be_pending }
       its(:score) { should == 0 }
       it { @action.should == :bust }
 
@@ -161,9 +162,7 @@ describe HumanPlayer do
         face_counts = rolls.map { |r| r.faces.size }
         face_counts.should == [5, 3]
       end
-      it "has the proper final accumulation score" do
-        last_roll.accumulated_score.should == 1150
-      end
+      its(:score) { should == 1150 }
     end
 
     context "after rolling, continuing twice" do

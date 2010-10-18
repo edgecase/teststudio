@@ -41,12 +41,11 @@ class ComputerPlayer < Player
     unused.nonzero? || 5
   end
 
-  def new_roll(turn_score, action)
+  def new_roll(_unused_, action)
     Roll.new(
       :faces => roller.faces.map { |n| Face.new(:value => n) },
       :score => roller.points,
       :unused => roller.unused,
-      :accumulated_score => turn_score,
       :action => action)
   end
 

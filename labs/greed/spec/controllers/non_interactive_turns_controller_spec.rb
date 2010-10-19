@@ -13,7 +13,7 @@ describe NonInteractiveTurnsController do
   describe "GET start" do
     before do
       flexmock(player).should_receive(:take_turn).once
-      flexmock(player).should_receive(:save_roll!).once
+      flexmock(player).should_receive(:save_turn!).once
       get :start, :game_id => game.id
     end
     it "redirects to the non_interactive results" do

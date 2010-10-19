@@ -13,7 +13,7 @@ describe InteractiveTurnsController do
   describe "GET roll" do
     before do
       flexmock(current_player).should_receive(:roll_dice).once.by_default
-      flexmock(current_player).should_receive(:save_roll!).once
+      flexmock(current_player).should_receive(:save_turn!).once
       flexmock(current_player).should_receive(:undecided?).
         and_return(false).by_default
       flexmock(current_player).should_receive(:decides_to_roll_again).
@@ -92,7 +92,7 @@ describe InteractiveTurnsController do
     before do
       current_player.roll_dice
       flexmock(current_player).should_receive(:decides_to_hold).once
-      flexmock(current_player).should_receive(:save_roll!).once.
+      flexmock(current_player).should_receive(:save_turn!).once.
         and_return(true)
     end
 

@@ -19,7 +19,7 @@ class Player < ActiveRecord::Base
     last_turn.try(:rolls).to_a.last
   end
 
-  def save_roll!
+  def save_turn!
     last_turn.rolls.each do |r| r.save! end
     save!
   end

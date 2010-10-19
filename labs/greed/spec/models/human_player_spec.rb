@@ -209,11 +209,11 @@ describe HumanPlayer do
     before do
       player.start_turn
       player.roll_dice
-      player.save_roll!
+      player.save_turn!
 
       player.reload
       player.decides_to_hold
-      player.save_roll!
+      player.save_turn!
     end
 
     subject { Player.find(player.id) }

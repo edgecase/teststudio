@@ -5,7 +5,7 @@ class NonInteractiveTurnsController < ApplicationController
 
   def start
     current_player.take_turn
-    current_player.save_roll!
+    current_player.save_turn!
     redirect_to non_interactive_results_path(game.id)
   end
 

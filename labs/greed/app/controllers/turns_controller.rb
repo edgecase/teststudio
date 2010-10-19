@@ -4,7 +4,7 @@ class TurnsController < ApplicationController
   assume(:winner_name) { }
 
   def start_turn
-    if game.current_player.score >= 3000
+    if game.current_player && game.current_player.score >= 3000
       self.winner_name = current_player.name
       render "game_over"
     else

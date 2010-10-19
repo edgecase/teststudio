@@ -32,6 +32,11 @@ Factory.define :game do |game|
   game.players []
 end
 
-Factory.define :two_player_game, :parent => :game do |game|
-  game.players { [Factory.build(:human_player), Factory.build(:computer_player)] }
+Factory.define :game_between_human_and_computer, :parent => :game do |game|
+  game.players {
+    [
+      Factory.build(:human_player, :score => 0),
+      Factory.build(:computer_player, :score => 0, :strategy => "ConservativeStrategy")
+    ]
+  }
 end

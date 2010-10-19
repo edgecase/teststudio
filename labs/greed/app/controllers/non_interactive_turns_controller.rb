@@ -10,10 +10,6 @@ class NonInteractiveTurnsController < ApplicationController
   end
 
   def results
-    if current_player.score >= 3000
-      redirect_to game_over_path(game)
-    else
-      self.most_recent_turn = [current_player.turns.last]
-    end
+    self.most_recent_turn = [current_player.turns.last]
   end
 end

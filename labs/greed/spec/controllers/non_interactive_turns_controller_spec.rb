@@ -36,17 +36,6 @@ describe NonInteractiveTurnsController do
         @controller.most_recent_turn.should == [player.turns.last]
       end
     end
-
-    context "when there is a winner" do
-      before do
-        flexmock(player, :score => 3000)
-        get :results, :game_id => game.id
-      end
-
-      it "redirects to" do
-        response.should redirect_to game_over_path(game)
-      end
-    end
   end
 
 end

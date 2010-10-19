@@ -28,19 +28,4 @@ describe Game do
       end
     end
   end
-
-  describe "detecting game over" do
-    before do
-      player2.score = 3000
-    end
-
-    it "knowns the game is over" do
-      game.should be_over
-    end
-
-    it "knowns who won the game" do
-      game.winner.should == player2
-    end
-  end
-
 end

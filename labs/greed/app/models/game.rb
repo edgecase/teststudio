@@ -14,16 +14,4 @@ class Game < ActiveRecord::Base
     end
     players.first
   end
-
-  def over?
-    players.any? { |p| winner?(p) }
-  end
-
-  def winner
-    players.detect { |p| winner?(p) }
-  end
-
-  def winner?(player)
-    player.score >= 3000
-  end
 end

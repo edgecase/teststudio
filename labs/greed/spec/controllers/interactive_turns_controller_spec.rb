@@ -96,7 +96,6 @@ describe InteractiveTurnsController do
         and_return(true)
     end
 
-
     context "with a score less that the winning score" do
       before do
         flexmock(current_player, :score => 100)

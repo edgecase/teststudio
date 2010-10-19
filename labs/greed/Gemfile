@@ -32,7 +32,7 @@ gem "acts_as_list"
 group :development, :test do
   gem "rspec-rails", "2.0.0"
   gem "rspec-collection", "2.0.0"
-#  gem "flexmock", ">= 0.8.11"
+  gem "flexmock", ">= 0.8.11"
   gem 'webrat'
   gem 'factory_girl'
   gem 'faker'

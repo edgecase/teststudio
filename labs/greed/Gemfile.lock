@@ -59,6 +59,7 @@ GEM
     faker (0.3.1)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    flexmock (0.8.11)
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
@@ -133,6 +134,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl
   faker
+  flexmock (>= 0.8.11)
   rails (= 3.0.0)
   rspec-collection (= 2.0.0)
   rspec-rails (= 2.0.0)

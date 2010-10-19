@@ -16,6 +16,10 @@ Greed::Application.routes.draw do
   match 'interactive/:game_id/decide' => 'interactive_turns#decide', :as => :interactive_decide
   match 'interactive/:game_id/hold'   => 'interactive_turns#hold',   :as => :interactive_hold
 
+  match 'simulate'        => 'simulate_rolls#index',    :as => :simulation_index
+  match 'simulate/clear'  => 'simulate_rolls#clear',    :as => :simulation_clear
+  match 'simulate/:faces' => 'simulate_rolls#simulate', :as => :simulate_faces_path
+
   root :to => "games#new"
 
   # The priority is based upon order of creation:

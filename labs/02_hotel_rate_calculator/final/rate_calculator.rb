@@ -1,41 +1,38 @@
+#  Rules:
+#    * Daily rate for room is rack rate minus discount for that day
+#    * The rate for a range of dates is the sum of the individual daily rates
+#    * Weekdays get a 10% discount off of the rack rate
+#    * Weekends get a 20% discount off of the rack rate
+
 
 class RateCalculator
-  
   def initialize(rack_rate=100)
     @rack_rate = rack_rate
   end
-  
+
   def rate(check_in_date, check_out_date, rooms)
-    (check_in_date ... check_out_date).inject(0) { |sum, day|
-      sum + daily_rate(day, rooms) 
-    }
+    rooms * single_room_rate(check_in_date, check_out_date)
   end
 
   private
 
-  def daily_rate(date, rooms)
-    rate = @rack_rate
-    rate = apply_day_of_week_discounts(rate, date)
-    rate = apply_number_of_rooms_discounts(rate, rooms)
-    rate * rooms
+  def single_room_rate(check_in_date, check_out_date)
+    result = 0.0
+    (check_in_date...check_out_date).each do |day|
+      result += daily_rate(day)
+    end
+    result
   end
 
-  def apply_day_of_week_discounts(rate, date)
-    if date.wday == 6 || date.wday == 0
-      rate * 0.8
+  def daily_rate(day)
+    if weekend?(day)
+      daily_amount = 0.80 * @rack_rate
     else
-      rate * 0.9
+      daily_amount = 0.90 * @rack_rate
     end
   end
 
-  def apply_number_of_rooms_discounts(rate, rooms)
-    if rooms >= 50
-      rate * 0.7 
-    elsif rooms >= 10
-      rate * 0.8
-    else
-      rate
-    end
+  def weekend?(day)
+    day.wday == 6 || day.wday == 0
   end
 end
-

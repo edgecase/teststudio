@@ -1,13 +1,15 @@
 
 describe "equality checks" do
-  
+
   it "should determine structrual equality" do
     a = [1,2]
     b = [1,2]
 
     a.should == b
-    a.should_not be_equal(b)
+    a.should be_eql(b)
+
     a.should_not be(b)
+    a.should_not be_equal(b)
   end
 
 
@@ -16,6 +18,8 @@ describe "equality checks" do
     b = a
 
     a.should == b
+    a.should be_eql(b)
+
     a.should be(b)
     a.should be_equal(b)
   end
@@ -26,8 +30,9 @@ describe "equality checks" do
 
     a.should  == b
     a.should_not be_eql(b)
-    a.should_not be_equal(b)
+
     a.should_not be(b)
+    a.should_not be_equal(b)
   end
 
 end

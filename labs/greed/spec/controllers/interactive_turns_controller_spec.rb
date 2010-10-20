@@ -112,7 +112,7 @@ describe InteractiveTurnsController do
         get :hold, :game_id => game.id
       end
       it "redirects to game over" do
-        response.should redirect_to game_over_path(game)
+        response.should redirect_to start_turn_path(game)
       end
     end
   end

@@ -1,4 +1,6 @@
 class InteractiveTurnsController < ApplicationController
+  include NumberSource
+
   assume(:game) { Game.find(params[:game_id]) }
   assume(:current_player) { game.current_player }
   assume(:last_rolls) { current_player.turns.last.rolls }
@@ -7,6 +9,7 @@ class InteractiveTurnsController < ApplicationController
     if current_player.undecided?
       current_player.decides_to_roll_again
     end
+    current_player.roller = Roller.new(number_source)
     roll_result = current_player.roll_dice
     current_player.save_turn!
     if roll_result == :bust
@@ -27,10 +30,6 @@ class InteractiveTurnsController < ApplicationController
   def hold
     current_player.decides_to_hold
     current_player.save_turn!
-    if current_player.score >= 3000
-      redirect_to game_over_path(game)
-    else
-      redirect_to start_turn_path(game)
-    end
+    redirect_to start_turn_path(game)
   end
 end

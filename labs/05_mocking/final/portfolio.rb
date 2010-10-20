@@ -34,5 +34,5 @@ class Portfolio
   ensure
     @quote_service.logout rescue nil
   end
-    
+
 end

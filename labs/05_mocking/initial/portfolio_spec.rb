@@ -1,7 +1,4 @@
-#!/usr/bin/ruby -wKU
-
-require 'flexmock/rspec'
-
+require 'spec_helper'
 require 'quote_service'
 require 'portfolio'
 
@@ -22,8 +19,8 @@ describe Portfolio do
     it "still returns a good value"
   end
 
-  context "with a successful login" do
-    it "must call logout"
+  context "with a successful login, but a failing call to quote" do
+    it "still calls logout"
   end
 
   # NOTE: We don't have an explicit specifications for

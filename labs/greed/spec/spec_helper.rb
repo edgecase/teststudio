@@ -3,6 +3,7 @@ require 'cover_me' if ENV['COVER_ME']
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'shoulda/integrations/rspec2'
 require 'rspec-collection'
 
 # Requires supporting ruby files with custom matchers and macros, etc,

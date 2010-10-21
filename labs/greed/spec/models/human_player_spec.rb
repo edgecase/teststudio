@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe HumanPlayer do
+  describe "its validations" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:score) }
+    it { should validate_numericality_of(:score) }
+  end
+
   it "has a valid factory" do
     Factory.build(:human_player).should be_valid
   end

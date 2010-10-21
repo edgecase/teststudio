@@ -1,4 +1,6 @@
 class ComputerPlayer < Player
+  validates_presence_of :strategy
+
   delegate :name, :description, :roll_again?, :to => :logic
 
   def play_style

@@ -15,6 +15,8 @@ end
 
 Factory.define :player do |player|
   player.name { Faker::Name.first_name }
+  player.score 0
+  player.strategy "ConservativeStrategy"
 end
 
 Factory.define(:computer_player,

@@ -1,4 +1,6 @@
 class HumanPlayer < Player
+  validates_presence_of :name
+
   def play_style
     :interactive
   end

@@ -1,12 +1,18 @@
 require 'spec_helper'
 
 describe ComputerPlayer do
-  let(:player) { Factory.build(:computer_player) }
-  subject { player }
+  describe "its validations" do
+    it { should validate_presence_of(:strategy) }
+    it { should validate_presence_of(:score) }
+    it { should validate_numericality_of(:score) }
+  end
 
   it "has a valid factory" do
     player.should be_valid
   end
+
+  let(:player) { Factory.build(:computer_player) }
+  subject { player }
 
   it { should be_a(ComputerPlayer) }
   its(:play_style) { should == :automatic }

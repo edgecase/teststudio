@@ -1,4 +1,7 @@
 class Player < ActiveRecord::Base
+  validates_presence_of :score
+  validates_numericality_of :score
+
   attr_writer :roller
 
   has_many :turns, :order => "position"

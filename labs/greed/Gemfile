@@ -38,6 +38,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
+  gem "shoulda"
   gem 'cover_me', '>= 1.0.0.rc2', :group => :test
 end
 

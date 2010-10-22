@@ -75,3 +75,11 @@ Factory.build_def :game_between_human_and_computer, :parent => :game do |game|
     ]
   }
 end
+
+# --------------------------------------------------------------------
+
+Factory.build_def :member do |member|
+  member.name { Faker::Name.first_name }
+  member.email { Faker::Internet.email }
+  member.rank 1000
+end

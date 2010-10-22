@@ -1,5 +1,7 @@
 Greed::Application.routes.draw do
 
+  resources :members
+
   resources :games do |games|
     resources :players
   end

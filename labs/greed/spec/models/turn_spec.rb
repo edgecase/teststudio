@@ -51,12 +51,12 @@ describe Turn do
     end
 
     context "with several rolls" do
-      let(:turn) { turn_with_several_rolls }
+      let(:turn) { turn_with_rolls([1,2,3,4,5], [1,3,2,3,4]) }
       its(:score) { should == 250 }
     end
 
     context "with several rolls ending with a bust" do
-      let(:turn) { turn_with_a_bust }
+      let(:turn) { turn_with_rolls([1,2,3,4,5], [2,3,2,3,4]) }
       its(:score) { should == 0 }
     end
   end
@@ -86,31 +86,17 @@ describe Turn do
     end
 
     context "when the last action of the last roll is unknown" do
-      let(:turn) { turn_with_several_rolls(nil) }
+      let(:turn) { Factory.build(:turn_ending_with_unknown) }
       its(:undecided?) { should be_true }
     end
 
     context "when the last action of the last roll is known" do
-      let(:turn) { turn_with_several_rolls(:hold) }
+      let(:turn) { Factory.build(:turn_ending_with_hold) }
       its(:undecided?) { should be_false }
     end
   end
 
   private
-
-  def turn_with_several_rolls(last_action=:hold)
-    turn = Factory.build(:turn)
-    turn.rolls << Factory.build(:roll, :faces => faces(1,2,3,2,3), :action => :roll)
-    turn.rolls << Factory.build(:roll, :faces => faces(1,5,3,2,3), :action => last_action)
-    turn
-  end
-
-  def turn_with_a_bust(last_action=:hold)
-    turn = Factory.build(:turn)
-    turn.rolls << Factory.build(:roll, :faces => faces(1,2,3,2,3), :action => :roll)
-    turn.rolls << Factory.build(:roll, :faces => faces(2,3,4,3,4), :action => :bust)
-    turn
-  end
 
   def turn_with_rolls(*face_list)
     turn = Factory.build(:turn)
@@ -119,8 +105,17 @@ describe Turn do
         :faces => faces(*face_values),
         :action => :roll)
     }
-    turn.rolls.last.action = :bust
+    scorer.score(turn.rolls.last.faces.map { |f| f.value })
+    if scorer.points == 0
+      turn.rolls.last.action = :bust
+    else
+      turn.rolls.last.action = :hold
+    end
     turn
+  end
+
+  def scorer
+    @scorer ||= Scorer.new
   end
 
   def faces(*face_values)

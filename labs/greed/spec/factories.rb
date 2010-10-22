@@ -28,6 +28,14 @@ Factory.define :turn_ending_with_hold, :parent => :turn do |turn|
   }
 end
 
+Factory.define :turn_ending_with_unknown, :parent => :turn do |turn|
+  turn.rolls { [
+      Factory.build(:roll, :action => :roll),
+      Factory.build(:roll, :action => nil),
+    ]
+  }
+end
+
 # --------------------------------------------------------------------
 
 Factory.define :player do |player|

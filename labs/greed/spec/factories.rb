@@ -28,16 +28,16 @@ end
 
 Factory.build_def :turn_ending_with_hold, :parent => :turn do |turn|
   turn.rolls { [
-      Factory.build(:roll, :action => :roll),
-      Factory.build(:roll, :action => :hold),
+      Factory(:roll, :action => :roll),
+      Factory(:roll, :action => :hold),
     ]
   }
 end
 
 Factory.build_def :turn_ending_with_unknown, :parent => :turn do |turn|
   turn.rolls { [
-      Factory.build(:roll, :action => :roll),
-      Factory.build(:roll, :action => nil),
+      Factory(:roll, :action => :roll),
+      Factory(:roll, :action => nil),
     ]
   }
 end
@@ -70,8 +70,8 @@ end
 Factory.build_def :game_between_human_and_computer, :parent => :game do |game|
   game.players {
     [
-      Factory.build(:human_player, :score => 0),
-      Factory.build(:computer_player, :score => 0, :strategy => "ConservativeStrategy")
+      Factory(:human_player, :score => 0),
+      Factory(:computer_player, :score => 0, :strategy => "ConservativeStrategy")
     ]
   }
 end

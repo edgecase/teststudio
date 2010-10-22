@@ -1,17 +1,34 @@
 
+# --------------------------------------------------------------------
+
 Factory.define :face do |face|
   face.position 1
   face.value { 3 }
 end
 
+# --------------------------------------------------------------------
+
 Factory.define :roll do |roll|
   roll.position 1
-  roll.faces []
+  roll.faces { [] }
 end
 
+# --------------------------------------------------------------------
+
 Factory.define :turn do |turn|
+  turn.rolls { [] }
   turn.position 1
 end
+
+Factory.define :turn_ending_with_hold, :parent => :turn do |turn|
+  turn.rolls { [
+      Factory.build(:roll, :action => :roll),
+      Factory.build(:roll, :action => :hold),
+    ]
+  }
+end
+
+# --------------------------------------------------------------------
 
 Factory.define :player do |player|
   player.name { Faker::Name.first_name }
@@ -29,6 +46,8 @@ Factory.define(:human_player,
   :class => HumanPlayer) do |player|
   player.name Faker::Name.first_name
 end
+
+# --------------------------------------------------------------------
 
 Factory.define :game do |game|
   game.players []

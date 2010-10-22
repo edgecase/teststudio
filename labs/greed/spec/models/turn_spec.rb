@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Turn do
   it "has a valid factory" do
-    Factory.build(:turn).should be_valid
+    Factory(:turn).should be_valid
   end
 
-  let(:player) { Factory.build(:player) }
-  let(:turn) { Factory.build(:turn, :player => player) }
+  let(:player) { Factory(:player) }
+  let(:turn) { Factory(:turn, :player => player) }
 
   subject { turn }
 
@@ -81,17 +81,17 @@ describe Turn do
 
   describe "#undecided?" do
     context "with no rolls" do
-      let(:turn) { Factory.build(:turn) }
+      let(:turn) { Factory(:turn) }
       its(:undecided?) { should be_false }
     end
 
     context "when the last action of the last roll is unknown" do
-      let(:turn) { Factory.build(:turn_ending_with_unknown) }
+      let(:turn) { Factory(:turn_ending_with_unknown) }
       its(:undecided?) { should be_true }
     end
 
     context "when the last action of the last roll is known" do
-      let(:turn) { Factory.build(:turn_ending_with_hold) }
+      let(:turn) { Factory(:turn_ending_with_hold) }
       its(:undecided?) { should be_false }
     end
   end
@@ -99,9 +99,9 @@ describe Turn do
   private
 
   def turn_with_rolls(*face_list)
-    turn = Factory.build(:turn)
+    turn = Factory(:turn)
     face_list.each { |face_values|
-      turn.rolls << Factory.build(:roll,
+      turn.rolls << Factory(:roll,
         :faces => faces(*face_values),
         :action => :roll)
     }

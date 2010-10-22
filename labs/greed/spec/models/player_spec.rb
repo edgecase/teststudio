@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Player do
   it "has a valid factory" do
-    Factory.build(:player).should be_valid
+    Factory(:player).should be_valid
   end
 
-  let(:player) { Factory.build(:player) }
+  let(:player) { Factory(:player) }
   subject { player }
 
   it "provides a roller" do
@@ -19,8 +19,8 @@ describe Player do
 
     context "with a turn and some rolls" do
       before do
-        player.turns << Factory.build(:turn, :rolls => [Roll.new(:action => :bust)])
-        player.turns << Factory.build(:turn, :rolls => [Roll.new(:action => :hold)])
+        player.turns << Factory(:turn, :rolls => [Roll.new(:action => :bust)])
+        player.turns << Factory(:turn, :rolls => [Roll.new(:action => :hold)])
       end
       its(:last_action) { should be :hold }
     end
@@ -36,7 +36,7 @@ describe Player do
   context 'with muliple turns' do
     before do
       (1..4).each do |n|
-        @last_turn = Factory.build(:turn)
+        @last_turn = Factory(:turn)
         player.turns << @last_turn
       end
     end

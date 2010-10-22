@@ -8,13 +8,13 @@ describe HumanPlayer do
   end
 
   it "has a valid factory" do
-    Factory.build(:human_player).should be_valid
+    Factory(:human_player).should be_valid
   end
 
   let(:data) { [] }
   let(:roller) { Roller.new(SimulatedData.new(data)) }
   let(:player) {
-    Factory.build(:human_player).tap { |p| p.roller = roller }
+    Factory(:human_player).tap { |p| p.roller = roller }
   }
 
   subject { player }

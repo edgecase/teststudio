@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe Roll do
   it "has a valid factory" do
-    Factory.build(:roll).should be_valid
+    Factory(:roll).should be_valid
   end
 
   let(:roll) {
-    Factory.build(:roll, :faces => [])
+    Factory(:roll, :faces => [])
   }
 
   def set_faces(*face_values)
-    roll.faces = face_values.map { |v| Factory.build(:face, :value => v) }
+    roll.faces = face_values.map { |v| Factory(:face, :value => v) }
     roll
   end
 

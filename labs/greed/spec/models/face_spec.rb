@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Face do
   it "has a valid factory" do
-    Factory.build(:face).should be_valid
+    Factory(:face).should be_valid
   end
 
   subject { Face.new(:value => 3) }

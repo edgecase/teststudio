@@ -11,7 +11,7 @@ describe ComputerPlayer do
     player.should be_valid
   end
 
-  let(:player) { Factory.build(:computer_player) }
+  let(:player) { Factory(:computer_player) }
   subject { player }
 
   it { should be_a(ComputerPlayer) }

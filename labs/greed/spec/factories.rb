@@ -1,26 +1,32 @@
 
+# Make the default strategy :build globally.
+def Factory.build_def(name, options={}, &block)
+  opts = {:default_strategy => :build}.merge(options)
+  Factory.define(name, opts, &block)
+end
+
 # --------------------------------------------------------------------
 
-Factory.define :face do |face|
+Factory.build_def :face do |face|
   face.position 1
   face.value { 3 }
 end
 
 # --------------------------------------------------------------------
 
-Factory.define :roll do |roll|
+Factory.build_def :roll do |roll|
   roll.position 1
   roll.faces { [] }
 end
 
 # --------------------------------------------------------------------
 
-Factory.define :turn do |turn|
+Factory.build_def :turn do |turn|
   turn.rolls { [] }
   turn.position 1
 end
 
-Factory.define :turn_ending_with_hold, :parent => :turn do |turn|
+Factory.build_def :turn_ending_with_hold, :parent => :turn do |turn|
   turn.rolls { [
       Factory.build(:roll, :action => :roll),
       Factory.build(:roll, :action => :hold),
@@ -28,7 +34,7 @@ Factory.define :turn_ending_with_hold, :parent => :turn do |turn|
   }
 end
 
-Factory.define :turn_ending_with_unknown, :parent => :turn do |turn|
+Factory.build_def :turn_ending_with_unknown, :parent => :turn do |turn|
   turn.rolls { [
       Factory.build(:roll, :action => :roll),
       Factory.build(:roll, :action => nil),
@@ -38,18 +44,18 @@ end
 
 # --------------------------------------------------------------------
 
-Factory.define :player do |player|
+Factory.build_def :player do |player|
   player.name { Faker::Name.first_name }
   player.score 0
   player.strategy "ConservativeStrategy"
 end
 
-Factory.define(:computer_player,
+Factory.build_def(:computer_player,
   :parent => :player,
   :class => ComputerPlayer) do |player|
 end
 
-Factory.define(:human_player,
+Factory.build_def(:human_player,
   :parent => :player,
   :class => HumanPlayer) do |player|
   player.name Faker::Name.first_name
@@ -57,11 +63,11 @@ end
 
 # --------------------------------------------------------------------
 
-Factory.define :game do |game|
+Factory.build_def :game do |game|
   game.players []
 end
 
-Factory.define :game_between_human_and_computer, :parent => :game do |game|
+Factory.build_def :game_between_human_and_computer, :parent => :game do |game|
   game.players {
     [
       Factory.build(:human_player, :score => 0),

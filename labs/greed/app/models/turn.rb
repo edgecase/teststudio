@@ -10,7 +10,6 @@ class Turn < ActiveRecord::Base
     }
   end
 
-
   def score_up_to(current_roll)
     sum = 0
     rolls.each do |roll|

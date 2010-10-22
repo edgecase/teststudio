@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Game do
-  let(:game) { Factory.build(:game_between_human_and_computer) }
+  let(:game) { Factory(:game_between_human_and_computer) }
   let(:player1) { game.players[0] }
   let(:player2) { game.players[1] }
 

@@ -37,7 +37,7 @@ class Ring
 end
 
 describe Ring do
-    let(:max_size) { 3 }
+  let(:max_size) { 3 }
   let(:ring) { Ring.new(max_size) }
 
   subject { ring }
@@ -59,7 +59,7 @@ describe Ring do
   end
 
   context "when setup with an initial max size" do
-    describe "when being created" do
+    context "when being created" do
       its(:max_size) { should == max_size }
       its(:length) { should == 0 }
       it { should be_empty }

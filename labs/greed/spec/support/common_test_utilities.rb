@@ -19,5 +19,37 @@ module CommonTestUtilities
     obj
   end
 
+  # Expect a model to be new'ed with the given attributes.
+  def expect_new(model, attrs={})
+    klass = attrs.delete(:class) || model.class
+    flexmock(model, :id => CommonTestUtilities.next_id)
+    flexmock(klass).should_receive(:new).
+      with(member_attrs).once.
+      and_return(member)
+  end
+
+  # Expect a model to be created with the given attributes.
+  def expect_creation(model, attrs, invalid=nil)
+    klass = attrs.delete(:class) || model.class
+    flexmock(model, :id => CommonTestUtilities.next_id)
+    flexmock(klass).should_receive(:create).
+      with(member_attrs).once.
+      and_return(invalid ? nil : member)
+    make_invalid(model) if invalid
+  end
+
+  # Expect a model to be saved with the given attributes.
+  def expect_save(model, invalid=nil)
+    flexmock(model, :id => CommonTestUtilities.next_id) if model.id.nil?
+    flexmock(model).should_receive(:save).once.
+      and_return(invalid ? false : true)
+    make_invalid(model) if invalid
+  end
+
+  def self.next_id
+    @next_id ||= 1000
+    @next_id += 1
+  end
+
   RSpec.configure {|c| c.include self}
 end

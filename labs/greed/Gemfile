@@ -35,6 +35,7 @@ group :development, :test do
   gem "flexmock", ">= 0.8.11"
   gem 'factory_girl'
   gem 'faker'
+  gem 'webrat'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'

@@ -204,16 +204,16 @@ form .submit {
   margin-bottom: 10px;
 }
 
-form#new_game {
+form.data_entry {
   padding: 50px 0 0 100px;
 }
 
-form#new_game label {
+form.data_entry label {
   display: block;
   margin-bottom: 5px;
 }
 
-form#new_game input[type=text] {
+form.data_entry input[type=text] {
   width: 295px;
   border: 1px solid #b1b1b1;
   padding: 12px 5px;

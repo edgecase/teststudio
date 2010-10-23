@@ -16,11 +16,10 @@ Create a Player model
     - strategy: string
     
   Validations: 
-    - name must be included
-    - name must be unique
-    - score must be included
+    - name must be present
+    - score must be present
     - score must be a number
-    - strategy must be included
+    - strategy must be present
     
   Associations:
     - belongs to a game

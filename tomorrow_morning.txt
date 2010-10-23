@@ -1,2 +1,0 @@
-Finish selenium test for making a reservation
-add a watir test for making a reservation

@@ -1,0 +1,31 @@
+Write a hotel rate calculator object with the following methods
+
+  class RateCalculator
+    def initialize(rake_rate=100) ... end
+    def rate(check_in_date, check_out_date, number_of_rooms) ... end
+  end
+
+The rate should be calculated according the the following rules
+  
+* The daily rate for a room is its rack_rate minus the daily discount.
+* The rate for a range of dates is the sum of the individual daily rates.
+* Dates during the week get a 10% discount off of the rack rate. 
+* Dates on weekends get a 20% discount off of the rack rate.
+
+If you get done with the above, add the following extra credit rules:
+
+* 10-49 rooms get an extra 20% off the rack_rate.
+* 50+ rooms get an extra 30% off the rack_rate.
+* At no time should the combined discount exceed 40%.
+
+NOTE: You can customize the hidden .rspec file in the current
+      directory to provide default options to the rspec command line.
+
+HINTS:
+
+  To use the wday date function to calculate weekday VS weekend:
+
+      require 'date'
+      Date.parse("Oct 17, 2010").wday #=> 0 (Sunday)
+      Date.parse("Oct 18, 2010").wday #=> 1 (Monday)
+      Date.parse("Oct 23, 2010").wday #=> 6 (Saturday)

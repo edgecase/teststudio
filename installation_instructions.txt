@@ -1,0 +1,22 @@
+1) Install Ruby, Rails, and SQLite3
+------------------------------------------------------
+Each computer will need to have a working version of Ruby 1.9.2, Rails 3.0.0, and a Rails-supported database server (such as SQLite3) installed. They'll also need an editor in which they can comfortably write code. 
+
+2) Install Required RubyGems
+------------------------------------------------------
+During the course, they'll need a number of testing-related RubyGems. If you do not have recent version of bundler (e.g. 1.0.0 or later), then install bundler with the following command.
+
+   gem install bundler
+
+Then download the file: http://onestepback.org/download/Gemfile-zvrs
+
+Moved the downloaded file into an empty directory and rename it to "Gemfile".  Then run the command:
+
+  bundle install
+
+Bundler will take care of downloading all the required gems for the studio.
+
+If for some reason bundler is not working, you can always install the gems individually by hand.  Use the downloaded Gemfile as a reference to find the gem name and version, then run the gem install command.  For example, the Gemfile calls out factory-girl, version 1.3.2.  To install factory-girl by hand, use the command:
+
+  gem install factory-girl -v1.3.2
+

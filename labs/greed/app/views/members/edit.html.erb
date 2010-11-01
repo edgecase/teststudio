@@ -1,3 +1,5 @@
+<h1>Edit Member <%= member.name %></h1>
+
 <% if flash[:error] -%>
   <div class="error_message"><%= flash[:error] %></div>
 <% end -%>
@@ -14,6 +16,6 @@
   </div>
   <div class="field">
     <%= f.submit "Update" %>
-    <%= link_to "Cancel", member_path(member) %>
+    <%= link_to "Cancel", member_path(member), :class => "button" %>
   </div>
 <% end -%>

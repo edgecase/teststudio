@@ -1,11 +1,12 @@
-<div>
-  <p>Name: <%= member.name %></p>
-  <p>Email: <%= member.email %></p>
-  <p>Rank:  <%= member.rank %><p>
-</div>
+<h1>Member Information</h1>
 
 <div>
-  <%= link_to "Back", members_path %> |
-  <%= link_to "Edit", edit_member_path(member) %>
+  <div class="field"><label>Name:</label> <%= member.name %></div>
+  <div class="field"><label>Email:</label> <%= member.email %></div>
+  <div class="field"><label>Rank:</label>  <%= member.rank %><div>
 </div>
 
+<div class="button_panel">
+  <%= link_to "Back", members_path, :class => "button" %>
+  <%= link_to "Edit", edit_member_path(member), :class => "button" %>
+</div>

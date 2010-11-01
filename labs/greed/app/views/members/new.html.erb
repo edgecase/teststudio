@@ -1,3 +1,5 @@
+<h1>Create New Member</h1>
+
 <% if flash[:error] -%>
   <div class="error_message"><%= flash[:error] %></div>
 <% end -%>
@@ -14,5 +16,6 @@
   </div>
   <div class="field">
     <%= f.submit "Create" %>
+    <%= link_to "Cancel", members_path, :class => "button" %>
   </div>
 <% end -%>

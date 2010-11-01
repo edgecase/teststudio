@@ -29,6 +29,21 @@ describe Member do
     its(:rank) { should == 1000 }
   end
 
+  describe "finders" do
+    describe "#by_rank" do
+      before do
+        Factory.create(:member, :name => "Zak", :rank => 1000)
+        Factory.create(:member, :name => "Adam", :rank => 1000)
+        Factory.create(:member, :name => "Jim", :rank => 1200)
+      end
+      let(:members) { Member.by_rank }
+
+      it "sorts by rank and name" do
+        members.map(&:name).should == ['Jim', 'Adam', 'Zak']
+      end
+    end
+  end
+
   describe "rank management" do
     let(:member) { Factory(:member) }
     let!(:original_rank) { member.rank }

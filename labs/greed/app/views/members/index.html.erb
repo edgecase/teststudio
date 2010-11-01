@@ -1,0 +1,13 @@
+<table>
+<% members.each do |member| -%>
+  <tr>
+    <td><%= link_to member.name, member_path(member) %></td>
+    <td><%= member.email %></td>
+    <td><%= member.rank %></td>
+    <td>
+      <%= link_to "Edit", edit_member_path(member) %> |
+      <%= link_to "Delete", member_path(member), :method => :delete, :confirm => "Do you really want to delete member #{member.name}?" %>
+    </td>
+  </tr>
+<% end -%>
+</table>

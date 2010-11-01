@@ -46,6 +46,18 @@ module CommonTestUtilities
     make_invalid(model) if invalid
   end
 
+  def expect_update(model, attrs, invalid=nil)
+    flexmock(model).should_receive(:update_attributes).
+      with(attrs).once.
+      and_return(invalid ? false : true)
+    make_invalid(model) if invalid
+  end
+
+  def expect_destruction(model, invalid=nil)
+    flexmock(member).should_receive(:destroy).once.and_return(!invalid)
+    make_invalid(model) if invalid
+  end
+
   def self.next_id
     @next_id ||= 1000
     @next_id += 1

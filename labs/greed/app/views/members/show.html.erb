@@ -1,0 +1,11 @@
+<div>
+  <p>Name: <%= member.name %></p>
+  <p>Email: <%= member.email %></p>
+  <p>Rank:  <%= member.rank %><p>
+</div>
+
+<div>
+  <%= link_to "Back", members_path %> |
+  <%= link_to "Edit", edit_member_path(member) %>
+</div>
+

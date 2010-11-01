@@ -2,17 +2,18 @@
   <div class="error_message"><%= flash[:error] %></div>
 <% end -%>
 
-<%= form_for member, :url => { :action => "create" }, :html =>  { :id => 'new_member', :class => 'data_entry' } do |f| %>
+<%= form_for member, :url => { :action => "update" }, :html =>  { :id => 'new_member', :class => 'data_entry' } do |f| %>
   <%= f.error_messages %>
   <div class="field">
-    <%= f.label :name, "Enter Your Name" -%>
+    <%= f.label :name, "Your Name" -%>
     <%= f.text_field "name" %>
   </div>
   <div class="field">
-    <%= f.label :email, "Enter Your Email" -%>
+    <%= f.label :email, "Your Email" -%>
     <%= f.text_field "email" %>
   </div>
   <div class="field">
-    <%= f.submit "Create" %>
+    <%= f.submit "Update" %>
+    <%= link_to "Cancel", member_path(member) %>
   </div>
 <% end -%>

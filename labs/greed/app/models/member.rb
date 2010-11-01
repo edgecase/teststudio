@@ -5,6 +5,8 @@ class Member < ActiveRecord::Base
   validates_length_of :name, :within => 3..1000, :message => "needs at least 3 characters"
   validates_format_of :email, :with => RFC822::LooseEmailAddress
 
+  scope :by_rank, order("rank DESC", :name, :email)
+
   def draws_against(opponent_rank)
     self.rank = new_rank(0.5, opponent_rank)
   end

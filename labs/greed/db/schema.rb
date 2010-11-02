@@ -28,7 +28,11 @@ ActiveRecord::Schema.define(:version => 20101101204604) do
 
   create_table "matches", :force => true do |t|
     t.integer  "winner_id"
+    t.integer  "winner_new_rank"
+    t.integer  "winner_old_rank"
     t.integer  "loser_id"
+    t.integer  "loser_new_rank"
+    t.integer  "loser_old_rank"
     t.date     "played_on"
     t.datetime "created_at"
     t.datetime "updated_at"

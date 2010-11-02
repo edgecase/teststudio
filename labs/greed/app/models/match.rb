@@ -11,14 +11,21 @@ class Match < ActiveRecord::Base
   end
 
   scope :played_by, lambda { |member|
-    where("loser_id = ? OR winner_id = ?", member.id, member.id)
+    where("loser_id = ? OR winner_id = ?", member.id, member.id).
+    order("played_on ASC, created_at ASC")
   }
 
   def self.record_match(winner, loser)
-    attrs = { :winner => winner, :loser => loser, :played_on => Date.today }
-    match = Match.new(attrs)
+    match = Match.new(
+      :winner => winner,
+      :winner_old_rank => winner.rank,
+      :loser => loser,
+      :loser_old_rank => loser.rank,
+      :played_on => Date.today)
     winner.wins_against(loser.rank)
     loser.loses_against(winner.rank)
+    match.winner_new_rank = winner.rank
+    match.loser_new_rank = loser.rank
     Match.transaction do
       winner.save &&
         loser.save &&

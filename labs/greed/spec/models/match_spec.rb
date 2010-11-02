@@ -20,17 +20,21 @@ describe Match do
     end
   end
 
-  describe "#record" do
+  describe "#record_match" do
     let(:winner) { Factory(:member, :name => "Winner", :rank => 1100) }
     let(:loser)  { Factory(:member, :name => "Loser",  :rank => 900) }
 
     before do
       @match = Match.record_match(winner, loser)
     end
-   subject { @match }
+    subject { @match }
 
     its(:winner) { should be winner }
+    its(:winner_old_rank) { should == 1100 }
+    its(:winner_new_rank) { should > 1100 }
     its(:loser) { should be loser }
+    its(:loser_old_rank) { should == 900 }
+    its(:loser_new_rank) { should be < 900 }
     its(:played_on) { should == Date.today }
     specify { winner.rank.should > 1100 }
     specify { loser.rank.should < 900 }

@@ -1,3 +1,4 @@
+require 'date'
 
 # Make the default strategy :build globally.
 def Factory.build_def(name, options={}, &block)
@@ -82,4 +83,13 @@ Factory.build_def :member do |member|
   member.name { Faker::Name.first_name }
   member.email { Faker::Internet.email }
   member.rank 1000
+end
+
+
+# --------------------------------------------------------------------
+
+Factory.build_def :match do |match|
+  match.winner { Factory(:member) }
+  match.loser { Factory(:member) }
+  match.played_on Date.parse("Nov 1, 2010")
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101022192720) do
+ActiveRecord::Schema.define(:version => 20101101204604) do
 
   create_table "faces", :force => true do |t|
     t.integer  "value"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(:version => 20101022192720) do
     t.datetime "updated_at"
   end
 
+  create_table "matches", :force => true do |t|
+    t.integer  "winner_id"
+    t.integer  "loser_id"
+    t.date     "played_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "members", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -33,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20101022192720) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "members", ["email"], :name => "index_members_on_email", :unique => true
+  add_index "members", ["name"], :name => "index_members_on_name", :unique => true
 
   create_table "players", :force => true do |t|
     t.string   "type"

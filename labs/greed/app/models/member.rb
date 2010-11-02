@@ -1,11 +1,16 @@
 class Member < ActiveRecord::Base
   validates_presence_of :name, :email, :rank
-  validates_uniqueness_of :email
+  validates_uniqueness_of :name, :email
   validates_numericality_of :rank, :only_integer => :true
   validates_length_of :name, :within => 3..1000, :message => "needs at least 3 characters"
   validates_format_of :email, :with => RFC822::LooseEmailAddress
 
   scope :by_rank, order("rank DESC", :name, :email)
+  scope :by_name, order("name ASC", :name, :email)
+
+  def matches
+    Match.played_by(self)
+  end
 
   def draws_against(opponent_rank)
     self.rank = new_rank(0.5, opponent_rank)

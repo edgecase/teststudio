@@ -6,7 +6,10 @@ describe Member do
   end
 
   describe "its validations" do
+    before { Factory.create(:member) }
+
     it { should validate_presence_of :name }
+    it { should validate_uniqueness_of :name }
     it {
       should ensure_length_of(:name).
       is_at_least(3).
@@ -14,9 +17,8 @@ describe Member do
     }
 
     it { should validate_presence_of :email }
-    it { should validate_presence_of :email }
+    it { should validate_uniqueness_of :email }
 
-    it { should validate_presence_of :rank }
     it { should validate_numericality_of :rank }
 
     it { should allow_value('abc@xyz.com').for(:email) }
@@ -41,6 +43,24 @@ describe Member do
       it "sorts by rank and name" do
         members.map(&:name).should == ['Jim', 'Adam', 'Zak']
       end
+    end
+  end
+
+  describe "#matches" do
+    let(:member) { Factory.create(:member) }
+    let(:opponent) { Factory.create(:member) }
+    before do
+      Match.record_match(member, opponent)
+      Match.record_match(opponent, member)
+    end
+
+    it "has the proper matches" do
+      matches = member.matches
+      winnings = matches.select { |m| m.winner == member }
+      losings = matches.select { |m| m.loser == member }
+      matches.should have(2).items
+      winnings.should have(1).items
+      losings.should have(1).items
     end
   end
 

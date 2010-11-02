@@ -7,9 +7,13 @@ class CreateMembers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :members, [:name], :unique => true
+    add_index :members, [:email], :unique => true
   end
 
   def self.down
+    remove_index :members, :email
+    remove_index :members, :name
     drop_table :members
   end
 end

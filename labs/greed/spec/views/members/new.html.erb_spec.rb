@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe 'members/new.html.erb' do
+  before {
+    def view.member
+      Factory(:member)
+    end
+  }
   before { render }
   subject { rendered }
 

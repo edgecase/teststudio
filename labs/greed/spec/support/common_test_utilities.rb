@@ -24,8 +24,8 @@ module CommonTestUtilities
     klass = attrs.delete(:class) || model.class
     flexmock(model, :id => CommonTestUtilities.next_id)
     flexmock(klass).should_receive(:new).
-      with(member_attrs).once.
-      and_return(member)
+      with(FlexMock.hsh(attrs)).once.
+      and_return(model)
   end
 
   # Expect a model to be created with the given attributes.

@@ -3,8 +3,23 @@
 <div>
   <div class="field"><label>Name:</label> <%= member.name %></div>
   <div class="field"><label>Email:</label> <%= member.email %></div>
-  <div class="field"><label>Rank:</label>  <%= member.rank %><div>
+  <div class="field"><label>Rank:</label>  <%= member.rank %></div>
+
+  <h2>Matches for <%= member.name %>:</h2>
+  <ul>
+    <% member.matches.each do |match| -%>
+      <li>
+        <%= match.winner == member ? "Won against #{match.loser.name}" : "Lost to #{match.winner.name}" -%>
+        On
+        <%= match.played_on %>
+      </li>
+    <% end -%>
+  </ul>
+    
 </div>
+
+
+
 
 <div class="button_panel">
   <%= link_to "Back", members_path, :class => "button" %>

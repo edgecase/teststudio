@@ -6,6 +6,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div id="nav">
+    <ul>
+      <% if defined?(members_path) -%>
+        <li><%= link_to "Start Game", "/" %></li>
+        <li><%= link_to "Manage Members", members_path, :style => "background-image: none;"  %></li>
+      <% else -%>
+        <li><%= link_to "Start Game", "/", :style => "background-image: none;" %></li>
+      <% end -%>
+    </ul>
+  </div>
   <div id="wrap" class="clearfix">
     <%= yield %>
   </div>

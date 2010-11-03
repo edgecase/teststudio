@@ -55,6 +55,40 @@ input[type=submit] {
 }
 
 
+#nav {
+    margin: 3px 10px;
+}
+
+#nav ul {
+    list-style-type: none;
+    background-image: url(/images/navi_bg.png);
+    height: 80px;
+    width: 663px;
+    margin: auto;
+}
+
+#nav li {
+    float: left;
+}
+    
+#nav ul a {
+    background-image: url(/images/navi_bg_divider.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 32px;
+    padding-left: 32px;
+    display: block;
+    line-height: 80px;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 21px;
+    color: #371C1C;
+}
+
+#nav ul a:hover {
+    color: #FFF;
+}
+
 #sidebar {
   float: left;
   width: 187px;

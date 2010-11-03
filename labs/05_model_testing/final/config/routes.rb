@@ -1,9 +1,5 @@
 Greed::Application.routes.draw do
 
-  resources :matches
-
-  resources :members
-
   resources :games do |games|
     resources :players
   end

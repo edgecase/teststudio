@@ -1,60 +1,39 @@
 class HumanPlayer < Player
-  validates_length_of :name, :within => 1..32
-  acts_as_list :scope => :game
+  validates_presence_of :name
 
-  def description
-    "Human"
-  end
-  
   def play_style
     :interactive
   end
 
+  def description
+    "Human"
+  end
+
   def start_turn
-    turn = Turn.new
-    turns << turn
+    turns << Turn.new(:rolls => [])
   end
 
   def roll_dice
-    roller.roll(number_of_dice_to_roll)
-    accumulated_score = roller.points
-    accumulated_score += turns.last.rolls.last.accumulated_score unless turns.last.rolls.empty?
-    roll = Roll.new(
-      :faces => roller.faces.map { |n| Face.new(:value => n) },
-      :score => roller.points,
-      :unused => roller.unused,
-      :accumulated_score => accumulated_score)
-    turns.last.rolls << roll
-    if roller.bust?
-      most_recent_roll.action = :bust
-    else
-      :ok
-    end
-  end
-  
-  def most_recent_roll
-    last_roll
+    last_turn.roll_dice(roller)
   end
 
-  def holds
-    self.score += turns.last.score
+  def goes_bust
+    last_roll.action = :bust
   end
 
-  def rolls_again
+  def decides_to_hold
+    last_roll.action = :hold
+    self.score += last_turn.score
+  end
+
+  def decides_to_roll_again
     last_roll.action = :roll
   end
 
-  private
-  
-  def last_roll
-    turns.try(:last).try(:rolls).try(:last)
+  # True if the last roll of the last turn does not have an action.
+  def undecided?
+    last_turn && last_turn.undecided?
   end
 
-  def last_unused
-    last_roll.try(:unused) || 0
-  end
-
-  def number_of_dice_to_roll
-    last_unused.nonzero? || 5
-  end
 end
+

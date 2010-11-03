@@ -1,17 +1,19 @@
 class GamesController < ApplicationController
+  assume(:game) { }
+
   def new
   end
 
   def create
-    @game = Game.new
-    human_player = HumanPlayer.new(params[:game])
-    @game.players << human_player
-    if @game.save
-      session[:game] = @game.id
-      redirect_to game_players_path(@game)
+    self.game = Game.new
+    human = HumanPlayer.new(params[:game])
+    game.players << human
+
+    if game.save
+      redirect_to game_players_path(game)
     else
       flash[:error] = "Can not create game\n"
-      flash[:error] << human_player.errors.full_messages.join(', ')
+      flash[:error] << human.errors.full_messages.join(", ")
       redirect_to new_game_path
     end
   end

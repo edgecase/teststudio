@@ -10,7 +10,7 @@ class Scorer
   end
 
   private
-  
+
   def face_score(roll, face)
     count = roll.select { |n| n == face }.size
     if count >= 3

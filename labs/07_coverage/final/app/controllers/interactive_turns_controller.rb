@@ -1,37 +1,35 @@
 class InteractiveTurnsController < ApplicationController
-  include SimInjectionRoller
+  include NumberSource
+
+  assume(:game) { Game.find(params[:game_id]) }
+  assume(:current_player) { game.current_player }
+  assume(:last_rolls) { current_player.turns.last.rolls }
 
   def roll
-    @game = Game.find(params[:id])
-    @game.current_player.roller = roller
-    roll_result = @game.current_player.roll_dice
-    @game.current_player.save!
-    action = @game.current_player.turns.last.rolls.last.action
+    if current_player.undecided?
+      current_player.decides_to_roll_again
+    end
+    current_player.roller = Roller.new(number_source)
+    roll_result = current_player.roll_dice
+    current_player.save_turn!
     if roll_result == :bust
-      redirect_to bust_interactive_turn_path(@game)
+      redirect_to interactive_bust_path(game)
     else
-      redirect_to decide_interactive_turn_path(@game)
+      redirect_to interactive_decide_path(game)
     end
   end
-  
+
   def bust
-    @game = Game.find(params[:id])
-    @rolls = @game.current_player.turns.last.rolls
+    current_player.goes_bust
+    current_player.save_turn!
   end
 
   def decide
-    @game = Game.find(params[:id])
-    @rolls = @game.current_player.turns.last.rolls
   end
-  
+
   def hold
-    @game = Game.find(params[:id])
-    @game.current_player.holds
-    @game.current_player.save!
-    if @game.current_player.score >= 3000
-      redirect_to game_over_path(@game)
-    else
-      redirect_to start_turn_path(@game)
-    end
+    current_player.decides_to_hold
+    current_player.save_turn!
+    redirect_to start_turn_path(game)
   end
 end

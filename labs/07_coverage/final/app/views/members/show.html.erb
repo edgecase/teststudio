@@ -1,0 +1,35 @@
+<h1>Member Information</h1>
+
+<div>
+  <div class="field"><label>Name:</label> <%= member.name %></div>
+  <div class="field"><label>Email:</label> <%= member.email %></div>
+  <div class="field"><label>Rank:</label>  <%= member.rank %></div>
+</div>
+
+<h2>Matches for <%= member.name %>:</h2>
+<div>
+  <ul>
+    <% member.matches.each do |match| -%>
+      <li>
+        <%=
+           match.winner == member ?
+           "Won against #{match.loser.name}" :
+             "Lost to #{match.winner.name}"
+           -%>
+        on
+        <%= match.played_on %>
+        (new rank:
+        <%= match.winner == member ? match.winner_new_rank : match.loser_new_rank -%>)
+      </li>
+    <% end -%>
+  </ul>
+    
+</div>
+
+
+
+
+<div class="button_panel">
+  <%= link_to "Back", members_path, :class => "button" %>
+  <%= link_to "Edit", edit_member_path(member), :class => "button" %>
+</div>

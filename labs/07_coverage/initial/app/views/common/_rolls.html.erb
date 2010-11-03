@@ -5,7 +5,9 @@
   <% end -%>
 </ul>
 
-<p class="score_for_turn">Score for this turn so far: <%= roll.accumulated_score %></p>
+<p class="score_for_turn">
+  Score for this turn so far: <%= roll.turn.score_up_to(roll) %>
+</p>
 
 <p class="action">
   <%= player.name %>
@@ -18,13 +20,13 @@
       when :roll
         "rolled again"
       when nil
-        if roll.accumulated_score == 0
+        if roll.turn.score == 0
           "went bust, no points for this turn"
         else
-          "is deciding..."
+          "is deciding... (#{roll.dice_to_roll} dice to roll)"
         end
       else
-        "-Unknown action #{roll.action}-"
+        "-Unknown action #{roll.action.inspect}-"
       end
       -%>
 </p>

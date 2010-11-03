@@ -1,36 +1,53 @@
 Lab 6: Model Testing
 
-Create a Game model
-  Attributes: none
-  Validations: none
-  
-  Associations:
-    - Has many players
-    
-Create a Player model
-  Attributes:
-    - type:     string
-    - name:     string
-    - game_id:  integer
-    - score:    integer
-    - strategy: string
-    
-  Validations: 
-    - name must be included
-    - name must be unique
-    - score must be included
-    - score must be a number
-    - strategy must be included
-    
-  Associations:
-    - belongs to a game
+Create a Member model object with the following fields
 
-Create a faces model.
-  Attributes:
-    - value:    integer
-    - position: integer
-    
-  Validation
-    - value must be a number
-    - position must be a number
-    - value must be between 1 and 6
+* name -- Name of guild member (must be present, at least 3 characters)
+* email -- Email for guild member (must be present, basic EMail format)
+* rank -- Ranking score for member, (must be present and numeric)
+
+Guild members play each other in Greed.  Each guild member has a guild
+ranking number that is adjusted for up and down for each win or loss.
+The size of the adjustment is based on the relative strength of your
+opponent
+
+Business Logic:
+
+* win_percent is the percentage of time you are expected to be an
+  opponent of the given rank score is 1.0 if you win, 0.0 if you lose.
+
+* round to the nearest integer
+
+                                 1.0
+    win_percent = ---------------------------------------
+                   1 + 10**((rank - opponent_rank) / 400)
+
+    score = if win? then 1.0 else 0.0 end
+
+    new_rank = (rank + 32*(score - win_percent)).round
+
+Create the following methods:
+
+  def wins_against(opponent_rank)
+    # adjust the score when the member wins against
+    # an opponent of rank 'opponent_rank'
+  end
+
+  def loses_against(opponent_rank)
+    # adjust the score when the member loses against
+    # an opponent of rank 'opponent_rank'
+  end
+
+Sample Data:
+
+Your    Opponents            Your
+Rank    Rank        You      New Rank
+-----   -----       ----     -----
+1000    1000        win      1016
+1000    1000        lose      984
+
+1000    1100        win      1020
+1000    1100        lose      988
+
+1000     900        win      1012
+1000     900        lose      980  

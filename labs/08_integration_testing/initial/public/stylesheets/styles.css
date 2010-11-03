@@ -19,9 +19,22 @@ h1 {
   letter-spacing: -0.025em;
 }
 
+h2 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+}
+
 h3 {
   margin-bottom: 10px;
   font-weight: bold;
+}
+
+.button_panel {
+  margin-top: 2em;
 }
 
 a.button,
@@ -41,6 +54,40 @@ input[type=submit] {
   cursor: pointer;
 }
 
+
+#nav {
+    margin: 3px 10px;
+}
+
+#nav ul {
+    list-style-type: none;
+    background-image: url(/images/navi_bg.png);
+    height: 80px;
+    width: 663px;
+    margin: auto;
+}
+
+#nav li {
+    float: left;
+}
+    
+#nav ul a {
+    background-image: url(/images/navi_bg_divider.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 32px;
+    padding-left: 32px;
+    display: block;
+    line-height: 80px;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 21px;
+    color: #371C1C;
+}
+
+#nav ul a:hover {
+    color: #FFF;
+}
 
 #sidebar {
   float: left;
@@ -204,16 +251,16 @@ form .submit {
   margin-bottom: 10px;
 }
 
-form#new_game {
+form.data_entry {
   padding: 50px 0 0 100px;
 }
 
-form#new_game label {
+form.data_entry label {
   display: block;
   margin-bottom: 5px;
 }
 
-form#new_game input[type=text] {
+form.data_entry input[type=text] {
   width: 295px;
   border: 1px solid #b1b1b1;
   padding: 12px 5px;
@@ -248,4 +295,8 @@ form#select_players .submit {
   font-weight: bold;
   text-align: center;
   background: #d00;
+}
+
+table td {
+    padding: 0.2em 1em;
 }

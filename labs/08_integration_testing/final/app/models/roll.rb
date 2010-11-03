@@ -1,39 +1,42 @@
 class Roll < ActiveRecord::Base
   has_many :faces
   belongs_to :turn
+
   acts_as_list :scope => :turn
+
+  def self.new_from_roller(roller, _unused_)
+    new(
+      :faces => roller.faces.map { |n| Face.new(:value => n) },
+      :score => roller.points,
+      :unused => roller.unused,
+      :action => nil)
+  end
 
   def face_values
     faces.map { |f| f.value }
   end
 
   def points
-    update_points unless defined?(@points)
-    @points
+    scorer = Scorer.new
+    scorer.score(face_values)
+    scorer.points
   end
 
   def unused
-    update_points unless defined?(@unused)
-    @unused
+    scorer = Scorer.new
+    scorer.score(face_values)
+    scorer.unused
+  end
+
+  def dice_to_roll
+    unused.nonzero? || 5
   end
 
   def action
-    action_name ? action_name.to_sym : nil
+    action_name.blank? ? nil : action_name.try(:to_sym)
   end
 
-  def action=(act)
-    self.action_name = act.to_s
-    self.accumulated_score = 0 if action_name == "bust"
-    save!
+  def action=(new_action)
+    self.action_name = new_action.to_s
   end
-
-  private
-
-  def update_points
-    scorer = Scorer.new
-    scorer.score(face_values)
-    @points = scorer.points
-    @unused = scorer.unused
-  end
-
 end

@@ -1,20 +1,23 @@
 class TurnsController < ApplicationController
+  assume(:game) { Game.find(params[:game_id]) }
+  assume(:current_player) { game.current_player }
+  assume(:winner_name) { }
+
   def start_turn
-    game = Game.find(params[:game])
-    game.current_player = game.next_player
-    game.save!
-    case game.current_player.play_style
-    when :interactive
-      game.current_player.start_turn
-      game.current_player.save!
-      redirect_to roll_interactive_turn_path(game.id)
-    when :automatic
-      redirect_to start_non_interactive_turn_path(game.id)
+    if game.current_player && game.current_player.score >= 3000
+      self.winner_name = current_player.name
+      render "game_over"
+    else
+      game.update_attributes(:current_player => game.next_player)
+
+      if current_player.play_style == :automatic
+        redirect_to non_interactive_start_path(params[:game_id])
+      else
+        current_player.start_turn
+        current_player.save!
+        redirect_to interactive_start_path(params[:game_id])
+      end
     end
   end
-
-  def game_over
-    @game = Game.find(params[:game])
-    @winner = @game.current_player.name
-  end
 end
+

@@ -1,9 +1,5 @@
-
-# Look below for the "I take a turn" step and fill in its
-# implementation.
-
 Then /^I am asked to choose players$/ do
-  response.should contain("Select Your Opponent")
+  page.should  have_content("Select Your Opponent")
 end
 
 Given /^a fresh start$/ do
@@ -16,39 +12,36 @@ Given /^the dice will roll ([1-6,]+)$/ do |faces|
 end
 
 Given /^I take a turn$/ do
-  # -----------------------------------------------------------------
-  # FILL IN: Implement this step.  Suggestion: just click the "Start
-  # Your Turn" link).
-  # -----------------------------------------------------------------
+  click_link("Start Your Turn")
 end
 
-Given /^I start a game$/ do 
+Given /^I start a game$/ do
   $roller = nil
   visit path_to("the homepage")
-  fill_in("game_name", :with => "John") 
+  fill_in("game_name", :with => "John")
   click_button("Next")
-  choose("Connie")
+  choose("ConservativeStrategy")
   click_button("Play")
 end
 
 Given /^I look at the total score for (\w+)$/ do |player|
-  doc = Nokogiri::HTML(response.body)
+  doc = Nokogiri::HTML(page.body)
   n = doc.css("span.score")
   @saved_total_points = n.first.text
 end
 
 When /^I refresh the screen$/ do
-  visit request.path
+  visit current_path
 end
 
 Then /^the total score for Connie is unchanged$/ do
-  doc = Nokogiri::HTML(response.body)
+  doc = Nokogiri::HTML(page.body)
   n = doc.css("span.score")
-  assert_equal @saved_total_points, n.first.text
+  n.first.text.should == @saved_total_points
 end
 
 Then /^the turn score so far is (\d+)$/ do |score|
-  assert_contain "so far: #{score}"
+  page.should have_content("so far: #{score}")
 end
 
 When /^I choose to hold$/ do
@@ -60,41 +53,42 @@ When /^I continue$/ do
 end
 
 Then /^(\w+)'s game score is (\d+)$/ do |player, score| # '
-  doc = Nokogiri::HTML(response.body)
-  n = doc.css("div#sidebar")
-  assert_match(/#{player}\s+#{score}/, n.text)
+  page.should have_content("#{player} #{score}")
 end
 
 Then /^it is my turn$/ do
-  assert_contain "Your Turn"
+  page.should have_content("Your Turn")
 end
 
 Then /^it is (\w+)'s turn$/ do |player| # '
-  assert_contain "#{player}'s Turn"
+  page.should have_content("#{player}'s Turn")
 end
 
 Then /^(\w+) go(es)? bust$/ do |player, _|
   player = "John" if player == "I"
-  assert_match(/#{player}\s+went bust/mi, css("p.action").text)
+  within("p.action") do
+    page.should have_content("#{player} went bust")
+  end
 end
 
 When /^I choose to roll again$/ do
-  click_link "Roll Again"
+  click_link "Roll again"
 end
 
 Then /^(\d+) dice are displayed$/ do |dice_count|
   ul = css("ul.dice")
   li = ul.last.css("li.die")
-  assert_equal dice_count.to_i, li.size
+
+  li.size.should == dice_count.to_i
 end
 
 Then /^(\w+) wins the game$/ do |player|
-  assert_contain "The Winner is #{player}"
+  page.should have_content "The Winner is #{player}"
 end
 
 # Helpers ------------------------------------------------------------
 
 def css(pattern)
-  doc = Nokogiri::HTML(response.body)
+  doc = Nokogiri::HTML(page.body)
   doc.css(pattern)
 end

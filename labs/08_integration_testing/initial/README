@@ -1,9 +1,20 @@
-Lab 9: Integration Testing
+LAB 6: Integration Testing
+--------------------------
 
-Choose one of:
+Pick a method and create integration tests for app
 
-  * Watir
-  * Selenium
-  * Cucumber
+* Rails Integration
+* Watir
+* Selenium
+* Cucumber
 
-to do some integration level testing.
+How much functionality can you test?
+How readable can you make your test?
+
+Hints: 
+
+There is a skeleton setup for Cucumber testing in the features
+directory.  Look at the following files for more information:
+
+* features/step_definitions/greed_steps.rb
+* features/playing_a_game.features

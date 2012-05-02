@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   assume(:game) { }
 
   def new
+    sleep 20
   end
 
   def create

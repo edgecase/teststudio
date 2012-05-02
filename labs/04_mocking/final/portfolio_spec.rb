@@ -13,7 +13,6 @@ describe Portfolio do
   before do
     flexmock(QuoteService).should_receive(:new).and_return(quote_service)
     quote_service.should_receive(:login).with(name, password).by_default
-    quote_service.should_receive(:login).by_default
     quote_service.should_receive(:quote).with("APPL").and_return(100).by_default
     quote_service.should_receive(:quote).with("GOOG").and_return(20).by_default
   end
@@ -43,7 +42,9 @@ describe Portfolio do
       port.add_stock("APPL")
       quote_service.should_receive(:logout).and_raise(StandardError)
     end
-    its(:value) { should == 100 }
+    before { @value == subject.value }
+
+    specify { @value.should == 100 }
   end
 
   context "with a successful login, but a failing call to quote" do

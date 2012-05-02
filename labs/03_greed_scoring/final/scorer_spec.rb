@@ -9,7 +9,9 @@ module RSpec
       end
 
       failure_message_for_should do |roll|
-        "#{roll} should score as #{points} and #{unused}, but was #{scorer.points} and #{scorer.unused}"
+        "#{roll} should score as #{points} and #{unused}, but was #{scorer.points} and #{scorer.unused}" +
+          "\nactual=#{actual}" +
+          "\nexpected=#{expected}"
       end
 
       failure_message_for_should_not do |roll|
@@ -56,3 +58,21 @@ describe Scorer do
     [1,2,3,4,5].should score_as(150, 3)
   end
 end
+
+describe Scorer do
+  specify { [5].should score_as(50,0) }
+  specify { [5,5].should score_as(100,0) }
+  specify { [5,5,2,3,2].should score_as(100,3) }
+  specify { [1].should score_as(100,0) }
+  specify { [1,1].should score_as(200, 0) }
+  specify { [1,4,1].should score_as(200,1) }
+  specify { [2,2,2].should score_as(200,0) }
+  specify { [6,6,6,2,3].should score_as(600,2) }
+  specify { [1,1,1].should score_as(1000, 0) }
+  specify { [5,5,5].should score_as(500, 0) }
+  specify { [1,1,1,1,1].should score_as(1200, 0) }
+  specify { [5,5,5,5,5].should score_as(600, 0) }
+  specify { [5,2,1,2,2].should score_as(350, 0) }
+  specify { [1,2,3,4,5].should score_as(150, 3) }
+end
+

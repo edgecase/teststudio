@@ -10,7 +10,7 @@ require 'rspec-collection'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-require Rails.root.join("spec/factories.rb")
+require Rails.root.join("spec/factories.rb")o
 
 RSpec.configure do |config|
   # == Mock Framework

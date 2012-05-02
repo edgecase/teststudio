@@ -29,6 +29,10 @@ PACKAGE_FILES = TAR_FILES + ZIP_FILES +
 
 task :noop
 
+task :show_labs do
+  puts LABS.inspect
+end
+
 desc "default action => :package"
 task :default => :package
 
@@ -62,7 +66,7 @@ end
 ZIP_FILES.each do |zipfn|
   labfn = zipfn.pathmap("labs/%n")
   file zipfn => ["pkg", labfn] do |t|
-    chdir("labs") do 
+    chdir("labs") do
       sh "zip -r ../#{zipfn} #{labfn.pathmap("%f")}"
     end
   end

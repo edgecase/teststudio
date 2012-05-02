@@ -21,6 +21,7 @@ describe Member do
 
     it { should validate_numericality_of :rank }
 
+    it { should validate_format_of(:email).with("jim@xyz.com") }
     it { should allow_value('abc@xyz.com').for(:email) }
     it { should_not allow_value('abc@xyz').for(:email) }
     it { should_not allow_value('abc').for(:email) }

@@ -3,10 +3,10 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :name, :email
   validates_numericality_of :rank, :only_integer => :true
   validates_length_of :name, :within => 3..1000, :message => "needs at least 3 characters"
-  validates_format_of :email, :with => RFC822::LooseEmailAddress
+  validates_format_of :email, :with => RFC822::LooseEmailAddress, :message => "HI"
 
   scope :by_rank, order("rank DESC", :name, :email)
-  scope :by_name, order("name ASC", :name, :email)
+  scope :by_name, order("name ASC", :email)
 
   def matches
     Match.played_by(self)

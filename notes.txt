@@ -1,12 +1,5 @@
-TODO:
-* Break model testing into
-  (1) Business logic testing, and
-  (2) Finder testing
-  And downplay the metaprogramming
-* Add slides for RSpec/before(:each), etc
-* Change ring example to nested context rather than shared behavior.
-* Add a section javascript testing
+Plugins:
+  rails plugin install git://github.com/rails/dynamic_form.git
 
-FIXED:
-* Add lab numbers to slides
-* Lab has meaning of availability backwards
+Bugs: 
+* When computer wins, we don't see his last move

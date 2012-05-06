@@ -1,4 +1,5 @@
 require 'scorer'
+require 'rspec/given'
 
 module RSpec
   module Matchers
@@ -26,53 +27,35 @@ module RSpec
 end
 
 describe Scorer do
-  it "handles 5s" do
-    [5].should score_as(50,0)
-    [5,5].should score_as(100,0)
-    [5,5,2,3,2].should score_as(100,3)
+  context "handles 5s" do
+    Then { [5].should score_as(50,0) }
+    Then { [5,5].should score_as(100,0) }
+    Then { [5,5,2,3,2].should score_as(100,3) }
   end
 
-  it "handles 1s" do
-    [1].should score_as(100,0)
-    [1,1].should score_as(200, 0)
-    [1,4,1].should score_as(200,1)
+  context "handles 1s" do
+    Then { [1].should score_as(100,0) }
+    Then { [1,1].should score_as(200, 0) }
+    Then { [1,4,1].should score_as(200,1) }
   end
 
-  it "handles triplets" do
-    [2,2,2].should score_as(200,0)
-    [6,6,6,2,3].should score_as(600,2)
+  context "handles triplets" do
+    Then { [2,2,2].should score_as(200,0) }
+    Then { [6,6,6,2,3].should score_as(600,2) }
   end
 
-  it "handles triplets of 1 and 5" do
-    [1,1,1].should score_as(1000, 0)
-    [5,5,5].should score_as(500, 0)
+  context "handles triplets of 1 and 5" do
+    Then { [1,1,1].should score_as(1000, 0) }
+    Then { [5,5,5].should score_as(500, 0) }
   end
 
-  it "handles more than 3 1s or 5s" do
-    [1,1,1,1,1].should score_as(1200, 0)
-    [5,5,5,5,5].should score_as(600, 0)
+  context "handles more than 3 1s or 5s" do
+    Then { [1,1,1,1,1].should score_as(1200, 0) }
+    Then { [5,5,5,5,5].should score_as(600, 0) }
   end
 
-  it "handles mixed combinations" do
-    [5,2,1,2,2].should score_as(350, 0)
-    [1,2,3,4,5].should score_as(150, 3)
+  context "handles mixed combinations" do
+    Then { [5,2,1,2,2].should score_as(350, 0) }
+    Then { [1,2,3,4,5].should score_as(150, 3) }
   end
 end
-
-describe Scorer do
-  specify { [5].should score_as(50,0) }
-  specify { [5,5].should score_as(100,0) }
-  specify { [5,5,2,3,2].should score_as(100,3) }
-  specify { [1].should score_as(100,0) }
-  specify { [1,1].should score_as(200, 0) }
-  specify { [1,4,1].should score_as(200,1) }
-  specify { [2,2,2].should score_as(200,0) }
-  specify { [6,6,6,2,3].should score_as(600,2) }
-  specify { [1,1,1].should score_as(1000, 0) }
-  specify { [5,5,5].should score_as(500, 0) }
-  specify { [1,1,1,1,1].should score_as(1200, 0) }
-  specify { [5,5,5,5,5].should score_as(600, 0) }
-  specify { [5,2,1,2,2].should score_as(350, 0) }
-  specify { [1,2,3,4,5].should score_as(150, 3) }
-end
-

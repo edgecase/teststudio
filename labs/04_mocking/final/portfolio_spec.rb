@@ -42,7 +42,7 @@ describe Portfolio do
       port.add_stock("APPL")
       quote_service.should_receive(:logout).and_raise(StandardError)
     end
-    before { @value == subject.value }
+    before { @value = subject.value }
 
     specify { @value.should == 100 }
   end

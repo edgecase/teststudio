@@ -1,4 +1,4 @@
-Lab 6: Model Testing
+Lab 5: Model Testing
 
 Create a Member model object with the following fields
 
@@ -13,14 +13,15 @@ opponent
 
 Business Logic:
 
-* win_percent is the percentage of time you are expected to be an
-  opponent of the given rank score is 1.0 if you win, 0.0 if you lose.
+* win_percent is the percentage of time you are expected to beat an
+  opponent of the given rank.  Score is 1.0 if you win, 0.0 if you
+  lose.
 
 * round to the nearest integer
 
                                  1.0
-    win_percent = ---------------------------------------
-                   1 + 10**((rank - opponent_rank) / 400)
+    win_percent = -------------------------------------------
+                   1 + 10**((opponents_rank - my_rank) / 400)
 
     score = if win? then 1.0 else 0.0 end
 
@@ -50,4 +51,4 @@ Rank    Rank        You      New Rank
 1000    1100        lose      988
 
 1000     900        win      1012
-1000     900        lose      980  
+1000     900        lose      980

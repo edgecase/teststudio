@@ -1,5 +1,12 @@
-LAB 8: RCov Coverage
+LAB 6: Controller Testing
 
-Add the RCov task to the project.  Run it and find where additional
-coverage is needed.  Add the missing coverage.  Repeat until 100%
-covered.
+1. Add a "by_rank" class method (or scope if you prefer) to the Member
+   model that returns the members in order of descending rank.
+
+2. Write the specs for the Members controller.
+
+   * Assume the standard Restful/CRUD operations
+   * Make sure that the index is ordered by descending rank
+   * Use either the Mock approach or the database approach
+
+Remember to always write your test first!

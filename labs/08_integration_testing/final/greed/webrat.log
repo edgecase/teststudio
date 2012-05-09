@@ -80,3 +80,73 @@ REQUESTING PAGE: GET / with {} and HTTP headers {}
 REQUESTING PAGE: GET /members/new with {} and HTTP headers {"HTTP_REFERER"=>"/"}
 REQUESTING PAGE: POST /members with {"utf8"=>"✓", "member"=>{"name"=>"Eli", "email"=>"eli@shipshe.com", "rank"=>"1000"}, "commit"=>"Create Member"} and HTTP headers {"HTTP_REFERER"=>"/members/new"}
 REQUESTING PAGE: GET http://www.example.com/members/1 with {} and HTTP headers {"HTTP_REFERER"=>"/members"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /members/new with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /members/new with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /members/new with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+REQUESTING PAGE: POST /members with {"utf8"=>"✓", "member"=>{"name"=>"Eli", "email"=>"eli@shipshe.com", "rank"=>"1000"}, "commit"=>"Create Member"} and HTTP headers {"HTTP_REFERER"=>"/members/new"}
+REQUESTING PAGE: GET http://www.example.com/members/1 with {} and HTTP headers {"HTTP_REFERER"=>"/members"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}
+REQUESTING PAGE: GET /games/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /games with {"utf8"=>"✓", "winner_id"=>"1", "loser_id"=>"2", "commit"=>"Record Game"} and HTTP headers {"HTTP_REFERER"=>"/games/new"}
+REQUESTING PAGE: GET http://www.example.com/members with {} and HTTP headers {"HTTP_REFERER"=>"/games"}

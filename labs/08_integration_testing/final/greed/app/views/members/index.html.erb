@@ -4,7 +4,7 @@
 <%= link_to "Record Game", new_game_path %>
 <ul>
   <% @members.each do |member| %>
-  <li>
+  <li class="<%= dom_id(member) %>">
     <%= link_to member.name, member %>
     <%= member.rank %>
     [ <%= link_to "Edit", edit_member_path(member) %> ]</li>

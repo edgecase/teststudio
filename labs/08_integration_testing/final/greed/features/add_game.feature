@@ -5,13 +5,13 @@ Feature: Add a Game
   So that I can adjust my ranking
 
   Scenario: Add Game
-    Given there is "A Winner" member
-    And there is "A Loser" member
-    And I am on the add game page
+    Given there is "Winfred" member with rank 1000
+    And there is "Larry" member with rank 1000
+    And I am ready to add a game
 
-    When I select "A Winner" as the winner
-    And I select "A Loser" as the loser
-    And I click the "Record Game" button
+    When I select "Winfred" as the winner
+    And I select "Larry" as the loser
+    And I record the game
 
-    Then I see "A Winner" with a 1016 rank
-    And I see "A Loser" with a 984 rank
+    Then I see "Winfred" with a 1016 rank
+    And I see "Larry" with a 984 rank

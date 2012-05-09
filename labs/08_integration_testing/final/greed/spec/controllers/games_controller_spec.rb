@@ -15,16 +15,51 @@ describe GamesController do
   describe "POST create" do
     Given(:winner) { Member.new(rank: 1000).tap { |m| flexmock(m, id: "1") } }
     Given(:loser) { Member.new(rank: 1000).tap { |m| flexmock(m, id: "2") } }
-    Given { flexmock(Member).should_receive(:find).with("1").and_return(winner) }
-    Given { flexmock(Member).should_receive(:find).with("2").and_return(loser) }
-    Given { winner.should_receive(:save).once.and_return(true) }
-    Given { loser.should_receive(:save).once.and_return(true) }
+    Given { flexmock(Member).should_receive(:find).with(winner.id).and_return(winner) }
+    Given { flexmock(Member).should_receive(:find).with(loser.id).and_return(loser) }
 
-    When { post :create, "winner_id" => winner.id, "loser_id" => loser.id }
+    context "with good data" do
+      Given { winner.should_receive(:save).once.and_return(true) }
+      Given { loser.should_receive(:save).once.and_return(true) }
 
-    Then { response.should redirect_to(members_path) }
-    Then { winner.rank.should == 1016 }
-    Then { loser.rank.should == 984 }
+      When { post :create, "winner_id" => winner.id, "loser_id" => loser.id }
+
+      Then { response.should redirect_to(members_path) }
+      Then { winner.rank.should == 1016 }
+      Then { loser.rank.should == 984 }
+    end
+
+    context "with bad data" do
+      Given { flexmock(Member, :by_name => [:member]) }
+      Given(:winner_id) { winner.id }
+      Given(:loser_id) { loser.id }
+
+      When { post :create, "winner_id" => winner_id, "loser_id" => loser_id }
+
+      context "with no winner selected" do
+        Given(:winner_id) { nil }
+        Then { response.should render_template("new") }
+        Then { assigns(:game).should be_a(Game) }
+        Then { assigns(:members).should == [:member] }
+        Then { flash[:error].should =~ /winner/i }
+      end
+
+      context "with no loser selected" do
+        Given(:loser_id) { nil }
+        Then { response.should render_template("new") }
+        Then { assigns(:game).should be_a(Game) }
+        Then { assigns(:members).should == [:member] }
+        Then { flash[:error].should =~ /loser/i }
+      end
+
+      context "with winner and loser the same" do
+        Given(:winner_id) { winner.id }
+        Given(:loser_id) { winner.id }
+        Then { response.should render_template("new") }
+        Then { assigns(:game).should be_a(Game) }
+        Then { assigns(:members).should == [:member] }
+        Then { flash[:error].should =~ /different/i }
+      end
+    end
   end
-
 end

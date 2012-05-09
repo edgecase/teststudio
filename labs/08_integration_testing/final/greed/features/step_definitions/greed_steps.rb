@@ -1,9 +1,9 @@
-Given /^I am on the add game page$/ do
+Given /^I am ready to add a game$/ do
   visit '/games/new'
 end
 
-Given /^there is "([^"]*)" member$/ do |name| # "
-  Member.create!(name: name, email: "x@x.com", rank: 1000)
+Given /^there is "([^"]*)" member with rank (\d+)$/ do |name, rank| # "
+  Member.create!(name: name, email: "x@x.com", rank: rank)
 end
 
 When /^I select "([^"]*)" as the winner$/ do |winner_name| # "
@@ -14,7 +14,7 @@ When /^I select "([^"]*)" as the loser$/ do |loser_name| # "
   select loser_name, from: 'loser_id'
 end
 
-When /^I click the "([^"]*)" button$/ do |button_name| # "
+When /^I record the game$/ do
   click_button 'Record Game'
 end
 

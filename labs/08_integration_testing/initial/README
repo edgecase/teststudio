@@ -1,0 +1,28 @@
+LAB 8: Integration Testing
+--------------------------
+
+Goal: Add a "Record Game" page to allow member to record wins/loses.
+
+Steps:
+
+(1) Write a high level test for the record game feature.  Use either
+    RSpec or Cucumber (with webrat) to define the steps.  The scenario
+    should be something like:
+
+      * Go to the add game page
+      * Select the winner and loser from a drop down list
+      * Press the record button
+      * See that the ranks are properly adjusted.
+
+(2) Add a "Game" resource.  We're not going to bother making the Game
+    model persistent, it just needs to call the proper wins_against
+    and loses_against methods on the member objects.
+
+(3) Implement the GamesController.  You will only need the new and
+    create actions on this controller.  Use TDD with a controller spec
+    to drive the implementation.  (if you have time, make sure you
+    deal with error conditions, e.g. missing winner or loser, winner
+    the same as loser).
+
+(4) Revisit your integration test and make sure that it passes. Adjust
+    the test or code as necessary to get everything working.

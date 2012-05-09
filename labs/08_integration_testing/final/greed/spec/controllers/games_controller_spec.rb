@@ -27,6 +27,7 @@ describe GamesController do
       Then { response.should redirect_to(members_path) }
       Then { winner.rank.should == 1016 }
       Then { loser.rank.should == 984 }
+      Then { flash[:alert].should =~ /game.*recorded/i }
     end
 
     context "with bad data" do

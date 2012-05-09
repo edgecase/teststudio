@@ -18,7 +18,7 @@ class GamesController < ApplicationController
       game = Game.new(winner: winner, loser: loser)
       game.update_ranks
       game.save
-      redirect_to members_path
+      redirect_to members_path, alert: "Game recorded: Winner is #{winner.name}, Loser is #{loser.name}"
     end
   end
 

@@ -1,13 +1,5 @@
 <h1>Enter Game Results</h1>
 
-<% unless flash.empty? %>
-<% flash.keys.each do |key| %>
-<p id="<%= key %>">
-  <%= flash[key] %>
-</p>
-<% end %>
-<% end %>
-
 <%= form_tag games_path do %>
 <fieldset>
   <p>

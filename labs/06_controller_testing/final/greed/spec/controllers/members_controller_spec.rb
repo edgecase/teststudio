@@ -49,6 +49,7 @@ describe MembersController do
     context "with valid paramaters" do
       Given(:valid) { true }
       Then { response.should redirect_to member_path(member) }
+      Then { flash[:alert].should =~ /member created/i }
     end
 
     context "with invalid paramaters" do

@@ -1,20 +1,28 @@
-LAB 6: Integration Testing
+LAB 8: Integration Testing
 --------------------------
 
-Pick a method and create integration tests for app
+Goal: Add a "Record Game" page to allow member to record wins/loses.
 
-* Rails Integration
-* Watir
-* Selenium
-* Cucumber
+Steps:
 
-How much functionality can you test?
-How readable can you make your test?
+(1) Write a high level test for the record game feature.  Use either
+    RSpec or Cucumber (with webrat) to define the steps.  The scenario
+    should be something like:
 
-Hints: 
+      * Go to the add game page
+      * Select the winner and loser from a drop down list
+      * Press the record button
+      * See that the ranks are properly adjusted.
 
-There is a skeleton setup for Cucumber testing in the features
-directory.  Look at the following files for more information:
+(2) Add a "Game" resource.  We're not going to bother making the Game
+    model persistent, it just needs to call the proper wins_against
+    and loses_against methods on the member objects.
 
-* features/step_definitions/greed_steps.rb
-* features/playing_a_game.features
+(3) Implement the GamesController.  You will only need the new and
+    create actions on this controller.  Use TDD with a controller spec
+    to drive the implementation.  (if you have time, make sure you
+    deal with error conditions, e.g. missing winner or loser, winner
+    the same as loser).
+
+(4) Revisit your integration test and make sure that it passes. Adjust
+    the test or code as necessary to get everything working.

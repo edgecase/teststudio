@@ -8,9 +8,6 @@ describe "Add a Member" do
     context "going to the new members page" do
       When { click_link "New Member" }
       Then { response.should contain(/New Member/) }
-      it "xxx", :js => true do
-        response.should contain(/New Member/)
-      end
 
       context "and filling in the new member info" do
         When {

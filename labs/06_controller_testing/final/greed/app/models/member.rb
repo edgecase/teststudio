@@ -11,6 +11,10 @@ class Member < ActiveRecord::Base
     order("rank DESC")
   end
 
+  def self.by_name
+    order("name")
+  end
+
   def wins_against(opponent)
     self.rank = new_rank(1.0, opponent)
   end

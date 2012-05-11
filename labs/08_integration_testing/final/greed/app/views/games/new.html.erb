@@ -1,6 +1,7 @@
 <h1>Enter Game Results</h1>
 
 <%= form_tag games_path do %>
+<%= render "shared/errors", model: @game %>
 <fieldset>
   <p>
     <%= label_tag :winner %>

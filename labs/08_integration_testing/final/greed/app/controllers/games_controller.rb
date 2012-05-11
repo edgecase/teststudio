@@ -1,31 +1,24 @@
 class GamesController < ApplicationController
+  before_filter :find_members
+
   def new
-    setup_for_new
+    @game = Game.new
   end
 
   def create
-    if params[:winner_id].blank? || params[:loser_id].blank?
-      flash.now[:error] = "Both winner and loser must be specified"
-      setup_for_new
-      render :new
-    elsif params[:winner_id] == params[:loser_id]
-      flash.now[:error] = "The winner and loser must be different"
-      setup_for_new
-      render :new
+    @game = Game.new(winner_id: params[:winner_id], loser_id: params[:loser_id])
+    if @game.valid?
+      @game.update_ranks
+      @game.save
+      redirect_to members_path, alert: "Game recorded: Winner is #{@game.winner.name}, Loser is #{@game.loser.name}"
     else
-      winner = Member.find(params[:winner_id])
-      loser = Member.find(params[:loser_id])
-      game = Game.new(winner: winner, loser: loser)
-      game.update_ranks
-      game.save
-      redirect_to members_path, alert: "Game recorded: Winner is #{winner.name}, Loser is #{loser.name}"
+      render :new
     end
   end
 
   private
 
-  def setup_for_new
-    @game = Game.new
+  def find_members
     @members = Member.by_name
   end
 

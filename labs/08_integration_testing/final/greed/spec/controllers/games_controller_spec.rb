@@ -15,8 +15,9 @@ describe GamesController do
   describe "POST create" do
     Given(:winner) { Member.new(rank: 1000).tap { |m| flexmock(m, id: "1") } }
     Given(:loser) { Member.new(rank: 1000).tap { |m| flexmock(m, id: "2") } }
-    Given { flexmock(Member).should_receive(:find).with(winner.id).and_return(winner) }
-    Given { flexmock(Member).should_receive(:find).with(loser.id).and_return(loser) }
+    Given { flexmock(Member).should_receive(:find_by_id).with(winner.id).and_return(winner) }
+    Given { flexmock(Member).should_receive(:find_by_id).with(loser.id).and_return(loser) }
+    Given { flexmock(Member).should_receive(:find_by_id).with(//).and_return(nil) }
 
     context "with good data" do
       Given { winner.should_receive(:save).once.and_return(true) }
@@ -42,7 +43,6 @@ describe GamesController do
         Then { response.should render_template("new") }
         Then { assigns(:game).should be_a(Game) }
         Then { assigns(:members).should == [:member] }
-        Then { flash[:error].should =~ /winner/i }
       end
 
       context "with no loser selected" do
@@ -50,7 +50,6 @@ describe GamesController do
         Then { response.should render_template("new") }
         Then { assigns(:game).should be_a(Game) }
         Then { assigns(:members).should == [:member] }
-        Then { flash[:error].should =~ /loser/i }
       end
 
       context "with winner and loser the same" do
@@ -59,7 +58,6 @@ describe GamesController do
         Then { response.should render_template("new") }
         Then { assigns(:game).should be_a(Game) }
         Then { assigns(:members).should == [:member] }
-        Then { flash[:error].should =~ /different/i }
       end
     end
   end
